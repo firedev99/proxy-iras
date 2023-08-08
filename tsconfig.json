@@ -19,7 +19,8 @@
       "@components": ["./components/index.ts"],
       "@hooks/*": ["./hooks/*"],
       "@styles/*": ["./styles/*"],
-      "@icons": ["./lib/icons/index.ts"]
+      "@icons": ["./lib/icons/index.tsx"],
+      "@bg": ["./lib/bg/index.tsx"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

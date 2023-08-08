@@ -5,6 +5,7 @@ export const GlobalStyles = styled.createGlobalStyle`
     --background-base: 241, 245, 249;
     --text-base: 18, 18, 18;
     --font-base: "Poppins";
+    --btn-color: 23, 58, 116;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -30,6 +31,12 @@ export const GlobalStyles = styled.createGlobalStyle`
   body {
     color: rgb(var(--text-base));
     background: rgb(var(--background-base));
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
   }
 
   a {

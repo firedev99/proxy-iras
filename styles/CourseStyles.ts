@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const HomePageWrapper = styled.div`
+export const CourseHomePageWrapper = styled.div`
   position: relative;
   height: 100%;
   width: 100%;

@@ -1,12 +1,12 @@
 import { ReactElement } from "react"
 import { Layout } from "@components"
-import { Wrapper } from "@styles/HomeStyles"
+import { HomePageWrapper } from "@styles/HomeStyles"
 
 export default function Home() {
   return (
-    <Wrapper>
+    <HomePageWrapper>
       <h1>firedev99</h1>
-    </Wrapper>
+    </HomePageWrapper>
   )
 }
 

@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { ReactNode } from "react"
-import { Wrapper } from "./styles"
+import { RootLayoutWrapper } from "./styles"
 
 // types of layout component
 type LayoutComponentProps = {
@@ -30,7 +30,7 @@ export default function RootLayout({
         <link rel="icon" href={icon || "/favicon.ico"} />
       </Head>
       <main>
-        <Wrapper>{children}</Wrapper>
+        <RootLayoutWrapper>{children}</RootLayoutWrapper>
       </main>
     </>
   )
