@@ -6,15 +6,12 @@ import {
   useState,
   FormEvent,
 } from "react"
-
-export type CustomHookFormErrorType = {
-  [key: string]: string | null
-}
+import { CustomHookFormErrorType } from "@types"
 
 type CustomHookFormType<T> = {
   formValues: T
   onSubmit: (val: T) => Promise<any> | void
-  validationFunc?: (val: T) => CustomHookFormErrorType | any
+  validationFunc: (val: T) => CustomHookFormErrorType | any
 }
 
 export function useForm<T>({
@@ -28,7 +25,6 @@ export function useForm<T>({
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   useEffect(() => {
-    if (!validationFunc) return
     const validationErrors = validationFunc(values)
     const touchedFields = Object.keys(touched)
     // create a new string of arrays w the validation errors
@@ -86,15 +82,16 @@ export function useForm<T>({
 
   function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (validationFunc) {
-      const validationErrors = validationFunc(values)
-      setErrors((err) => ({ ...err, ...validationErrors }))
-    }
+    // store errors
+    const validationErrors = validationFunc(values)
+    setErrors((err) => ({ ...err, ...validationErrors }))
+    // proceed submission
     setIsSubmitting(true)
   }
 
   return {
     values,
+    setValues,
     errors,
     handleChange,
     handleBlur,
@@ -104,7 +101,10 @@ export function useForm<T>({
   }
 }
 
-// const {} = useForm({ formValues: {}, onSubmit: (val) => console.log(val) })
+// usage guide
+// useForm hook
+// const {} = useFrom({ formValues: {}, onSubmit: (val) => console.log(val), validationFunc: checkCredentials })
+// optimize input renders
 // wrap the input component with memo() inexpensive performace, ps -> callback function is for caching so using a callback function w/o memo function is useless
 // const CustomInput = memo(function CustomInput () {
 //   return <input onChange={handleChange} onBlur={handleBlur} />

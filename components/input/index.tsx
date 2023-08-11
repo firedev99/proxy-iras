@@ -1,16 +1,7 @@
+import { memo } from "react"
 import { firey } from "@/lib/utils"
-import { ChangeEvent, FocusEvent, HTMLInputTypeAttribute, memo } from "react"
 import { InputWrapper } from "./styles"
-
-type InputProps = {
-  type: HTMLInputTypeAttribute
-  name: string
-  value: string
-  placeholder?: string
-  errStaus?: boolean
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
-  onBlur?: (e: FocusEvent<HTMLInputElement>) => void
-}
+import { InputProps } from "@types"
 
 const CustomInput = memo(function CustomInput({
   type,
@@ -21,7 +12,6 @@ const CustomInput = memo(function CustomInput({
   onChange,
   onBlur,
 }: InputProps) {
-  // modify the input name
   const _name = firey.camelize(name)
 
   return (

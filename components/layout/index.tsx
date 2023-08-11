@@ -1,21 +1,13 @@
 import Head from "next/head"
-import { ReactNode } from "react"
 import { RootLayoutWrapper } from "./styles"
-
-// types of layout component
-type LayoutComponentProps = {
-  children: ReactNode
-  title?: string
-  description?: string
-  icon?: string
-}
+import { LayoutType } from "@types"
 
 export default function RootLayout({
   children,
   title,
   description,
   icon,
-}: LayoutComponentProps) {
+}: LayoutType) {
   return (
     <>
       <Head>

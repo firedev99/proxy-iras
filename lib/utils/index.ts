@@ -12,7 +12,7 @@ function generateRandomValue(dict: string[] = []): string {
 }
 
 // camelize a text or word
-function camelize(text: string) {
+function camelize(text: string): string {
   let _text = text
     .toLowerCase()
     .trim()

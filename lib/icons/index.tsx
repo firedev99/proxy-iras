@@ -1,10 +1,7 @@
 import { SpinningLoader } from "./icons"
+import { IconProps } from "@types"
 
-type IconType = {
-  name: "spinning-loader"
-}
-
-export default function Icon({ name }: IconType) {
+export default function Icon({ name }: IconProps) {
   switch (name) {
     case "spinning-loader":
       return <SpinningLoader />

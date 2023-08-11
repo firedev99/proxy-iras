@@ -20,7 +20,8 @@
       "@hooks/*": ["./hooks/*"],
       "@styles/*": ["./styles/*"],
       "@icons": ["./lib/icons/index.tsx"],
-      "@bg": ["./lib/bg/index.tsx"]
+      "@bg": ["./lib/bg/index.tsx"],
+      "@types": ["./types/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -1,7 +1,7 @@
-import { AuthCredentials } from "@/components/form"
+import { AuthCredentials } from "@types"
 
 async function auth(values: AuthCredentials) {
-  const res = await fetch("/api/token", {
+  const res = await fetch("/api/iub", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,16 +29,18 @@ async function getToken(values: AuthCredentials) {
   return data
 }
 
-async function getDataWithToken(endpoint: string, token: string) {
-  const res = await fetch(endpoint, {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  })
+async function getDataWithToken(endpoint: string, token?: string) {
+  if (token) {
+    const res = await fetch(endpoint, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
 
-  const data = res.json()
-  return data
+    const data = res.json()
+    return data
+  }
 }
 
 async function getUniRules() {

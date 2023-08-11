@@ -1,27 +1,10 @@
+import { ToastProvider } from "@/lib/contexts/toastContext"
+import { StudentProvider } from "@/lib/contexts/studentContext"
+import { poppins } from "@/lib/font/poppins"
 import { GlobalStyles } from "@styles/GlobalStyles"
-import { NextPage } from "next"
-import { ReactElement, ReactNode } from "react"
-import type { AppProps } from "next/app"
-import { Poppins } from "next/font/google"
-
-// getLayout type declaration
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode
-}
-
-// type of the app component
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
-}
-
-// connect font from next/font
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "600", "800"],
-})
+import { AppPropsWithLayout } from "@types"
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  // handle the component if a layout was used
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return getLayout(
@@ -33,7 +16,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         }
       `}</style>
       <GlobalStyles />
-      <Component {...pageProps} />
+      <ToastProvider>
+        <StudentProvider>
+          <Component {...pageProps} />
+        </StudentProvider>
+      </ToastProvider>
     </>
   )
 }

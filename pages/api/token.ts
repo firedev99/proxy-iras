@@ -1,12 +1,12 @@
+import type { NextApiRequest, NextApiResponse } from "next"
 import { services } from "@/lib/services"
 import { setCookie } from "@/lib/utils/cookies"
-import type { NextApiRequest, NextApiResponse } from "next"
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // enable only post method calls
+  // allow only /POST requests
   if (req.method !== "POST") {
     res.status(405).json({ message: "method not allowed!" })
   }

@@ -1,7 +1,7 @@
 import { serialize, CookieSerializeOptions } from "cookie"
 import { NextApiResponse } from "next"
 
-export const setCookie = (
+export const SetCookie = (
   res: NextApiResponse,
   name: string,
   value: unknown,

@@ -1,25 +1,27 @@
-import { login } from "@/lib/validation"
-import { useForm } from "@hooks/useForm"
-import { Input } from "@components"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { LoginFormWrapper } from "./styles"
-import Icon from "@icons"
+import { Input } from "@components"
+import { useForm } from "@hooks/useForm"
+import { useToast } from "@hooks/useToast"
+import { useStudent } from "@hooks/useStudent"
 import { services } from "@/lib/services"
-
-export type AuthCredentials = {
-  email: string
-  password: string
-}
-
-// handle request
-async function getUser(values: AuthCredentials) {
-  const res = await services.auth(values)
-  return res
-}
+import { login } from "@/lib/validation"
+import { firey } from "@/lib/utils"
+import { greetingLines } from "@/lib/dummy/greetings"
+import Icon from "@icons"
+import { LoginFormWrapper } from "./styles"
+import { AuthCredentials } from "@types"
 
 export default function LoginForm() {
+  const { addToast } = useToast()
+  const { addStudent } = useStudent()
+  const router = useRouter()
+  const greeting = firey.generateRandomValue(greetingLines)
+
+  // handle form actions
   const {
     values,
+    setValues,
     handleChange,
     handleBlur,
     errors,
@@ -31,8 +33,15 @@ export default function LoginForm() {
       password: "",
     } as AuthCredentials,
     onSubmit: async function (values) {
-      const res = await getUser(values)
-      console.log(res, "client")
+      const res = await services.auth(values)
+      if (res.message === "Success") {
+        setValues({ email: "", password: "" })
+        addStudent(res.student)
+        addToast(`${greeting} ${res.student.studentName}`)
+        setTimeout(() => router.refresh(), 2500)
+      } else {
+        addToast(`email or password is incorrent😔`)
+      }
     },
     validationFunc: login,
   })

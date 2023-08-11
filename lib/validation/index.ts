@@ -1,7 +1,4 @@
-// errors with string as it's key
-export type CustomHookFormErrorType = {
-  [key: string]: string | null
-}
+import { CustomHookFormErrorType } from "@types"
 
 export function login<T extends CustomHookFormErrorType>(values: T) {
   let errors: CustomHookFormErrorType = {}
