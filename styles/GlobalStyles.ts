@@ -30,7 +30,7 @@ export const GlobalStyles = styled.createGlobalStyle`
 
   body {
     color: rgb(var(--text-base));
-    background: rgb(var(--background-base));
+    background: rgb(var(--background-base)) !important;
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -43,6 +43,23 @@ export const GlobalStyles = styled.createGlobalStyle`
     color: inherit;
     text-decoration: none;
     font-family: var(--font-base), sans-serif;
+  }
+
+  /* style google gsi/client one tap signin dialog and button */
+
+  [id="oneTap"] {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [id="oneTap"] {
+      color-scheme: light !important;
+    }
+    [id="googleBtn"] {
+      color-scheme: light !important;
+    }
   }
 
   @media (prefers-color-scheme: dark) {

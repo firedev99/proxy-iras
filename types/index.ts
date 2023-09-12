@@ -119,3 +119,7 @@ export type CourseProps = {
   semesterByYear: string
   year: string
 }
+
+export type HomePageType = {
+  courses?: CourseProps[]
+}

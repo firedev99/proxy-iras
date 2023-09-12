@@ -10,7 +10,7 @@ export const StudentContext = createContext<StudentContextProps>({
 export function StudentProvider({ children }: StudentProviderType) {
   const [student, setStudent] = useState<StudentProps | null>(null)
 
-  // get the student informations from browser storage
+  // get the student informations from  localstorage
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage && !student) {
       let studentInfo = JSON.parse(
@@ -28,7 +28,7 @@ export function StudentProvider({ children }: StudentProviderType) {
     }
   }
 
-  // remove a student in the context and localstorage
+  // remove a student from the context and localstorage
   function removeStudent() {
     if (typeof window !== "undefined" && window.localStorage) {
       localStorage.removeItem("student-info")

@@ -8,7 +8,7 @@ export const SetCookie = (
   options: CookieSerializeOptions = {}
 ) => {
   const stringValue =
-    typeof value === "object" ? "j:" + JSON.stringify(value) : String(value)
+    typeof value === "object" ? JSON.stringify(value) : String(value)
 
   res.setHeader(
     "Set-Cookie",
