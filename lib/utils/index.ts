@@ -24,8 +24,13 @@ function camelize(text: string): string {
   return _text
 }
 
+function objEmpty(obj: {}): boolean {
+  return Object.keys(obj).length === 0
+}
+
 export const firey = {
   uniqueID,
   generateRandomValue,
   camelize,
+  objEmpty,
 }

@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import cookie from "cookie"
-import { google } from "googleapis"
-import oAuth2Client from "@/lib/google"
+import { generateClassroom } from "@/lib/google/generateClassroom"
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,17 +10,9 @@ export default async function handler(
     res.status(405).json({ message: "method not allowed!" })
   }
 
-  const { id } = req.query
-
   try {
-    const cookies = cookie.parse(req.headers.cookie || "")
-    const g_token = cookies?.["g-token"] ?? ""
-    const tokens = g_token ? JSON.parse(g_token) : {}
-
-    // set the credentials in the auth client to initialize
-    oAuth2Client.setCredentials(tokens)
-
-    const classroom = google.classroom({ version: "v1", auth: oAuth2Client })
+    const { id } = req.query
+    const classroom = generateClassroom(req)
 
     // fetch course announcements from classroom
     const announcementList = await classroom.courses.announcements.list({

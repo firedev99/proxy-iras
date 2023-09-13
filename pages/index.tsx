@@ -24,7 +24,6 @@ export default function Home({ courses }: HomePageType) {
       ) : (
         <span>no courses atm!</span>
       )}
-      {/* <GoogleUI /> */}
     </HomePageWrapper>
   )
 }
@@ -41,5 +40,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>
+  return <Layout nav={true}>{page}</Layout>
 }

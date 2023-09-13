@@ -5,8 +5,8 @@ import Link from "next/link"
 import { ReactElement } from "react"
 
 export default function CoursesPage(props: any) {
-  const { token, courses } = props
-  console.log(courses)
+  const { auth, courses } = props
+  // console.log(courses)
   return (
     <CourseHomePageWrapper>
       <h1>Courses Page</h1>
@@ -21,18 +21,19 @@ export default function CoursesPage(props: any) {
       ) : (
         <h3>No course found</h3>
       )}
-      {!token && <GoogleUI />}
+      {!auth && <GoogleUI />}
     </CourseHomePageWrapper>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = ctx.req.cookies["g-token"]
+  const refreshToken = ctx.req.cookies["r-token"]
   // replace single quotes with double quotes to make it valid JSON
-  const validJsonValue = token?.replace(/'/g, '"')
+  // const validJsonValue = token?.replace(/'/g, '"')
   let courses: any = []
 
-  if (token) {
+  if (token || refreshToken) {
     // fetch the course data
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/google/classroom/courses`,
@@ -51,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      token: token ? JSON.parse(JSON.stringify(validJsonValue)) : null,
+      auth: token || refreshToken ? true : false,
       courses: courses,
     },
   }
