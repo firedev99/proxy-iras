@@ -1,7 +1,10 @@
 import Head from "next/head"
 import { RootLayoutWrapper } from "./styles"
 import { LayoutType } from "@types"
-import { Navigation } from "@components"
+import dynamic from "next/dynamic"
+
+const Navigation = dynamic(() => import("../navigation"))
+const RouteLoader = dynamic(() => import("../loaders/RouteLoader"))
 
 export default function RootLayout({
   children,
@@ -23,6 +26,7 @@ export default function RootLayout({
         />
         <link rel="icon" href={icon || "/favicon.ico"} />
       </Head>
+      <RouteLoader />
       {nav && <Navigation />}
       <main>
         <RootLayoutWrapper>{children}</RootLayoutWrapper>

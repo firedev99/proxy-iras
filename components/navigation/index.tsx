@@ -1,70 +1,70 @@
-import styled, { css } from "styled-components"
+import { upperLinks } from "@/lib/dummy/links"
+import Icon from "@/lib/icons"
+import Image from "next/image"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { motion } from "framer-motion"
+import {
+  NavWrapper,
+  SidebarWrapper,
+  UpperWrapper,
+  BottomWrapper,
+  TopElement,
+  SideElement,
+} from "./styles"
 
 export default function Navigation() {
+  const router = useRouter()
+  const [active, setActive] = useState(router.pathname)
+
   return (
     <>
+      <NavWrapper>
+        <TopElement>
+          <Icon name="settings" />
+        </TopElement>
+      </NavWrapper>
       <SidebarWrapper>
         <UpperWrapper>
-          <SideElement>Home</SideElement>
-          <SideElement>Courses</SideElement>
-          <SideElement>Works</SideElement>
-          <SideElement>Profile</SideElement>
-          <SideElement>Calculate Grade</SideElement>
+          {upperLinks &&
+            upperLinks.map((item) => (
+              <Link key={`link-${item.href}`} href={item.href}>
+                <SideElement
+                  data-title={item.context}
+                  layout
+                  className={active === item.href ? "disable_hover" : ""}
+                  onClick={() => setActive(item.href)}
+                >
+                  {item.href === active && (
+                    <motion.div
+                      className="active_layout"
+                      layoutId="active_layout"
+                    />
+                  )}
+                  <Icon name={item.icon} />
+                </SideElement>
+              </Link>
+            ))}
         </UpperWrapper>
+
         <BottomWrapper>
-          <SideElement>User Control</SideElement>
+          <SideElement
+            className="disable_hover bottom"
+            whileHover={{ scale: 1.07, cursor: "pointer" }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <Image
+              src="https://res.cloudinary.com/firey/image/upload/v1694607132/iub/male_9.jpg"
+              alt="cloudinary"
+              width={48}
+              height={48}
+              priority={true}
+              quality={100}
+            />
+          </SideElement>
         </BottomWrapper>
       </SidebarWrapper>
-      <NavWrapper>
-        <TopElement>Settings</TopElement>
-      </NavWrapper>
     </>
   )
 }
-
-export const SidebarWrapper = styled.div`
-  position: absolute;
-  z-index: 99;
-  left: 0;
-  top: 0;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: papayawhip;
-`
-export const NavWrapper = styled.div`
-  position: absolute;
-  z-index: 99;
-  top: 0;
-  right: 0;
-  background-color: papayawhip;
-`
-
-export const UpperWrapper = styled.div``
-
-export const BottomWrapper = styled.div`
-  margin-top: auto;
-  display: flex;
-`
-
-export const SideElement = styled.div`
-  padding: 1rem;
-  /* width: 8rem; */
-  height: 4rem;
-  margin: 1rem;
-  background: pink;
-  border-radius: 0.5rem;
-  display: grid;
-  place-items: center;
-`
-export const TopElement = styled.div`
-  padding: 1rem;
-  /* width: 8rem; */
-  height: 4rem;
-  margin: 1rem;
-  background: pink;
-  border-radius: 0.5rem;
-  display: grid;
-  place-items: center;
-`

@@ -6,7 +6,6 @@ import { AppPropsWithLayout } from "@types"
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
-
   return getLayout(
     <>
       {/* injecting font in the head */}

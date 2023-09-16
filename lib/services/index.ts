@@ -1,10 +1,11 @@
-import { AuthCredentials, IUBCourseProps } from "@types"
+import { AuthCredentials, CourseProps, IUBCourseProps } from "@types"
 
-async function auth(values: AuthCredentials) {
-  const res = await fetch("/api/iub", {
+async function auth(values: AuthCredentials, csrfToken: string) {
+  const response = await fetch(`/api/iub`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "x-csrf-token": csrfToken,
     },
     body: JSON.stringify({
       email: values.email,
@@ -12,9 +13,7 @@ async function auth(values: AuthCredentials) {
     }),
   })
 
-  const data = await res.json()
-  console.log(data, "auth")
-  return data
+  return response
 }
 
 async function getToken(values: AuthCredentials) {
@@ -30,17 +29,21 @@ async function getToken(values: AuthCredentials) {
   return data
 }
 
-async function getDataWithToken(endpoint: string, token?: string) {
-  if (token) {
-    const res = await fetch(endpoint, {
+async function getDataWithToken(endpoint: string, token: string) {
+  try {
+    const response = await fetch(endpoint, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
       },
     })
 
-    const data = res.json()
+    const data = response.json()
     return data
+  } catch (error) {
+    if (process.env.NODE_ENV !== "production") {
+      console.log(error)
+    }
   }
 }
 
@@ -60,8 +63,7 @@ async function getUniRules() {
   return data
 }
 
-async function getCourseData(token?: string) {
-  if (!token) return
+async function getCourseData(token: string) {
   const currentYear = new Date().getFullYear()
 
   const courses = (await services.getDataWithToken(
@@ -83,6 +85,7 @@ async function getCourseData(token?: string) {
         grade,
         regSemester: semesterByYear,
         regYear: year,
+        classTime,
       }) => ({
         courseName,
         courseID,
@@ -93,9 +96,10 @@ async function getCourseData(token?: string) {
         grade,
         semesterByYear,
         year,
+        classTime,
       })
-    )
-  console.log(currentCourses)
+    ) as CourseProps[]
+
   return currentCourses
 }
 

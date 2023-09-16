@@ -7,31 +7,34 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    const { code } = req.query
-    const { tokens } = await oAuth2Client.getToken(code as string)
+    const { state, code } = req.query
 
-    // set the credentials in the auth client
-    oAuth2Client.setCredentials(tokens)
+    if (code) {
+      const { tokens } = await oAuth2Client.getToken(code as string)
 
-    // store tokens and refresh token as cookie
-    res.setHeader("Set-Cookie", [
-      serialize("g-token", JSON.stringify(tokens), {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        expires: new Date(tokens.expiry_date as number),
-      }),
+      // set the credentials in the auth client
+      oAuth2Client.setCredentials(tokens)
 
-      // so that a new access token can be retrive w refresh token
-      serialize("r-token", String(tokens.refresh_token), {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
-        expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000), // 5 days
-      }),
-    ])
+      // store google tokens as cookie
+      res.setHeader("Set-Cookie", [
+        serialize("g-token", JSON.stringify(tokens), {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          path: "/",
+          expires: new Date(tokens.expiry_date as number),
+        }),
 
-    // redirect to courses page
-    res.redirect("/courses")
+        // so that a new access token can be retrive w the refresh token
+        serialize("r-token", String(tokens.refresh_token), {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          path: "/",
+          expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000), // 5 days
+        }),
+      ])
+    }
+
+    // redirect to the callbackURL
+    res.redirect(state as string)
   }
 }

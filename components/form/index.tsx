@@ -33,12 +33,19 @@ export default function LoginForm() {
       password: "",
     } as AuthCredentials,
     onSubmit: async function (values) {
-      const res = await services.auth(values)
-      if (res.message === "Success") {
+      // get the csrf token
+      const csrfTokenResponse = await fetch(`/api/iub`)
+      const csrfToken = await csrfTokenResponse.json()
+
+      // request to fetch student data along with csrf token
+      const response = await services.auth(values, csrfToken)
+
+      if (response.ok) {
+        const { student } = await response.json()
+        addStudent(student)
         setValues({ email: "", password: "" })
-        addStudent(res.student)
-        addToast(`${greeting} ${res.student.studentName}`)
-        setTimeout(() => router.refresh(), 2500)
+        addToast(`${greeting} ${student.studentName}`)
+        setTimeout(() => router.refresh(), 2000)
       } else {
         addToast(`email or password is incorrent😔`)
       }
@@ -63,6 +70,7 @@ export default function LoginForm() {
         onChange={handleChange}
         onBlur={handleBlur}
         errStaus={errStatus("email")}
+        autoComplete="email"
       />
       <Input
         type="password"
@@ -72,6 +80,7 @@ export default function LoginForm() {
         onChange={handleChange}
         onBlur={handleBlur}
         errStaus={errStatus("password")}
+        autoComplete="password"
       />
       <motion.button
         whileTap={{ scale: 0.92 }}

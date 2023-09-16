@@ -6,11 +6,12 @@ import { ReactElement } from "react"
 
 export default function CoursesPage(props: any) {
   const { auth, courses } = props
-  // console.log(courses)
+  console.log(courses)
+
   return (
     <CourseHomePageWrapper>
       <h1>Courses Page</h1>
-      {courses.length !== 0 ? (
+      {courses && courses.length !== 0 ? (
         courses.map((course: any) => (
           <div key={`classroom_course_${course.id}`}>
             <Link href={`/api/google/classroom/courses/${course.id}`}>
@@ -19,7 +20,11 @@ export default function CoursesPage(props: any) {
           </div>
         ))
       ) : (
-        <h3>No course found</h3>
+        <>
+          <h3>No course found</h3>
+          {/* for any sort of fallback - e.g if the user destroys the permission from their google account settings */}
+          <GoogleUI />
+        </>
       )}
       {!auth && <GoogleUI />}
     </CourseHomePageWrapper>
@@ -34,30 +39,34 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   let courses: any = []
 
   if (token || refreshToken) {
-    // fetch the course data
-    const res = await fetch(
+    const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/google/classroom/courses`,
       {
         headers: {
+          // send the cookies that are already stored
           Cookie: ctx.req.headers.cookie as string,
         },
       }
     )
 
-    if (res.status === 200) {
-      const _courses = await res.json()
-      courses = _courses.data
+    // sent the cookie along w the header that needs to be stored
+    const cookies = response.headers.getSetCookie()
+    ctx.res.setHeader("Set-Cookie", cookies)
+
+    if (response.ok) {
+      const { data } = await response.json()
+      courses = data
     }
   }
 
   return {
     props: {
       auth: token || refreshToken ? true : false,
-      courses: courses,
+      courses: courses ?? null, // null - line(26),
     },
   }
 }
 
 CoursesPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>
+  return <Layout nav={true}>{page}</Layout>
 }

@@ -27,6 +27,7 @@ export type InputProps = {
   value: string
   placeholder?: string
   errStaus?: boolean
+  autoComplete?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void
 }
@@ -66,19 +67,32 @@ export type CustomHookFormErrorType = {
 }
 
 export type IconProps = {
-  name: "spinning-loader"
+  name:
+    | "spinning-loader"
+    | "home"
+    | "checkboard"
+    | "calender"
+    | "user"
+    | "chart"
+    | "settings"
+    | "semi-star-shape"
+
+  className?: string
 }
 
 export type StudentProps = {
   studentID: string
   studentName: string
-  major: string
+  major?: string
   minor?: string
   notificationMessages: {
     messages: string
   }[]
   semesterByYear: string
   year: string
+  cgpa: string
+  advisorName?: string
+  creditEarned: string
 }
 
 export type StudentContextProps = {
@@ -93,8 +107,8 @@ export type StudentProviderType = {
 
 export type IUBCourseProps = {
   data: {
-    attend: number
-    classCount: number
+    attend?: number
+    classCount?: number
     classTime: string
     courseId: string
     courseName: string
@@ -113,7 +127,7 @@ export type CourseProps = {
   courseID: string
   section: number
   attendedClasses?: number
-  totalClasses: number
+  totalClasses?: number
   classTime: string
   roomID: string
   grade: string

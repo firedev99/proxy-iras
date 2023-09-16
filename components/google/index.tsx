@@ -27,7 +27,10 @@ export default function Component() {
   }, [status])
 
   async function handleGoogleLogin() {
-    router.push("/api/google")
+    router.push({
+      pathname: "/api/google",
+      query: { callbackURL: router.pathname },
+    })
   }
 
   useEffect(() => {

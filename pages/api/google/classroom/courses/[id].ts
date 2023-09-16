@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { generateClassroom } from "@/lib/google/generateClassroom"
+import { google } from "googleapis"
+import generateClient from "@/lib/google/generateClient"
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,7 +13,11 @@ export default async function handler(
 
   try {
     const { id } = req.query
-    const classroom = generateClassroom(req)
+    // generate the client
+    const oAuth2Client = await generateClient(req, res)
+
+    // generate google classroom
+    const classroom = google.classroom({ version: "v1", auth: oAuth2Client })
 
     // fetch course announcements from classroom
     const announcementList = await classroom.courses.announcements.list({
@@ -34,9 +39,11 @@ export default async function handler(
       },
     })
   } catch (err) {
-    console.log(err)
-    return res.status(404).send({
-      message: "course not found!",
+    if (process.env.NODE_ENV !== "production") {
+      console.log(err)
+    }
+    return res.status(400).send({
+      message: "something went wrong!",
     })
   }
 }
