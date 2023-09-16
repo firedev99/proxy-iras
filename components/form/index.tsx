@@ -70,7 +70,6 @@ export default function LoginForm() {
         onChange={handleChange}
         onBlur={handleBlur}
         errStaus={errStatus("email")}
-        autoComplete="email"
       />
       <Input
         type="password"
@@ -80,7 +79,6 @@ export default function LoginForm() {
         onChange={handleChange}
         onBlur={handleBlur}
         errStaus={errStatus("password")}
-        autoComplete="password"
       />
       <motion.button
         whileTap={{ scale: 0.92 }}

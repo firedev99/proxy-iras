@@ -2,6 +2,7 @@ import { parse, serialize } from "cookie"
 import { NextApiRequest, NextApiResponse } from "next"
 import { services } from "../services"
 import { StudentProps } from "@/types"
+import { saveStudent } from "./saveStudent"
 
 export default async function generateIubAuthFlow(
   req: NextApiRequest,
@@ -61,6 +62,18 @@ export default async function generateIubAuthFlow(
       creditEarned,
       advisorName,
     } as StudentProps
+
+    const newStudent = {
+      studentID: studentId,
+      studentName: studentName.slice(1),
+      email: `${studentId}@iub.edu.bd`,
+      createdAt: new Date().toLocaleString("en-GB", {
+        hour12: false,
+      }),
+    }
+
+    // save the student details
+    await saveStudent(newStudent)
 
     // set iub token as cookie
     res.setHeader(
