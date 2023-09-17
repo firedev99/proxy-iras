@@ -63,11 +63,11 @@ async function getUniRules() {
   return data
 }
 
-async function getCourseData(token: string) {
+async function getCourseData(token: string, studentID: string) {
   const currentYear = new Date().getFullYear()
 
   const courses = (await services.getDataWithToken(
-    `https://iras.iub.edu.bd:8079//api/v1/registration/student-registered-courses/2010047/all`,
+    `https://iras.iub.edu.bd:8079//api/v1/registration/student-registered-courses/${studentID}/all`,
     token
   )) as IUBCourseProps
 

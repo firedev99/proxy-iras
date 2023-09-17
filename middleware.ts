@@ -14,6 +14,11 @@ export function middleware(req: NextRequest) {
 
   // redirect to login page if token was not found
   if (!isPublicPath && !token) {
-    return NextResponse.redirect(new URL("/login", req.nextUrl))
+    const destination = req.nextUrl.href.split(
+      `${process.env.NEXT_PUBLIC_URL}/`
+    )[1]
+    const url = destination ? `/login?callback=${destination}` : "/login"
+
+    return NextResponse.redirect(new URL(url, req.nextUrl))
   }
 }

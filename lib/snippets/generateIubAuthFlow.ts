@@ -33,14 +33,14 @@ export default async function generateIubAuthFlow(
 
     // get the student informations
     const studentInfo = await services.getDataWithToken(
-      `https://iras.iub.edu.bd:8079//api/v1/landing/notichboard/2010047/student`,
+      `https://iras.iub.edu.bd:8079//api/v1/landing/notichboard/${credentials.email}/student`,
       token
     )
 
     // idk whom iub hired as the developer, i mean he have written such a crap
     // give me money and a few months, i'll let you know what top notch feels like
     const studentCatalogue = await services.getDataWithToken(
-      `https://iras.iub.edu.bd:8079//api/v1/registration/student-catelogue-requirment/2010047`,
+      `https://iras.iub.edu.bd:8079//api/v1/registration/student-catelogue-requirment/${credentials.email}`,
       token
     )
 
@@ -75,17 +75,21 @@ export default async function generateIubAuthFlow(
     // save the student details
     await saveStudent(newStudent)
 
-    // set iub token as cookie
-    res.setHeader(
-      "Set-Cookie",
+    // set iub token and id as cookie
+    res.setHeader("Set-Cookie", [
       serialize("user-token", String(token), {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         path: "/",
         expires: new Date(expires_in),
-        sameSite: "lax",
-      })
-    )
+      }),
+      serialize("_id", String(studentId), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        expires: new Date(expires_in),
+      }),
+    ])
 
     // return student data
     return res.status(200).json({ student: _student })

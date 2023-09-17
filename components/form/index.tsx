@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/router"
 import { motion } from "framer-motion"
 import { Input } from "@components"
 import { useForm } from "@hooks/useForm"
@@ -17,6 +17,8 @@ export default function LoginForm() {
   const { addStudent } = useStudent()
   const router = useRouter()
   const greeting = firey.generateRandomValue(greetingLines)
+
+  const callbackURL = router.query.callback as string | undefined
 
   // handle form actions
   const {
@@ -45,7 +47,11 @@ export default function LoginForm() {
         addStudent(student)
         setValues({ email: "", password: "" })
         addToast(`${greeting} ${student.studentName}`)
-        setTimeout(() => router.refresh(), 2000)
+        if (callbackURL) {
+          setTimeout(() => router.push(`/${callbackURL}`), 2000)
+        } else {
+          setTimeout(() => router.reload(), 2000)
+        }
       } else {
         addToast(`email or password is incorrent😔`)
       }
@@ -59,7 +65,7 @@ export default function LoginForm() {
   }
 
   return (
-    <LoginFormWrapper onSubmit={handleFormSubmit}>
+    <LoginFormWrapper onSubmit={handleFormSubmit} autoComplete="on">
       <h1>Login</h1>
       <span>Enter the details of your IRAS account to log in.</span>
       <Input

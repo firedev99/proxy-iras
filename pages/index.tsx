@@ -17,6 +17,7 @@ import {
   UserInformationWrapper,
   UserMetaDataWrapper,
 } from "@/styles/HomeStyles"
+import { useProfile } from "@/hooks/useProfile"
 
 const SetUpModal = dynamic(() => import("../components/modals/SetUpModal"), {
   ssr: false,
@@ -28,6 +29,11 @@ const HomeCourses = dynamic(() => import("../components/course/HomeCourses"), {
 
 export default function Home({ courses }: HomePageType) {
   const { student } = useStudent()
+  const { dummyPictures } = useProfile()
+  const imgSrc =
+    dummyPictures[2] ??
+    "https://res.cloudinary.com/firey/image/upload/v1694607132/iub/female_1.jpg"
+
   if (!student || !courses) return <div />
 
   const currentCourses = courses?.filter(
@@ -35,18 +41,18 @@ export default function Home({ courses }: HomePageType) {
   )
 
   console.log(student)
-  console.log(courses)
+  console.log(currentCourses)
 
   return (
     <HomePageWrapper>
       <UserInformationWrapper>
         <ProfileAvatar>
           <Image
-            src="https://res.cloudinary.com/firey/image/upload/v1694607132/iub/male_9.jpg"
+            src={imgSrc}
             // src="https://lh3.googleusercontent.com/a/ACg8ocKVH6l92asQq1MwjcK4aK8FnvX9TGCKnIJVDo6NxwYrqw8=s186-c"
             alt="cloudinary"
             fill
-            sizes="(max-width: 768px) 128px (max-width: 424px) 56px"
+            sizes="(max-width: 1200px) 186px, 56px"
             quality={100}
             placeholder="blur"
             blurDataURL={firey.rgbDataURL(177, 144, 182)}
@@ -74,10 +80,11 @@ export default function Home({ courses }: HomePageType) {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = ctx.req.cookies["user-token"]
+  const studentID = ctx.req.cookies["_id"]
   let courses = [] as CourseProps[]
 
-  if (token) {
-    courses = await services.getCourseData(token)
+  if (token && studentID) {
+    courses = await services.getCourseData(token, studentID)
   }
 
   return {
