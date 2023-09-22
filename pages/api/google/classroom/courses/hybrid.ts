@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { google } from "googleapis"
+import { classroom_v1, google } from "googleapis"
 import generateClient from "@/lib/google/generateClient"
 import allowInstitutionalEmail from "@/lib/snippets/allowInstitutionalEmail"
 
@@ -23,13 +23,37 @@ export default async function handler(
     const classroom = google.classroom({ version: "v1", auth: oAuth2Client })
 
     // fetch all the active courses
-    const result = await classroom.courses.list({
+    const courseList = await classroom.courses.list({
       courseStates: ["ACTIVE"],
+    })
+
+    const randomCourse = Math.floor(
+      Math.random() *
+        (courseList.data.courses as classroom_v1.Schema$Course[]).length
+    )
+
+    // fetch a random course announcements from classroom
+    const announcementList = await classroom.courses.announcements.list({
+      courseId: (courseList.data.courses as classroom_v1.Schema$Course[])[
+        randomCourse
+      ].id as string,
+      pageSize: 2,
+    })
+
+    // fetch a random course work details from classroom
+    const courseWorkList = await classroom.courses.courseWork.list({
+      courseId: (courseList.data.courses as classroom_v1.Schema$Course[])[
+        randomCourse
+      ].id as string,
+      pageSize: 2,
+      courseWorkStates: ["PUBLISHED"],
     })
 
     // send the course data
     return res.status(200).send({
-      data: result.data.courses,
+      courseList: courseList.data.courses,
+      announcementList: announcementList.data.announcements,
+      courseWorkList: courseWorkList.data.courseWork,
     })
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {

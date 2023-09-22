@@ -8,7 +8,7 @@ async function auth(values: AuthCredentials, csrfToken: string) {
       "x-csrf-token": csrfToken,
     },
     body: JSON.stringify({
-      email: values.email,
+      email: values.user,
       password: values.password,
     }),
   })

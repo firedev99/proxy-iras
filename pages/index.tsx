@@ -1,5 +1,5 @@
 import type { ReactElement } from "react"
-import { GoogleUI, Layout } from "@components"
+import { Layout } from "@components"
 import { useStudent } from "@hooks/useStudent"
 import type { GetServerSideProps } from "next"
 import { services } from "@/lib/services"
@@ -17,42 +17,31 @@ import {
   UserInformationWrapper,
   UserMetaDataWrapper,
 } from "@/styles/HomeStyles"
-import { useProfile } from "@/hooks/useProfile"
-
-const SetUpModal = dynamic(() => import("../components/modals/SetUpModal"), {
-  ssr: false,
-})
 
 const HomeCourses = dynamic(() => import("../components/course/HomeCourses"), {
   ssr: false,
 })
 
-export default function Home({ courses }: HomePageType) {
+export default function Home({ courses, classroomCourses }: HomePageType) {
   const { student } = useStudent()
-  const { dummyPictures } = useProfile()
-  const imgSrc =
-    dummyPictures[2] ??
-    "https://res.cloudinary.com/firey/image/upload/v1694607132/iub/female_1.jpg"
 
+  // make sure that student and courses already exists
   if (!student || !courses) return <div />
 
-  const currentCourses = courses?.filter(
+  // filter the course array to contain only current coursws
+  const currentCourses = courses.filter(
     (course) => course.semesterByYear === student.semesterByYear
   )
-
-  console.log(student)
-  console.log(currentCourses)
 
   return (
     <HomePageWrapper>
       <UserInformationWrapper>
         <ProfileAvatar>
           <Image
-            src={imgSrc}
-            // src="https://lh3.googleusercontent.com/a/ACg8ocKVH6l92asQq1MwjcK4aK8FnvX9TGCKnIJVDo6NxwYrqw8=s186-c"
+            src={student.picture}
             alt="cloudinary"
             fill
-            sizes="(max-width: 1200px) 186px, 56px"
+            sizes="(max-width: 768px) 56px, 186px"
             quality={100}
             placeholder="blur"
             blurDataURL={firey.rgbDataURL(177, 144, 182)}
@@ -72,7 +61,10 @@ export default function Home({ courses }: HomePageType) {
         <span>Minor: {student.minor ?? "Not Declared"}</span>
         <span>Advisor Name: {student.advisorName}</span>
       </UserMetaDataWrapper>
-      <HomeCourses courses={currentCourses} />
+      <HomeCourses
+        classroomCourses={classroomCourses}
+        courses={currentCourses}
+      />
       <HomeFooterWrapper></HomeFooterWrapper>
     </HomePageWrapper>
   )
@@ -81,15 +73,48 @@ export default function Home({ courses }: HomePageType) {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = ctx.req.cookies["user-token"]
   const studentID = ctx.req.cookies["_id"]
-  let courses = [] as CourseProps[]
 
+  // get class room cookies
+  let g_token = ctx.req.cookies["g-token"]
+  let refreshToken = ctx.req.cookies["r-token"]
+
+  let courses = [] as CourseProps[]
+  let classroomCourses: any = []
+
+  // fetch the course data based of student id
   if (token && studentID) {
     courses = await services.getCourseData(token, studentID)
   }
 
+  // fetch google classroom courses
+  if (g_token || refreshToken) {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/google/classroom/courses`,
+      {
+        headers: {
+          // send the cookies that are already stored
+          Cookie: ctx.req.headers.cookie as string,
+        },
+      }
+    )
+
+    // sent the cookie along w the header that needs to be stored
+    const cookies = response.headers.getSetCookie()
+    ctx.res.setHeader("Set-Cookie", cookies)
+
+    // set data and tokens based on response status
+    if (response.ok) {
+      const { data } = await response.json()
+      classroomCourses = data
+    } else {
+      g_token = undefined
+      refreshToken = undefined
+    }
+  }
   return {
     props: {
       courses: JSON.parse(JSON.stringify(courses)),
+      classroomCourses,
     },
   }
 }

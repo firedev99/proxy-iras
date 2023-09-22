@@ -3,9 +3,11 @@ import {
   ChartIcon,
   CheckboardIcon,
   HomeIcon,
+  LogoutIcon,
   SemiStarShapeIcon,
   SettingsIcon,
   SpinningLoader,
+  SqaureStackIcon,
   UserIcon,
 } from "./icons"
 import { IconProps } from "@types"
@@ -14,6 +16,12 @@ export default function Icon({ name, className }: IconProps) {
   switch (name) {
     case "spinning-loader":
       return <SpinningLoader />
+
+    case "square-stack":
+      return <SqaureStackIcon />
+
+    case "logout":
+      return <LogoutIcon />
 
     case "home":
       return <HomeIcon />

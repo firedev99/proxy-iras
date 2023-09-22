@@ -3,16 +3,6 @@ function uniqueID(): string {
   return Math.random().toString(36).slice(2)
 }
 
-// shuffle array
-function shuffleArray(array: string[]): string[] {
-  // Fisher-Yates shuffle algorithm.
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
-  }
-  return array
-}
-
 // get a random value from an array
 function generateRandomValue(array: string[] = []): string {
   let rand = Math.random() * array.length
@@ -54,9 +44,29 @@ function rgbDataURL(r: number, g: number, b: number) {
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`
 }
 
+// Fisher-Yates shuffle algorithm.
+function shuffleArray(array: string[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[array[i], array[j]] = [array[j], array[i]]
+  }
+  return array
+}
+
+// generate a non repeating random value from an array
+function getRandomNonRepeatingValue(dict: string[]) {
+  if (dict.length === 0) {
+    return null
+  }
+
+  // pop and return the last element from the array.
+  return dict.pop() || null
+}
+
 export const firey = {
   uniqueID,
   generateRandomValue,
+  getRandomNonRepeatingValue,
   shuffleArray,
   camelize,
   objEmpty,

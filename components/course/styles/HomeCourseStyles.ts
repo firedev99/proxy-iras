@@ -46,6 +46,10 @@ export const CourseElementWrapper = styled(motion.div)`
   span {
     font-weight: 800;
   }
+
+  .time {
+    letter-spacing: 2px;
+  }
 `
 
 export const GradeWrapper = styled.div`

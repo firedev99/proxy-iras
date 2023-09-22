@@ -7,81 +7,90 @@ import {
 } from "./styles/HomeCourseStyles"
 import { colors } from "@/lib/dummy/colors"
 import Icon from "@/lib/icons"
+import Link from "next/link"
+import { firey } from "@/lib/utils"
 
 type Props = {
   courses?: CourseProps[]
+  classroomCourses?: any
 }
 
-// generate a non repeating random value from an array
-function getRandomNonRepeatingValue(dict: string[]) {
-  if (dict.length === 0) {
-    return null
-  }
-
-  // pop and return the last element from the array.
-  return dict.pop() || null
-}
-
-// Fisher-Yates shuffle algorithm.
-function shuffleArray(array: string[]) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[array[i], array[j]] = [array[j], array[i]]
-  }
-  return array
-}
-
-export default function HomeCourses({ courses }: Props) {
+export default function HomeCourses({ courses, classroomCourses }: Props) {
   const [randomColors, setRandomColors] = useState<string[]>([])
+  const [modCourses, setModCourses] = useState<CourseProps[]>([])
 
+  // Create a shuffled copy of the colors array
   useEffect(() => {
-    // Create a shuffled copy of the colors array
-    const shuffledColors = shuffleArray([...colors])
+    const shuffledColors = firey.shuffleArray([...colors])
     setRandomColors(shuffledColors)
   }, [])
 
-  const getNextRandomColor = () => {
-    const color = getRandomNonRepeatingValue(randomColors)
+  // get the next non repeating random color
+  function getNextRandomColor() {
+    const color = firey.getRandomNonRepeatingValue(randomColors)
     if (color) {
       return color
     } else {
       // if all colors have been used, reshuffle the array
-      const shuffledColors = shuffleArray([...colors])
+      const shuffledColors = firey.shuffleArray([...colors])
       setRandomColors(shuffledColors)
-      return getRandomNonRepeatingValue(shuffledColors)
+      return firey.getRandomNonRepeatingValue(shuffledColors)
     }
   }
 
+  // modify the current courses to contain it's classroom course id
+  useEffect(() => {
+    if (!courses) return
+
+    const courseList = courses.map((courseI) => {
+      const matchingClassroomCourse = classroomCourses.find(
+        (courseG: any) => courseG.name.split("-")[2] === courseI.courseID
+      )
+      return {
+        ...courseI,
+        classroomLink: matchingClassroomCourse
+          ? `/api/google/classroom/courses/${matchingClassroomCourse.id}`
+          : undefined,
+      }
+    })
+
+    // set the modified courses that contains classroom id into mod courses
+    setModCourses(courseList as CourseProps[])
+  }, [courses, classroomCourses])
+
+  console.log(modCourses)
+
   return (
     <HomeCoursesWrapper>
-      {courses && courses.length !== 0 ? (
-        courses.map((course) => (
-          <CourseElementWrapper
-            whileHover={{ scale: 0.96 }}
-            key={course.courseID}
-            style={{
-              backgroundColor: getNextRandomColor() ?? "",
-            }}
-          >
-            <h3>{course.courseName}</h3>
-            <h5>{course.classTime}</h5>
-            <h5>{course.roomID}</h5>
-            <span>
-              {course.attendedClasses ?? 0} /{" "}
-              {course.totalClasses ? course.totalClasses - 1 : 0}
-            </span>
-            {course.grade !== "Z" && (
-              <GradeWrapper>
-                <Icon
-                  name="semi-star-shape"
-                  className={
-                    course.grade === "F" ? "shape_fill_f" : "shape_fill"
-                  }
-                />
-                <span>{course.grade}</span>
-              </GradeWrapper>
-            )}
-          </CourseElementWrapper>
+      {modCourses && modCourses.length !== 0 ? (
+        modCourses.map((course) => (
+          <Link href={course.classroomLink ?? "/courses"} key={course.courseID}>
+            <CourseElementWrapper
+              whileHover={{ scale: 0.96 }}
+              style={{
+                backgroundColor: getNextRandomColor() ?? "#FFF",
+              }}
+            >
+              <h3>{course.courseName}</h3>
+              <h5 className="time">{course.classTime}</h5>
+              <h5>{course.roomID}</h5>
+              <span>
+                {course.attendedClasses ?? 0} /{" "}
+                {course.totalClasses ? course.totalClasses - 1 : 0}
+              </span>
+              {course.grade !== "Z" && (
+                <GradeWrapper>
+                  <Icon
+                    name="semi-star-shape"
+                    className={
+                      course.grade === "F" ? "shape_fill_f" : "shape_fill"
+                    }
+                  />
+                  <span>{course.grade}</span>
+                </GradeWrapper>
+              )}
+            </CourseElementWrapper>
+          </Link>
         ))
       ) : (
         <h1>no courses atm 🍻</h1>

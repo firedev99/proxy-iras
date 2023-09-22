@@ -64,6 +64,10 @@ export const GlobalStyles = styled.createGlobalStyle`
     visibility: visible;
   }
 
+  a:focus {
+    outline: none;
+  }
+
   [data-title]:after {
     content: attr(data-title);
     background-color: rgb(241, 245, 249);
@@ -71,7 +75,7 @@ export const GlobalStyles = styled.createGlobalStyle`
     color: rgba(18, 18, 18, 0.7);
     font-size: 0.8rem;
     position: absolute;
-    padding: 0.4rem 0.8rem;
+    padding: 0.55rem 0.8rem;
     border-radius: 0.25rem;
     bottom: -1.8rem;
     left: 80%;

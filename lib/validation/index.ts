@@ -3,10 +3,10 @@ import { CustomHookFormErrorType } from "@types"
 export function login<T extends CustomHookFormErrorType>(values: T) {
   let errors: CustomHookFormErrorType = {}
 
-  if (!values.email) {
+  if (!values.user) {
     errors.user = "user id required"
   } else {
-    errors.email = null
+    errors.user = null
   }
 
   if (!values.password) {

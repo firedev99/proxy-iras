@@ -5,13 +5,21 @@ import Link from "next/link"
 import { ReactElement } from "react"
 
 export default function CoursesPage(props: any) {
-  const { auth, courses } = props
+  const { g_auth, courses, announcements, courseWorks } = props
   console.log(courses)
+  console.log(announcements)
+  console.log(courseWorks)
+
+  async function logoutFromGoogle() {
+    const res = await fetch(`api/google/logout`, { method: "DELETE" })
+    console.log(await res.json())
+  }
 
   return (
     <CourseHomePageWrapper>
       <h1>Courses Page</h1>
-      {courses && courses.length !== 0 ? (
+      <button onClick={logoutFromGoogle}>Signout from Google</button>
+      {courses.length !== 0 ? (
         courses.map((course: any) => (
           <div key={`classroom_course_${course.id}`}>
             <Link href={`/api/google/classroom/courses/${course.id}`}>
@@ -26,21 +34,22 @@ export default function CoursesPage(props: any) {
           <GoogleUI />
         </>
       )}
-      {!auth && <GoogleUI />}
+      {!g_auth && <GoogleUI />}
     </CourseHomePageWrapper>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const token = ctx.req.cookies["g-token"]
-  const refreshToken = ctx.req.cookies["r-token"]
-  // replace single quotes with double quotes to make it valid JSON
-  // const validJsonValue = token?.replace(/'/g, '"')
+  let token = ctx.req.cookies["g-token"]
+  let refreshToken = ctx.req.cookies["r-token"]
   let courses: any = []
+  let announcements: any = []
+  let courseWorks: any = []
 
+  // fetch google classroom courses
   if (token || refreshToken) {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/google/classroom/courses`,
+      `${process.env.NEXT_PUBLIC_URL}/api/google/classroom/courses/hybrid`,
       {
         headers: {
           // send the cookies that are already stored
@@ -53,16 +62,27 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const cookies = response.headers.getSetCookie()
     ctx.res.setHeader("Set-Cookie", cookies)
 
+    // set data and tokens based on response status
     if (response.ok) {
-      const { data } = await response.json()
-      courses = data
+      const { courseList, announcementList, courseWorkList } =
+        await response.json()
+      courses = courseList
+      announcements = announcementList ?? []
+      courseWorks = courseWorkList ?? []
+    } else {
+      token = undefined
+      refreshToken = undefined
     }
   }
 
+  // return g_auth status and google courses
   return {
     props: {
-      auth: token || refreshToken ? true : false,
-      courses: courses ?? null, // null - line(26),
+      g_auth: token || refreshToken ? true : false,
+      courses,
+      announcements,
+      courseWorks,
+      // courses: courses ?? null, // null - line(26),
     },
   }
 }

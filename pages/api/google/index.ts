@@ -10,15 +10,18 @@ const scopes = [
 ]
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "GET") {
-    const { callbackURL } = req.query
-
-    const url = oAuth2Client.generateAuthUrl({
-      access_type: "offline",
-      scope: scopes,
-      state: callbackURL as string,
-    })
-
-    res.redirect(url)
+  // enable only get method calls
+  if (req.method !== "GET") {
+    res.status(405).json({ message: "method not allowed!" })
   }
+
+  const { callbackURL } = req.query
+
+  const url = oAuth2Client.generateAuthUrl({
+    access_type: "offline",
+    scope: scopes,
+    state: callbackURL as string,
+  })
+
+  res.redirect(url)
 }

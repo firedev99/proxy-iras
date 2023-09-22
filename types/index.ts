@@ -17,7 +17,7 @@ export type AppPropsWithLayout = AppProps & {
 }
 
 export type AuthCredentials = {
-  email: string
+  user: string
   password: string
 }
 
@@ -27,7 +27,6 @@ export type InputProps = {
   value: string
   placeholder?: string
   errStaus?: boolean
-  autoComplete?: string
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void
 }
@@ -76,8 +75,11 @@ export type IconProps = {
     | "chart"
     | "settings"
     | "semi-star-shape"
+    | "logout"
+    | "square-stack"
 
   className?: string
+  active?: boolean
 }
 
 export type StudentProps = {
@@ -93,6 +95,31 @@ export type StudentProps = {
   cgpa: string
   advisorName?: string
   creditEarned: string
+  picture: string
+}
+
+export type StudentProfileProp = {
+  studentName: string
+  studentID: string
+  studentPrimaryImgSrc: string
+  studentSecondaryImgSrc?: string
+  cgpa: number
+  earnedCredit: number
+  major: string
+  minor: string
+  schoolName: string
+  dob: string
+  birthRegistrationNo: string
+  nid: string
+  passportNo: string
+  bloodGroup: string
+  cellPhone: string
+  primaryEmail: string
+  secondaryEmail?: string
+  fathersName: string
+  mothersName: string
+  presentAddess: string
+  sex: string
 }
 
 export type StudentContextProps = {
@@ -133,8 +160,10 @@ export type CourseProps = {
   grade: string
   semesterByYear: string
   year: string
+  classroomLink?: string
 }
 
 export type HomePageType = {
   courses?: CourseProps[]
+  classroomCourses?: any
 }

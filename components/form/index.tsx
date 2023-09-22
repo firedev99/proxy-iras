@@ -31,7 +31,7 @@ export default function LoginForm() {
     handleFormSubmit,
   } = useForm({
     formValues: {
-      email: "",
+      user: "",
       password: "",
     } as AuthCredentials,
     onSubmit: async function (values) {
@@ -45,7 +45,7 @@ export default function LoginForm() {
       if (response.ok) {
         const { student } = await response.json()
         addStudent(student)
-        setValues({ email: "", password: "" })
+        setValues({ user: "", password: "" })
         addToast(`${greeting} ${student.studentName}`)
         if (callbackURL) {
           setTimeout(() => router.push(`/${callbackURL}`), 2000)
@@ -53,7 +53,7 @@ export default function LoginForm() {
           setTimeout(() => router.reload(), 2000)
         }
       } else {
-        addToast(`email or password is incorrent😔`)
+        addToast(`user id or password is incorrent😔`)
       }
     },
     validationFunc: login,
@@ -65,17 +65,17 @@ export default function LoginForm() {
   }
 
   return (
-    <LoginFormWrapper onSubmit={handleFormSubmit} autoComplete="on">
+    <LoginFormWrapper onSubmit={handleFormSubmit}>
       <h1>Login</h1>
       <span>Enter the details of your IRAS account to log in.</span>
       <Input
         type="text"
-        name="Email"
+        name="User"
         placeholder="Student ID"
-        value={values.email}
+        value={values.user}
         onChange={handleChange}
         onBlur={handleBlur}
-        errStaus={errStatus("email")}
+        errStaus={errStatus("user")}
       />
       <Input
         type="password"

@@ -6,10 +6,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // enable only get method calls
+  if (req.method !== "GET") {
+    res.status(405).json({ message: "method not allowed!" })
+  }
+
   const cookies = cookie.parse(req.headers.cookie || "")
   const token = cookies["user-token"]
   const studentID = cookies["_id"]
-  const profilePicture = cookies?.["pp"] ?? ""
+  const googleSavedCookie = cookies[`gsp`] ?? ""
+  const googlePicture = googleSavedCookie
+    ? JSON.parse(googleSavedCookie)
+    : undefined
 
   if (token && studentID) {
     // get student profile details from iub api
@@ -18,8 +26,14 @@ export default async function handler(
       token
     )
 
-    res
-      .status(200)
-      .send({ student: { ...data, googleProfilePicture: profilePicture } })
+    res.status(200).send({
+      student: {
+        ...data,
+        googleProfilePicture:
+          googlePicture && googlePicture.studentID === studentID
+            ? googlePicture.picture
+            : undefined,
+      },
+    })
   }
 }

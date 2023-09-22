@@ -23,8 +23,33 @@ export function StudentProvider({ children }: StudentProviderType) {
   // assign a student in the context and localstorage
   function addStudent(student: StudentProps) {
     if (typeof window !== "undefined" && window.localStorage) {
-      setStudent(student)
-      localStorage.setItem("student-info", JSON.stringify(student))
+      // get previously saved picture
+      let previouslySavedPicture = localStorage.getItem(
+        `saved-${student.studentID}-picture`
+      )
+
+      // assign student in the state
+      setStudent({
+        ...student,
+        picture: previouslySavedPicture ?? student.picture,
+      })
+
+      // set student details in the local storage
+      localStorage.setItem(
+        "student-info",
+        JSON.stringify({
+          ...student,
+          picture: previouslySavedPicture ?? student.picture,
+        })
+      )
+
+      // store the profile picture in the local storage
+      if (!previouslySavedPicture) {
+        localStorage.setItem(
+          `saved-${student.studentID}-picture`,
+          student.picture
+        )
+      }
     }
   }
 

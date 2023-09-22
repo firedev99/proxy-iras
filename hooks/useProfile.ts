@@ -1,33 +1,9 @@
+import { StudentProfileProp } from "@/types"
 import { useState, useEffect } from "react"
 
-type StudentProfileProp = {
-  studentName: string
-  studentID: string
-  studentPrimaryImgSrc: string
-  studentSecondaryImgSrc?: string
-  cgpa: number
-  earnedCredit: number
-  major: string
-  minor: string
-  schoolName: string
-  dob: string
-  birthRegistrationNo: string
-  nid: string
-  passportNo: string
-  bloodGroup: string
-  cellPhone: string
-  primaryEmail: string
-  secondaryEmail?: string
-  fathersName: string
-  mothersName: string
-  presentAddess: string
-  sex: string
-}
-
 export function useProfile() {
-  const [studentDetails, setStudentDetails] = useState<StudentProfileProp | {}>(
-    {}
-  )
+  const [studentDetails, setStudentDetails] =
+    useState<StudentProfileProp | null>(null)
   const [dummyPictures, setDummyPictures] = useState<string[]>([])
 
   useEffect(() => {
@@ -36,6 +12,7 @@ export function useProfile() {
       const response = await fetch(`/api/iub/profile`)
       if (response.ok) {
         const { student } = await response.json()
+        // set the student details
         setStudentDetails({
           studentName: student.studentName,
           studentID: student.studentId,
@@ -61,7 +38,7 @@ export function useProfile() {
 
         // generate src links based on their gender
         if (student.sex.toLowerCase() === "male") {
-          // generate src links for dummy pictures
+          // generate src links for dummy pictures for male
           const generatedSrc = [...Array(20)].map(
             (_, i) =>
               `https://res.cloudinary.com/firey/image/upload/v1694607133/iub/male_${
@@ -69,9 +46,10 @@ export function useProfile() {
               }.jpg`
           )
 
+          // set the dummy pictures in state
           setDummyPictures(generatedSrc)
         } else {
-          // generate src links for dummy pictures
+          // generate src links for dummy pictures for female
           const generatedSrc = [...Array(20)].map(
             (_, i) =>
               `https://res.cloudinary.com/firey/image/upload/v1694607133/iub/female_${
@@ -79,16 +57,21 @@ export function useProfile() {
               }.jpg`
           )
 
+          // set the dummy pictures in state
           setDummyPictures(generatedSrc)
         }
 
         // store the google profile picture in localstorage
-        if (student.googleProfilePicture && typeof window !== "undefined") {
-          localStorage.setItem("google-dp", student.googleProfilePicture)
+        if (typeof window !== "undefined" && student.googleProfilePicture) {
+          localStorage.setItem(
+            `saved-${student.studentId}-gsp`,
+            student.googleProfilePicture
+          )
         }
       }
     })()
   }, [])
 
+  // return the student details and dummy pictures
   return { studentDetails, dummyPictures }
 }

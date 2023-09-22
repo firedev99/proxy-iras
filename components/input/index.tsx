@@ -11,7 +11,6 @@ const CustomInput = memo(function CustomInput({
   errStaus,
   onChange,
   onBlur,
-  autoComplete,
 }: InputProps) {
   const _name = firey.camelize(name)
 
@@ -21,11 +20,9 @@ const CustomInput = memo(function CustomInput({
         type={type}
         name={_name}
         placeholder={placeholder}
-        spellCheck="false"
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        autoComplete={autoComplete}
         style={{
           borderColor: errStaus ? "rgba(203, 74, 74, 0.7)" : "initial",
         }}

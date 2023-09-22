@@ -50,6 +50,17 @@ export default async function generateIubAuthFlow(
       studentInfo.data
     const { cgpa, creditEarned, advisorName } = studentCatalogue.data[0]
 
+    // get student profile details from iub api
+    const {
+      data: { sex },
+    } = await services.getDataWithToken(
+      `https://iras.iub.edu.bd:8079//api/v2/profile/${studentId}/load-student-details`,
+      token
+    )
+
+    // get random number between 1-20
+    let randomNumber = Math.floor(Math.random() * 20 + 1)
+
     const _student = {
       studentID: studentId,
       studentName: studentName.slice(1),
@@ -61,6 +72,8 @@ export default async function generateIubAuthFlow(
       cgpa,
       creditEarned,
       advisorName,
+      // generate a random bit emoji based on their gender
+      picture: `https://res.cloudinary.com/firey/image/upload/v1694607133/iub/${sex.toLowerCase()}_${randomNumber}.jpg`,
     } as StudentProps
 
     const newStudent = {

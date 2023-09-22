@@ -22,6 +22,7 @@ export const ProfileAvatar = styled.div`
 export const UserDetails = styled.div`
   margin-left: 2.5rem;
   user-select: none;
+  white-space: nowrap;
 
   h3 {
     font-size: 2.4rem;
