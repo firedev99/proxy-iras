@@ -1,19 +1,14 @@
 import { GoogleUI, Layout } from "@/components"
+import { logoutFromGoogle } from "@/lib/snippets/logoutFromGoogle"
 import { CourseHomePageWrapper } from "@styles/CourseStyles"
 import { GetServerSideProps } from "next"
 import Link from "next/link"
 import { ReactElement } from "react"
 
 export default function CoursesPage(props: any) {
-  const { g_auth, courses, announcements, courseWorks } = props
+  const { g_auth, courses, courseWork } = props
   console.log(courses)
-  console.log(announcements)
-  console.log(courseWorks)
-
-  async function logoutFromGoogle() {
-    const res = await fetch(`api/google/logout`, { method: "DELETE" })
-    console.log(await res.json())
-  }
+  console.log(courseWork)
 
   return (
     <CourseHomePageWrapper>
@@ -22,7 +17,11 @@ export default function CoursesPage(props: any) {
       {courses.length !== 0 ? (
         courses.map((course: any) => (
           <div key={`classroom_course_${course.id}`}>
-            <Link href={`/api/google/classroom/courses/${course.id}`}>
+            <Link
+              href={`/courses/${course.id}?code=${course.name
+                .split("-")[2]
+                .toLowerCase()}`}
+            >
               <h3>{course.name}</h3>
             </Link>
           </div>
@@ -40,11 +39,8 @@ export default function CoursesPage(props: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  let token = ctx.req.cookies["g-token"]
-  let refreshToken = ctx.req.cookies["r-token"]
-  let courses: any = []
-  let announcements: any = []
-  let courseWorks: any = []
+  const token = ctx.req.cookies["g-token"]
+  const refreshToken = ctx.req.cookies["r-token"]
 
   // fetch google classroom courses
   if (token || refreshToken) {
@@ -62,31 +58,34 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const cookies = response.headers.getSetCookie()
     ctx.res.setHeader("Set-Cookie", cookies)
 
-    // set data and tokens based on response status
+    // sent the course list and course works to client
     if (response.ok) {
-      const { courseList, announcementList, courseWorkList } =
-        await response.json()
-      courses = courseList
-      announcements = announcementList ?? []
-      courseWorks = courseWorkList ?? []
-    } else {
-      token = undefined
-      refreshToken = undefined
+      const { courseList, courseWork } = await response.json()
+
+      return {
+        props: {
+          g_auth: true,
+          courses: courseList,
+          courseWork,
+        },
+      }
     }
   }
 
-  // return g_auth status and google courses
+  // sent the default values
   return {
     props: {
-      g_auth: token || refreshToken ? true : false,
-      courses,
-      announcements,
-      courseWorks,
-      // courses: courses ?? null, // null - line(26),
+      g_auth: false,
+      courses: [],
+      courseWork: [],
     },
   }
 }
 
 CoursesPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout nav={true}>{page}</Layout>
+  return (
+    <Layout nav={true} title="Classroom Courses | Proxy IRAS">
+      {page}
+    </Layout>
+  )
 }

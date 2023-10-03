@@ -26,6 +26,7 @@ export default async function handler(
       token
     )
 
+    // send student data along with google profile picture if user has signed in with their google account
     res.status(200).send({
       student: {
         ...data,

@@ -4,7 +4,7 @@ import { serialize } from "cookie"
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
-) {
+): Promise<void> {
   // enable only delete method calls
   if (req.method !== "DELETE") {
     res.status(405).json({ message: "method not allowed!" })

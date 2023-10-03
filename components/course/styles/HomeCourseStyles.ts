@@ -4,7 +4,7 @@ import styled from "styled-components"
 export const HomeCoursesWrapper = styled.div`
   width: 100%;
   min-height: 25rem;
-  margin-left: 1rem;
+  margin-left: 1.05rem;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -21,16 +21,19 @@ export const HomeCoursesWrapper = styled.div`
 `
 
 export const CourseElementWrapper = styled(motion.div)`
+  position: relative;
+  cursor: pointer;
+`
+
+export const CourseElement = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 0.6rem;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  cursor: pointer;
+  padding: 1.5rem;
 
   h3 {
     font-size: 1.5rem;
@@ -72,5 +75,32 @@ export const GradeWrapper = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    font-weight: 800;
+  }
+`
+
+export const ClassScheduleWrapper = styled.div`
+  margin-left: 1.2rem;
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .course_meta_wrapper {
+    display: grid;
+    max-width: 50rem;
+    grid-template-columns: 86px 224px 64px 100px 150px;
+    gap: 0.5rem;
+    margin-left: 0.2rem;
+
+    span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 `

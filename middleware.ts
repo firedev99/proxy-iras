@@ -1,7 +1,14 @@
 import { NextResponse, NextRequest } from "next/server"
 
 export const config = {
-  matcher: ["/", "/login", "/courses/:path*", "/works/:path*", "/profile"],
+  matcher: [
+    "/",
+    "/login",
+    "/courses/:path*",
+    "/calender",
+    "/profile",
+    "/extra",
+  ],
 }
 
 export function middleware(req: NextRequest) {
@@ -13,6 +20,7 @@ export function middleware(req: NextRequest) {
   }
 
   // redirect to login page if token was not found
+  // handle csrf token in the client side
   if (!isPublicPath && !token) {
     const destination = req.nextUrl.href.split(
       `${process.env.NEXT_PUBLIC_URL}/`

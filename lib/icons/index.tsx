@@ -4,6 +4,7 @@ import {
   CheckboardIcon,
   HomeIcon,
   LogoutIcon,
+  RightArrowIcon,
   SemiStarShapeIcon,
   SettingsIcon,
   SpinningLoader,
@@ -16,6 +17,9 @@ export default function Icon({ name, className }: IconProps) {
   switch (name) {
     case "spinning-loader":
       return <SpinningLoader />
+
+    case "right-arrow":
+      return <RightArrowIcon />
 
     case "square-stack":
       return <SqaureStackIcon />

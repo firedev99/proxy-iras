@@ -5,7 +5,7 @@ import cookie, { serialize } from "cookie"
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
-) {
+): Promise<void> {
   // enable only get method calls
   if (req.method !== "GET") {
     res.status(405).json({ message: "method not allowed!" })
@@ -22,7 +22,7 @@ export default async function handler(
     // set the credentials in the auth client
     oAuth2Client.setCredentials(tokens)
 
-    // generate the payload the to get profile informations
+    // generate the payload to get profile informations
     const ticket = await oAuth2Client.verifyIdToken({
       idToken: tokens.id_token as string,
       audience: process.env.GOOGLE_CLIENT_ID,

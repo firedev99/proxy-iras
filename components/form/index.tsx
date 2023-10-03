@@ -8,9 +8,9 @@ import { services } from "@/lib/services"
 import { login } from "@/lib/validation"
 import { firey } from "@/lib/utils"
 import { greetingLines } from "@/lib/dummy/greetings"
-import Icon from "@icons"
 import { LoginFormWrapper } from "./styles"
 import { AuthCredentials } from "@types"
+import Icon from "@icons"
 
 export default function LoginForm() {
   const { addToast } = useToast()
@@ -48,8 +48,10 @@ export default function LoginForm() {
         setValues({ user: "", password: "" })
         addToast(`${greeting} ${student.studentName}`)
         if (callbackURL) {
+          // redirect to the page it logged out from or asked to visit
           setTimeout(() => router.push(`/${callbackURL}`), 2000)
         } else {
+          // redirect to home page
           setTimeout(() => router.reload(), 2000)
         }
       } else {

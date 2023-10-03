@@ -1,4 +1,4 @@
-import type { ReactElement } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { Layout } from "@components"
 import { useStudent } from "@hooks/useStudent"
 import type { GetServerSideProps } from "next"
@@ -22,16 +22,55 @@ const HomeCourses = dynamic(() => import("../components/course/HomeCourses"), {
   ssr: false,
 })
 
+const HomeSchedule = dynamic(
+  () => import("../components/course/HomeSchedule"),
+  {
+    ssr: false,
+  }
+)
+
 export default function Home({ courses, classroomCourses }: HomePageType) {
   const { student } = useStudent()
+  const [courseList, setCourseList] = useState<CourseProps[]>([])
 
-  // make sure that student and courses already exists
-  if (!student || !courses) return <div />
+  useEffect(() => {
+    if (!courses || !student) return
 
-  // filter the course array to contain only current coursws
-  const currentCourses = courses.filter(
-    (course) => course.semesterByYear === student.semesterByYear
-  )
+    // get the current courses from iub based on running semester
+    const currentCourses = courses.filter(
+      (course) => course.semesterByYear === student.semesterByYear
+    )
+
+    // modify the iub course data to contain classroom link
+    if (classroomCourses) {
+      const _courseList = currentCourses.map((courseI) => {
+        const matchingClassroomCourse = classroomCourses.find(
+          (courseG: any) => courseG.name.split("-")[2] === courseI.courseID
+        )
+
+        return {
+          ...courseI,
+          // redirect to the courses page if something went wrong
+          classroomLink: matchingClassroomCourse
+            ? `/courses/${
+                matchingClassroomCourse.id
+              }?code=${matchingClassroomCourse.name
+                .split("-")[2]
+                .toLowerCase()}`
+            : undefined,
+        }
+      })
+
+      // set the modified course details in the state
+      setCourseList(_courseList as CourseProps[])
+    } else {
+      // set the iub courses as it is
+      setCourseList(currentCourses)
+    }
+  }, [courses, student, classroomCourses])
+
+  // show skeleton if the student does not exists
+  if (!student) return <div />
 
   return (
     <HomePageWrapper>
@@ -61,33 +100,40 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
         <span>Minor: {student.minor ?? "Not Declared"}</span>
         <span>Advisor Name: {student.advisorName}</span>
       </UserMetaDataWrapper>
-      <HomeCourses
-        classroomCourses={classroomCourses}
-        courses={currentCourses}
-      />
+      {courseList.length > 0 && <HomeSchedule courses={courseList} />}
+      <HomeCourses courses={courseList} />
       <HomeFooterWrapper></HomeFooterWrapper>
     </HomePageWrapper>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  // get iub tokens
   const token = ctx.req.cookies["user-token"]
   const studentID = ctx.req.cookies["_id"]
 
-  // get class room cookies
-  let g_token = ctx.req.cookies["g-token"]
-  let refreshToken = ctx.req.cookies["r-token"]
+  // get google cookies
+  const g_token = ctx.req.cookies["g-token"]
+  const refreshToken = ctx.req.cookies["r-token"]
 
-  let courses = [] as CourseProps[]
-  let classroomCourses: any = []
+  // check if user is connected with a google account
+  const googleUser = g_token || refreshToken
 
-  // fetch the course data based of student id
-  if (token && studentID) {
-    courses = await services.getCourseData(token, studentID)
+  // fetch course details based on user status
+  if (token && studentID && !googleUser) {
+    const courses = await services.getCourseData(token, studentID)
+    return {
+      props: {
+        courses: JSON.parse(JSON.stringify(courses)),
+      },
+    }
   }
 
-  // fetch google classroom courses
-  if (g_token || refreshToken) {
+  // fetch course details based on user status
+  if (token && studentID && googleUser) {
+    // iub courses
+    const courses = await services.getCourseData(token, studentID)
+    // google classroom courses
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/google/classroom/courses`,
       {
@@ -98,27 +144,35 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       }
     )
 
-    // sent the cookie along w the header that needs to be stored
+    // send the cookie along w the header that needs to be stored
     const cookies = response.headers.getSetCookie()
     ctx.res.setHeader("Set-Cookie", cookies)
 
-    // set data and tokens based on response status
+    // send the course details to client
     if (response.ok) {
-      const { data } = await response.json()
-      classroomCourses = data
-    } else {
-      g_token = undefined
-      refreshToken = undefined
+      let { classroomCourses } = await response.json()
+      return {
+        props: {
+          courses: JSON.parse(JSON.stringify(courses)),
+          classroomCourses,
+        },
+      }
     }
   }
+
+  // default value
   return {
     props: {
-      courses: JSON.parse(JSON.stringify(courses)),
-      classroomCourses,
+      courses: undefined,
+      classroomCourses: undefined,
     },
   }
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout nav={true}>{page}</Layout>
+  return (
+    <Layout nav={true} title="Dashboard | Proxy IRAS">
+      {page}
+    </Layout>
+  )
 }

@@ -7,7 +7,6 @@ export default async function allowInstitutionalEmail(
   res: NextApiResponse
 ) {
   const cookies = cookie.parse(req.headers.cookie || "")
-
   const studentID = cookies["_id"]
 
   // flow to allow a student only sign in with their own account

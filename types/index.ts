@@ -77,6 +77,7 @@ export type IconProps = {
     | "semi-star-shape"
     | "logout"
     | "square-stack"
+    | "right-arrow"
 
   className?: string
   active?: boolean

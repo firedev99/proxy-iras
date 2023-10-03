@@ -1,3 +1,22 @@
+export function RightArrowIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="11"
+      height="10"
+      viewBox="0 0 11 10"
+      fill="none"
+    >
+      <path
+        d="M9.21114 4.10557L2.73666 0.868328C1.93878 0.469388 1 1.04958 1 1.94164V8.05836C1 8.95042 1.93878 9.53061 2.73666 9.13167L9.21115 5.89443C9.94819 5.5259 9.94819 4.4741 9.21114 4.10557Z"
+        stroke="#222222"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 export function SqaureStackIcon() {
   return (
     <svg

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { classroom_v1, google } from "googleapis"
+import { google } from "googleapis"
 import generateClient from "@/lib/google/generateClient"
 import allowInstitutionalEmail from "@/lib/snippets/allowInstitutionalEmail"
 
@@ -23,44 +23,43 @@ export default async function handler(
     const classroom = google.classroom({ version: "v1", auth: oAuth2Client })
 
     // fetch all the active courses
-    const courseList = await classroom.courses.list({
+    const courseListResponse = await classroom.courses.list({
       courseStates: ["ACTIVE"],
+      fields: "courses(id,name,section,description,alternateLink)",
     })
 
-    const randomCourse = Math.floor(
-      Math.random() *
-        (courseList.data.courses as classroom_v1.Schema$Course[]).length
-    )
+    if (courseListResponse.data.courses) {
+      const courseWorkPromises = courseListResponse.data.courses.map(
+        async (course) => {
+          // fetch all the course work details
+          const workList = await classroom.courses.courseWork.list({
+            courseId: course.id as string,
+            fields:
+              "courseWork(id,courseId,title,creationTime,dueTime,dueDate,alternateLink)",
+          })
 
-    // fetch a random course announcements from classroom
-    const announcementList = await classroom.courses.announcements.list({
-      courseId: (courseList.data.courses as classroom_v1.Schema$Course[])[
-        randomCourse
-      ].id as string,
-      pageSize: 2,
-    })
+          return workList.data.courseWork || []
+        }
+      )
 
-    // fetch a random course work details from classroom
-    const courseWorkList = await classroom.courses.courseWork.list({
-      courseId: (courseList.data.courses as classroom_v1.Schema$Course[])[
-        randomCourse
-      ].id as string,
-      pageSize: 2,
-      courseWorkStates: ["PUBLISHED"],
-    })
+      // use Promise.all to execute all requests concurrently
+      const courseWorkResults = await Promise.all(courseWorkPromises)
 
-    // send the course data
-    return res.status(200).send({
-      courseList: courseList.data.courses,
-      announcementList: announcementList.data.announcements,
-      courseWorkList: courseWorkList.data.courseWork,
-    })
+      // concatenate all course work results
+      const courseWork = courseWorkResults.flat()
+
+      // return the course data
+      return res.status(200).send({
+        courseList: courseListResponse.data.courses,
+        courseWork,
+      })
+    }
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {
       console.log(err)
     }
 
-    return res.status(400).send({
+    return res.status(500).send({
       message: "something went wrong!",
     })
   }

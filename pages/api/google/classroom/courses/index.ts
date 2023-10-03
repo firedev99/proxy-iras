@@ -23,20 +23,21 @@ export default async function handler(
     const classroom = google.classroom({ version: "v1", auth: oAuth2Client })
 
     // fetch all the active courses
-    const result = await classroom.courses.list({
+    const courseList = await classroom.courses.list({
       courseStates: ["ACTIVE"],
+      fields: "courses(id,name)",
     })
 
     // send the course data
     return res.status(200).send({
-      data: result.data.courses,
+      classroomCourses: courseList.data.courses,
     })
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {
       console.log(err)
     }
 
-    return res.status(400).send({
+    return res.status(500).send({
       message: "something went wrong!",
     })
   }

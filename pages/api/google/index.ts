@@ -7,9 +7,13 @@ const scopes = [
   "https://www.googleapis.com/auth/classroom.courses.readonly",
   "https://www.googleapis.com/auth/classroom.announcements.readonly",
   "https://www.googleapis.com/auth/classroom.coursework.me.readonly",
+  "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly",
 ]
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+): void {
   // enable only get method calls
   if (req.method !== "GET") {
     res.status(405).json({ message: "method not allowed!" })

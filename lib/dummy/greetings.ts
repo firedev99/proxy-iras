@@ -5,7 +5,7 @@ export const greetingLines = [
   "Hop on 🚀",
   "Pop the hood 🍭",
   "You're in 🍸",
-  "You're here – let's begin 🦄",
+  "Let's begin 🦄",
   "Glad you're on deck 🤖",
   "Welcome to the ride 👩🏽‍🚀",
 ]

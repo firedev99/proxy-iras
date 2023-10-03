@@ -9,6 +9,7 @@ export default async function generateIubAuthFlow(
   res: NextApiResponse
 ) {
   const credentials = req.body
+
   // check from server for credentials
   if (!credentials.email || !credentials.password) {
     return res.status(400).json({ data: "credentials are missing" })
@@ -37,7 +38,7 @@ export default async function generateIubAuthFlow(
       token
     )
 
-    // idk whom iub hired as the developer, i mean he have written such a crap
+    // idk whom iub hired as the developer, figuring out these mess made me sick :)
     // give me money and a few months, i'll let you know what top notch feels like
     const studentCatalogue = await services.getDataWithToken(
       `https://iras.iub.edu.bd:8079//api/v1/registration/student-catelogue-requirment/${credentials.email}`,
@@ -76,6 +77,7 @@ export default async function generateIubAuthFlow(
       picture: `https://res.cloudinary.com/firey/image/upload/v1694607133/iub/${sex.toLowerCase()}_${randomNumber}.jpg`,
     } as StudentProps
 
+    // create a new student object to save
     const newStudent = {
       studentID: studentId,
       studentName: studentName.slice(1),

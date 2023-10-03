@@ -2,9 +2,33 @@ import Head from "next/head"
 import { RootLayoutWrapper } from "./styles"
 import { LayoutType } from "@types"
 import dynamic from "next/dynamic"
+import { AnimatePresence, Variants, motion } from "framer-motion"
+import { useRouter } from "next/router"
 
 const Navigation = dynamic(() => import("../navigation"))
 const RouteLoader = dynamic(() => import("../loaders/RouteLoader"))
+
+let variants: Variants = {
+  initial: { x: "-100%", opacity: 0 },
+  animate: {
+    x: "0%",
+    opacity: 1,
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.2,
+    },
+  },
+  exit: {
+    x: "100%",
+    opacity: 0,
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.2,
+    },
+  },
+}
 
 export default function RootLayout({
   children,
@@ -13,6 +37,7 @@ export default function RootLayout({
   icon,
   nav,
 }: LayoutType) {
+  const router = useRouter()
   return (
     <>
       <Head>
@@ -28,9 +53,22 @@ export default function RootLayout({
       </Head>
       <RouteLoader />
       {nav && <Navigation />}
-      <main>
-        <RootLayoutWrapper>{children}</RootLayoutWrapper>
-      </main>
+      <AnimatePresence mode="wait">
+        {/* <motion.main
+          key={router.pathname}
+          variants={variants}
+          initial={{ x: "-100%", opacity: 0 }}
+          animate={{ x: "0%", opacity: 1 }}
+          exit={{ x: "100%", opacity: 0 }}
+          transition={{
+            type: "spring",
+            duration: 0.2,
+          }}
+        > */}
+        <main>
+          <RootLayoutWrapper>{children}</RootLayoutWrapper>
+        </main>
+      </AnimatePresence>
     </>
   )
 }

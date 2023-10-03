@@ -13,5 +13,9 @@ export default function ProfilePage({}: Props) {
 }
 
 ProfilePage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout nav={true}>{page}</Layout>
+  return (
+    <Layout nav={true} title="Profile | Proxy IRAS">
+      {page}
+    </Layout>
+  )
 }

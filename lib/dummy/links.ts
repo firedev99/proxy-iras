@@ -9,12 +9,12 @@ export const upperLinks = [
   {
     icon: "checkboard",
     href: "/courses",
-    context: "View Courses",
+    context: "Classroom Courses",
   },
   {
     icon: "calender",
-    href: "/courses/all",
-    context: "Works & Announcements",
+    href: "/calender",
+    context: "View Calender",
   },
   {
     icon: "user",
@@ -23,12 +23,7 @@ export const upperLinks = [
   },
   {
     icon: "chart",
-    href: "/gpacalculator",
-    context: "Calculate GPA",
-  },
-  {
-    icon: "square-stack",
-    href: "/preschedule",
-    context: "Plan Schedule",
+    href: "/helpers",
+    context: "Plan Schedule & Calculate GPA",
   },
 ] as { icon: IconProps["name"]; href: string; context: string }[]

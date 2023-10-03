@@ -12,13 +12,9 @@ export default async function handler(
     res.status(405).json({ message: "method not allowed!" })
   }
 
-  // // get the student id from cookies
-  // const cookies = cookie.parse(req.headers.cookie || "")
-  // const studentID = cookies["_id"]
+  const { id } = req.query
 
   try {
-    const { id } = req.query
-
     // generate the client
     const oAuth2Client = await generateClient(req, res)
 
@@ -36,21 +32,25 @@ export default async function handler(
     // fetch course work details from classroom
     const courseWorkList = await classroom.courses.courseWork.list({
       courseId: id as string,
-      courseWorkStates: ["PUBLISHED"],
     })
 
-    // return the annoucement list and course works
+    // fetch course work materials from classroom
+    const courseWorkMaterials =
+      await classroom.courses.courseWorkMaterials.list({
+        courseId: id as string,
+      })
+
+    // return the annoucement list, course works and course work materials
     return res.status(200).send({
-      data: {
-        annoucements: announcementList.data.announcements,
-        courseWork: courseWorkList.data.courseWork,
-      },
+      announcements: announcementList.data.announcements || [],
+      courseWork: courseWorkList.data.courseWork || [],
+      courseWorkMaterials: courseWorkMaterials.data.courseWorkMaterial || [],
     })
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {
       console.log(err)
     }
-    return res.status(400).send({
+    return res.status(500).send({
       message: "something went wrong!",
     })
   }

@@ -2,18 +2,42 @@ import { motion } from "framer-motion"
 import styled from "styled-components"
 
 export const ProfileMenu = styled(motion.div)`
-  width: 156px;
+  width: 186px;
   height: 3rem;
   position: absolute;
-  background: rgb(var(--text-base));
-  bottom: 4.8rem;
-  left: 1.5rem;
+  bottom: 4rem;
+  left: 1.2rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 0.2rem;
   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 
+  @media only screen and (max-width: 768px) {
+    left: unset;
+    right: 3.2rem;
+    bottom: 11.2rem;
+    border-radius: unset;
+
+    button {
+      border-top-left-radius: 0.2rem !important;
+      border-top-right-radius: 0.2rem !important;
+
+      &:last-of-type {
+        border-top-left-radius: unset !important;
+        border-top-right-radius: unset !important;
+      }
+    }
+
+    .theme_settings {
+      border-bottom-left-radius: 0.2rem !important;
+      border-bottom-right-radius: 0.2rem !important;
+      color: pointer;
+    }
+  }
+
+  .theme_settings,
   button {
     width: 100%;
     height: 100%;
@@ -23,6 +47,8 @@ export const ProfileMenu = styled(motion.div)`
     display: flex;
     align-items: center;
     padding-left: 0.3rem;
+    background: rgb(var(--text-base));
+    border-radius: inherit;
 
     span {
       font-weight: 800;
@@ -35,12 +61,13 @@ export const ProfileMenu = styled(motion.div)`
         stroke: rgba(126, 134, 158, 1);
       }
     }
-  }
 
-  &:hover {
-    background: rgba(24, 113, 172, 1);
+    .firey_stroke {
+      stroke: rgba(126, 134, 158, 1);
+    }
 
-    button {
+    &:not(.theme_settings):hover {
+      background: rgba(24, 113, 172, 1);
       cursor: pointer;
 
       span {
@@ -48,6 +75,7 @@ export const ProfileMenu = styled(motion.div)`
       }
 
       svg {
+        .firey_stroke,
         path {
           stroke: rgba(241, 245, 249, 1);
           transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -69,6 +97,11 @@ export const SidebarWrapper = styled.div`
   border-right: 2px solid rgba(126, 134, 158, 0.2);
   padding: 2rem 0 1rem 0;
 
+  .smaller_modal {
+    display: none;
+    visibility: none;
+  }
+
   .firey_stroke {
     stroke: rgba(var(--text-base), 0.6);
   }
@@ -87,6 +120,25 @@ export const SidebarWrapper = styled.div`
       stroke: rgba(var(--text-base), 0.6);
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    top: unset;
+    left: unset;
+    border-right: unset;
+    border-top: 2px solid rgba(126, 134, 158, 0.2);
+    min-height: auto;
+    width: 100%;
+    bottom: 0;
+    /* bottom: -10rem; */
+    left: 0;
+    flex-direction: row;
+    padding: unset;
+
+    .smaller_modal {
+      display: block !important;
+      visibility: visible !important;
+    }
+  }
 `
 export const NavWrapper = styled.div`
   position: absolute;
@@ -102,6 +154,27 @@ export const NavWrapper = styled.div`
 `
 
 export const UpperWrapper = styled.div`
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    .smaller_profile {
+      display: block !important;
+      visibility: visible !important;
+      position: relative;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      margin-left: -0.5rem;
+      cursor: pointer;
+
+      img {
+        border-radius: 50% !important;
+      }
+    }
+  }
+
   .active_layout {
     position: absolute;
     width: 3.5rem;
@@ -109,9 +182,18 @@ export const UpperWrapper = styled.div`
     background-color: rgba(126, 134, 158, 0.25);
     border-radius: 0.8rem;
   }
+
+  .smaller_profile {
+    display: none;
+    visibility: hidden;
+  }
 `
 
 export const BottomWrapper = styled.div`
+  @media only screen and (max-width: 768px) {
+    display: none;
+    visibility: hidden;
+  }
   margin-top: auto;
   position: relative;
 
@@ -125,7 +207,8 @@ export const BottomWrapper = styled.div`
   }
 `
 
-export const SideElement = styled(motion.div)`
+export const SideElementWrapper = styled.div`
+  position: relative;
   width: 3.5rem;
   height: 3.5rem;
   margin: 1rem;
@@ -133,7 +216,6 @@ export const SideElement = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 
   &:not(.disable_hover):hover {
     background-color: rgba(126, 134, 158, 0.25);
@@ -145,6 +227,22 @@ export const SideElement = styled(motion.div)`
       scale: 1.09;
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    margin-left: unset;
+
+    &:nth-child(4) {
+      display: none;
+    }
+  }
+`
+
+export const SideElement = styled(motion.div)`
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 export const TopElement = styled.div`
   width: 3.8rem;

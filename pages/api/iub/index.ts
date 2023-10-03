@@ -5,7 +5,7 @@ import generateIubAuthFlow from "@/lib/snippets/generateIubAuthFlow"
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
-) {
+): Promise<void> {
   if (req.method === "GET") {
     try {
       // generate a csrf token for post request
