@@ -147,8 +147,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     )
 
     // send the cookie along w the header that needs to be stored
-    const cookies = response.headers.getSetCookie()
-    ctx.res.setHeader("Set-Cookie", cookies)
+    const setCookies = (response.headers as any).getSetCookie()
+    ctx.res.setHeader("Set-Cookie", setCookies)
 
     // send the course details to client
     if (response.ok) {
