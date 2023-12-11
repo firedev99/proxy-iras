@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     )
 
     // sent the cookie along w the header that needs to be stored
-    const setCookies = response.headers.getSetCookie()
+    const setCookies = (response.headers as any).getSetCookie()
     ctx.res.setHeader("Set-Cookie", setCookies)
 
     // send to data to client
