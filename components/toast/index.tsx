@@ -1,3 +1,4 @@
+import { ReactPortal } from "react"
 import { createPortal } from "react-dom"
 import { Toast } from "./Component"
 import { ToastContainerWrapper } from "./styles"
@@ -11,7 +12,7 @@ export default function ToastContainer({ toasts }: ToastContainerType) {
         <Toast notifications={toasts} />
       </ToastContainerWrapper>,
       document.body
-    )
+    ) as ReactPortal
   }
 
   return null
