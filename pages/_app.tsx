@@ -1,6 +1,5 @@
 import { ToastProvider } from "@/lib/contexts/toastContext"
 import { StudentProvider } from "@/lib/contexts/studentContext"
-// import { poppins } from "@/lib/font/poppins"
 import { GlobalStyles } from "@styles/GlobalStyles"
 import { AppPropsWithLayout } from "@types"
 import { Noto_Sans_Display, Noto_Sans_Mono } from "next/font/google"

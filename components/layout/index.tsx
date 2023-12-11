@@ -5,7 +5,6 @@ import dynamic from "next/dynamic"
 import { AnimatePresence, Variants, motion } from "framer-motion"
 
 const Navigation = dynamic(() => import("../navigation"))
-// const RouteLoader = dynamic(() => import("../loaders/RouteLoader"))
 
 let variants: Variants = {
   initial: { x: "-100%", opacity: 0 },
