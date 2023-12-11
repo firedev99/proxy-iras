@@ -9,7 +9,7 @@ export function Toast({ notifications }: ToastStateProps) {
 
   useEffect(() => {
     // remove each notification on an interval of 1.5s
-    const intervalID: NodeJS.Timer = setInterval(() => {
+    const intervalID: NodeJS.Timeout = setInterval(() => {
       if (notifications.length) {
         removeToast(notifications[0].id)
       }
