@@ -45,8 +45,7 @@ export default function LoginForm() {
       if (response.ok) {
         const { student } = await response.json()
         addStudent(student)
-        setValues({ user: "", password: "" })
-        addToast(`${greeting} ${student.studentName}`)
+
         if (callbackURL) {
           // redirect to the page it logged out from or asked to visit
           setTimeout(() => router.push(`/${callbackURL}`), 2000)
@@ -54,6 +53,9 @@ export default function LoginForm() {
           // redirect to home page
           setTimeout(() => router.reload(), 2000)
         }
+
+        setValues({ user: "", password: "" })
+        addToast(`${greeting} ${student.studentName}`)
       } else {
         addToast(`user id or password is incorrent😔`)
       }
@@ -94,7 +96,11 @@ export default function LoginForm() {
         type="submit"
         disabled={isSubmitting}
       >
-        {isSubmitting ? <Icon name="spinning-loader" /> : <span>Login</span>}
+        {isSubmitting ? (
+          <Icon name="spinning-loader" />
+        ) : (
+          <span className="btn">Login</span>
+        )}
       </motion.button>
     </LoginFormWrapper>
   )

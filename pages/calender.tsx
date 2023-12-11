@@ -9,8 +9,8 @@ import {
   CalenderElementWrapper,
   CalenderPageWrapper,
 } from "@/styles/CalenderStyles"
-import PreviewElement from "@/components/calender/PreviewElement"
 import CalenderHeader from "@/components/calender/CalenderHeader"
+import CalenderPreview from "@/components/calender/CalenderPreview"
 
 type Props = {
   courseList: classroom_v1.Schema$Course[]
@@ -67,7 +67,7 @@ export default function CalenderPage({ courseList, courseWork }: Props) {
           ))}
 
           {/* current preview dates  */}
-          <PreviewElement
+          <CalenderPreview
             firstDayCurrentMonth={firstDayCurrentMonth}
             courseList={courseList}
             courseWork={courseWork}

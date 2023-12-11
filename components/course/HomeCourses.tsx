@@ -74,7 +74,7 @@ export default function HomeCourses({ courses }: Props) {
           </CourseElementWrapper>
         ))
       ) : (
-        <h1>no courses atm 🍻</h1>
+        <h1>no class, atm 🍻</h1>
       )}
     </HomeCoursesWrapper>
   )

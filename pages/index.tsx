@@ -18,16 +18,18 @@ import {
   UserMetaDataWrapper,
 } from "@/styles/HomeStyles"
 
-const HomeCourses = dynamic(() => import("../components/course/HomeCourses"), {
-  ssr: false,
-})
-
+// class schedule UI
 const HomeSchedule = dynamic(
   () => import("../components/course/HomeSchedule"),
   {
     ssr: false,
   }
 )
+
+// class courses UI
+const HomeCourses = dynamic(() => import("../components/course/HomeCourses"), {
+  ssr: false,
+})
 
 export default function Home({ courses, classroomCourses }: HomePageType) {
   const { student } = useStudent()
@@ -80,7 +82,7 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
             src={student.picture}
             alt="cloudinary"
             fill
-            sizes="(max-width: 768px) 56px, 186px"
+            sizes="(max-width: 768px) 124px, 186px"
             quality={100}
             placeholder="blur"
             blurDataURL={firey.rgbDataURL(177, 144, 182)}

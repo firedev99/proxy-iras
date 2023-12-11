@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const InputWrapper = styled.div`
-  margin: 1.4rem 0;
+  margin: 1rem 0;
 
   input {
     width: 100%;
@@ -18,7 +18,7 @@ export const InputWrapper = styled.div`
     &::placeholder {
       font-size: 17px;
       font-weight: 600;
-      font-family: var(--font-base), sans-serif;
+      font-family: var(--font-mono);
       letter-spacing: 0.005rem;
       color: rgba(var(--text-base), 0.6);
     }
@@ -52,6 +52,23 @@ export const InputWrapper = styled.div`
       &::placeholder {
         color: rgba(var(--text-base), 0.5) !important;
       }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    input {
+      height: 3rem;
+      font-size: 0.95rem;
+      font-weight: 400;
+      border-radius: 0.4rem;
+    }
+  }
+
+  @media only screen and (max-width: 486px) {
+    margin: 0.75rem 0;
+
+    input {
+      height: 2.8rem;
     }
   }
 `

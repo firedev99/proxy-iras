@@ -42,10 +42,8 @@ export default function HomeSchedule({ courses }: Props) {
         // filter the upcoming courses based on the abbreviation of the next day
         const upcomingCourses =
           courses &&
-          courses.filter(
-            (course) =>
-              course.classTime.includes(dayAbbreviations[nextClassDay]) &&
-              format(new Date(), "HH:mm") < course.classTime.split("-")[1]
+          courses.filter((course) =>
+            course.classTime.includes(dayAbbreviations[nextClassDay])
           )
 
         if (upcomingCourses.length > 0) {
@@ -59,9 +57,9 @@ export default function HomeSchedule({ courses }: Props) {
 
   return (
     <ClassScheduleWrapper>
-      <h2>{noClassToday ? "Upcoming Classes:" : "Today's Schedule"}</h2>
+      <h2>{noClassToday ? "Upcoming Classes" : "Today's Schedule"}</h2>
       <div className="course_meta_wrapper">
-        <h4>Code</h4>
+        <h4>Course</h4>
         <h4>Name</h4>
         <h4>Sec</h4>
         <h4>Room</h4>

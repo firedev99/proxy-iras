@@ -4,7 +4,6 @@ export const GlobalStyles = styled.createGlobalStyle`
   :root {
     --background-base: 241, 245, 249;
     --text-base: 18, 18, 18;
-    --font-base: "Poppins";
     --btn-color: 23, 58, 116;
     --primary-blue: 12, 140, 233;
   }
@@ -32,7 +31,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   body {
     max-width: 100vw;
     overflow-x: hidden;
-    font-family: var(--font-base), sans-serif;
+    font-family: var(--font-display);
   }
 
   body {
@@ -44,6 +43,10 @@ export const GlobalStyles = styled.createGlobalStyle`
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none !important;
+
+    @media only screen and (max-width: 768px) {
+      /* height: calc(100vh - 86px); */
+    }
   }
 
   a {
@@ -72,12 +75,12 @@ export const GlobalStyles = styled.createGlobalStyle`
       font-weight: 600;
       color: rgba(18, 18, 18, 0.7);
       font-size: 0.8rem;
-      position: absolute;
       padding: 0.55rem 0.8rem;
       border-radius: 0.25rem;
       bottom: -1.9rem;
-      left: 95%;
       white-space: nowrap;
+      position: absolute;
+      left: 95%;
       box-shadow: 1px 1px 4px rgba(18, 18, 18, 0.7);
       z-index: 99999;
       opacity: 0;

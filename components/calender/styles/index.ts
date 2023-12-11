@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import styled from "styled-components"
 
 export const CalenderElement = styled.div`
@@ -16,8 +17,8 @@ export const CalenderElement = styled.div`
 
   [data-title]:after {
     min-width: 10rem !important;
-    white-space: unset !important;
     text-align: center !important;
+    white-space: unset !important;
   }
 
   @media only screen and (max-width: 1280px) {
@@ -30,7 +31,27 @@ export const CalenderElement = styled.div`
   }
 `
 
-export const AssignmentPreviewWrapper = styled.div`
+export const CalenderHoverModal = styled(motion.div)`
+  min-width: 12rem !important;
+  text-align: center !important;
+  position: absolute !important;
+  bottom: -1.8rem !important;
+  background: rgb(241, 245, 249);
+
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.25rem;
+  bottom: -1.9rem;
+  box-shadow: 1px 1px 4px rgba(18, 18, 18, 0.7);
+  z-index: 99999;
+
+  span {
+    font-weight: 600;
+    color: rgba(18, 18, 18, 0.7);
+    font-size: 0.8rem;
+  }
+`
+
+export const AssignmentPreviewWrapper = styled(motion.div)`
   padding: 0.25rem;
   border-radius: 0.25rem;
   position: relative;

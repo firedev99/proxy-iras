@@ -3,7 +3,6 @@ import { RootLayoutWrapper } from "./styles"
 import { LayoutType } from "@types"
 import dynamic from "next/dynamic"
 import { AnimatePresence, Variants, motion } from "framer-motion"
-import { useRouter } from "next/router"
 
 const Navigation = dynamic(() => import("../navigation"))
 const RouteLoader = dynamic(() => import("../loaders/RouteLoader"))
@@ -37,7 +36,6 @@ export default function RootLayout({
   icon,
   nav,
 }: LayoutType) {
-  const router = useRouter()
   return (
     <>
       <Head>

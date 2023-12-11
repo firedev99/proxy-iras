@@ -6,7 +6,7 @@ type Sizes = {
   width: number
 }
 
-export function useWindow() {
+export function useWindowSize() {
   const isAvailable = typeof window !== "undefined"
 
   const [size, setSize] = useState<Sizes>({
