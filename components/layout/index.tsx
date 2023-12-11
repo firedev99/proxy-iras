@@ -5,7 +5,7 @@ import dynamic from "next/dynamic"
 import { AnimatePresence, Variants, motion } from "framer-motion"
 
 const Navigation = dynamic(() => import("../navigation"))
-const RouteLoader = dynamic(() => import("../loaders/RouteLoader"))
+// const RouteLoader = dynamic(() => import("../loaders/RouteLoader"))
 
 let variants: Variants = {
   initial: { x: "-100%", opacity: 0 },
@@ -49,7 +49,7 @@ export default function RootLayout({
         />
         <link rel="icon" href={icon || "/favicon.ico"} />
       </Head>
-      <RouteLoader />
+      {/* <RouteLoader /> */}
       {nav && <Navigation />}
       <AnimatePresence mode="wait">
         {/* <motion.main
