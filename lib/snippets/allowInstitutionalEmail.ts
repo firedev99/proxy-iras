@@ -28,8 +28,8 @@ export default async function allowInstitutionalEmail(
     )
 
     // send headers that needs to be deleted along with the request
-    const coookies = response.headers.getSetCookie()
-    res.setHeader("Set-Cookie", coookies)
+    const setCookies = (response.headers as any).getSetCookie()
+    res.setHeader("Set-Cookie", setCookies)
 
     res.status(406).send({ message: "sign in with your own email" })
     return

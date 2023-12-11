@@ -42,8 +42,8 @@ export default async function handler(
       )
 
       // send headers that needs to be deleted along with the request
-      const coookies = response.headers.getSetCookie()
-      res.setHeader("Set-Cookie", coookies)
+      const setCookies = (response.headers as any).getSetCookie()
+      res.setHeader("Set-Cookie", setCookies)
 
       // redirect to the page and don't execute further
       res.redirect(state as string)
