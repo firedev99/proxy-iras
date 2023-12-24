@@ -9,12 +9,12 @@ export default function ProfilePage({}: Props) {
   const { studentDetails, dummyPictures } = useProfile()
   console.log("studentDetails", studentDetails)
   console.log("dummyPictures", dummyPictures)
-  return <div>ProfilePage</div>
+  return <div />
 }
 
 ProfilePage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout nav={true} title="Profile | Proxy IRAS">
+    <Layout nav={true} working={true} title="Profile | Proxy IRAS">
       {page}
     </Layout>
   )

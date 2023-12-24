@@ -65,7 +65,8 @@ export const ProfileMenu = styled(motion.div)`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media screen and (max-width: 768px),
+    (max-height: 768px) and (orientation: landscape) {
     left: unset;
     bottom: 3.7rem;
     right: 3.2rem;
@@ -111,7 +112,8 @@ export const TopRightNav = styled.div`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media screen and (max-width: 768px),
+    (max-height: 768px) and (orientation: landscape) {
     display: none;
   }
 `
@@ -146,7 +148,8 @@ export const NavbarWrapper = styled.div`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media screen and (max-width: 768px),
+    (max-height: 768px) and (orientation: landscape) {
     /* overflow: hidden; */
     top: unset;
     bottom: 0rem;
@@ -204,7 +207,8 @@ export const UpperWrapper = styled.div`
   width: 100%;
   max-width: 100%;
 
-  @media only screen and (max-width: 768px) {
+  @media screen and (max-width: 768px),
+    (max-height: 768px) and (orientation: landscape) {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -231,7 +235,8 @@ export const BottomWrapper = styled.div`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media screen and (max-width: 768px),
+    (max-height: 768px) and (orientation: landscape) {
     margin-bottom: 1rem;
     margin-right: 2rem;
     margin-left: 1.5rem;
@@ -286,7 +291,8 @@ export const SideElementWrapper = styled.div`
     margin-top: 2.5rem;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media screen and (max-width: 768px),
+    (max-height: 768px) and (orientation: landscape) {
     margin: 1rem 0;
     width: 3rem;
     height: 3rem;
@@ -326,7 +332,8 @@ export const SideElement = styled(motion.div)`
     border-radius: 0.8rem;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media screen and (max-width: 768px),
+    (max-height: 768px) and (orientation: landscape) {
     width: 3rem;
     height: 3rem;
 

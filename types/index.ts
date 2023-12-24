@@ -37,6 +37,7 @@ export type LayoutType = {
   description?: string
   icon?: string
   nav?: boolean
+  working?: boolean
 }
 
 export type ToastContextType = {

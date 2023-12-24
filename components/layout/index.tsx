@@ -4,7 +4,10 @@ import { LayoutType } from "@types"
 import dynamic from "next/dynamic"
 import { AnimatePresence, Variants, motion } from "framer-motion"
 
-const Navigation = dynamic(() => import("../navigation"))
+const Navigation = dynamic(() => import("../navigation"), { ssr: false })
+const LaunchingSoon = dynamic(() => import("../template/LaunchingSoon"), {
+  ssr: false,
+})
 
 let variants: Variants = {
   initial: { x: "-100%", opacity: 0 },
@@ -34,6 +37,7 @@ export default function RootLayout({
   description,
   icon,
   nav,
+  working = false,
 }: LayoutType) {
   return (
     <>
@@ -50,6 +54,7 @@ export default function RootLayout({
       </Head>
       {/* <RouteLoader /> */}
       {nav && <Navigation />}
+      {working && <LaunchingSoon />}
       <AnimatePresence mode="wait">
         {/* <motion.main
           key={router.pathname}

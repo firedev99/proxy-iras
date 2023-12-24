@@ -27,6 +27,7 @@ export const HomeCoursesWrapper = styled.div`
     gap: 1.6rem;
     grid-auto-rows: 13rem;
     margin-left: -0.3rem;
+    margin-bottom: 1rem;
   }
 
   @media only screen and (max-width: 576px) {

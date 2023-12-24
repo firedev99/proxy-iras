@@ -6,12 +6,12 @@ import { ReactElement } from "react"
 type Props = {}
 
 export default function HelpersPage({}: Props) {
-  return <div>Plan Semester Schedule and Calculate CGPA</div>
+  return <div />
 }
 
 HelpersPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout nav={true} title="Helpers | Proxy IRAS">
+    <Layout nav={true} working={true} title="Helpers | Proxy IRAS">
       {page}
     </Layout>
   )
