@@ -12,7 +12,7 @@ export const ToastWrapper = styled(motion.div)`
   font-size: 0.8rem;
   background: rgba(4, 176, 255, 1);
   font-weight: 500;
-  color: rgba(241, 245, 249, 0.8);
+  color: rgba(241, 245, 249, 1);
   border-radius: 0.5rem;
   word-wrap: break-word;
   -webkit-font-smoothing: antialiased;

@@ -2,7 +2,7 @@ import { upperLinks } from "@/lib/dummy/links"
 import Icon from "@/lib/icons"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import { firey } from "@/lib/utils"
@@ -15,6 +15,7 @@ import {
   TopRightNav,
   UpperWrapper,
 } from "./styles"
+import { useClickOutside } from "@/hooks/useClickOutside"
 
 export default function Navigation() {
   const router = useRouter()
@@ -22,13 +23,16 @@ export default function Navigation() {
   const [imgSrc, setImgSrc] = useState<string | null>(null)
   const [open, setOpen] = useState<boolean>(false)
 
+  const modalRef = useRef<HTMLDivElement>(null)
+  useClickOutside(modalRef, () => setOpen(false))
+
   async function handleSingout(): Promise<void> {
     try {
       await Promise.allSettled([
-        fetch(`api/google/logout`, {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/api/google/logout`, {
           method: "DELETE",
         }),
-        fetch(`api/iub/logout`, {
+        fetch(`${process.env.NEXT_PUBLIC_URL}/api/iub/logout`, {
           method: "DELETE",
         }),
       ]).then(() => {
@@ -96,10 +100,10 @@ export default function Navigation() {
         </UpperWrapper>
 
         {/* bottom portion */}
-        <BottomWrapper>
+        <BottomWrapper ref={modalRef}>
           <motion.button
             whileTap={{ scale: 0.96 }}
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen((prev) => !prev)}
           >
             {imgSrc && (
               <Image
@@ -130,7 +134,13 @@ export default function Navigation() {
                   <Icon name="logout" />
                   <span>Signout</span>
                 </button>
-                <button className="only_small" onClick={() => {}}>
+                <button
+                  className="only_small"
+                  onClick={() => {
+                    router.push("/profile")
+                    setOpen(false)
+                  }}
+                >
                   <Icon name="user" />
                   <span>View Profile</span>
                 </button>

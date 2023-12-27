@@ -1,19 +1,6 @@
 import Head from "next/head"
-import styled from "styled-components"
 import { LayoutType } from "@types"
-
-export const MetaLayoutWrapper = styled.div`
-  height: 100vh;
-  height: 100svh;
-
-  @media only screen and (max-width: 768px) {
-    margin: 0 1.4rem;
-  }
-
-  @media only sceen and (max-width: 415px) {
-    margin: 0 1rem;
-  }
-`
+import { MetaLayoutWrapper } from "./styles"
 
 export default function MetaLayout({
   children,
