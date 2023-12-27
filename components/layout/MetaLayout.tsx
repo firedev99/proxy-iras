@@ -1,14 +1,6 @@
-import dynamic from "next/dynamic"
 import Head from "next/head"
-import { ReactNode } from "react"
 import styled from "styled-components"
-
-type LayoutType = {
-  children: ReactNode
-  title?: string
-  description?: string
-  icon?: string
-}
+import { LayoutType } from "@types"
 
 export const MetaLayoutWrapper = styled.div`
   height: 100vh;

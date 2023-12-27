@@ -36,8 +36,6 @@ export default function RootLayout({
   title,
   description,
   icon,
-  nav,
-  working = false,
 }: LayoutType) {
   return (
     <>
@@ -53,8 +51,8 @@ export default function RootLayout({
         <link rel="icon" href={icon || "/favicon.ico"} />
       </Head>
       {/* <RouteLoader /> */}
-      {nav && <Navigation />}
-      {working && <LaunchingSoon />}
+      {/* {nav && <Navigation />}
+      {working && <LaunchingSoon />} */}
       <AnimatePresence mode="wait">
         {/* <motion.main
           key={router.pathname}

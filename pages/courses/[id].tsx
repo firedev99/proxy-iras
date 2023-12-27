@@ -69,10 +69,7 @@ CoursePage.getLayout = function getLayout(page: ReactElement) {
   const title =
     page.props.children[2].props.children.props.children.props.code || ""
   return (
-    <Layout
-      nav={true}
-      title={`${title ? title.toUpperCase() + " |" : ""} Proxy IRAS`}
-    >
+    <Layout title={`${title ? title.toUpperCase() + " |" : ""} Proxy IRAS`}>
       {page}
     </Layout>
   )
