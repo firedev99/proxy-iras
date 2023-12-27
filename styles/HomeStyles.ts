@@ -184,7 +184,6 @@ export const UserMetaDataWrapper = styled.div`
   }
 
   @media only screen and (max-width: 576px) {
-    margin-left: 0rem;
     padding: 0.9rem 0;
 
     span {

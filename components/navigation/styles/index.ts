@@ -65,8 +65,7 @@ export const ProfileMenu = styled(motion.div)`
     }
   }
 
-  @media screen and (max-width: 768px),
-    (max-height: 768px) and (orientation: landscape) {
+  @media screen and (max-width: 768px), (max-height: 600px) {
     left: unset;
     bottom: 3.7rem;
     right: 3.2rem;
@@ -112,14 +111,13 @@ export const TopRightNav = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px),
-    (max-height: 768px) and (orientation: landscape) {
+  @media screen and (max-width: 768px), (max-height: 600px) {
     display: none;
   }
 `
 
 export const NavbarWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 55;
   left: 0;
   top: 0;
@@ -148,9 +146,7 @@ export const NavbarWrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px),
-    (max-height: 768px) and (orientation: landscape) {
-    /* overflow: hidden; */
+  @media only screen and (max-width: 768px), (max-height: 600px) {
     top: unset;
     bottom: 0rem;
     border-right: unset;
@@ -207,8 +203,7 @@ export const UpperWrapper = styled.div`
   width: 100%;
   max-width: 100%;
 
-  @media screen and (max-width: 768px),
-    (max-height: 768px) and (orientation: landscape) {
+  @media only screen and (max-width: 768px), (max-height: 600px) {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -235,8 +230,7 @@ export const BottomWrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px),
-    (max-height: 768px) and (orientation: landscape) {
+  @media only screen and (max-width: 768px), (max-height: 600px) {
     margin-bottom: 1rem;
     margin-right: 2rem;
     margin-left: 1.5rem;
@@ -273,17 +267,19 @@ export const SideElementWrapper = styled.div`
   position: relative;
   width: 3.5rem;
   height: 3.5rem;
-  margin: 1.4rem 0.9rem;
+  margin: 1.4rem 0.8rem;
   border-radius: 50%;
 
-  &:not(.disable_hover):hover {
-    background-color: rgba(126, 134, 158, 0.25);
-    border-radius: 0.8rem;
-    transition: background-color 0.25s cubic-bezier(0.075, 0.42, 0.165, 1);
-    transition: border-radius 0.25s cubic-bezier(0.075, 0.32, 0.165, 1);
+  @media (hover: hover) {
+    &:not(.disable_hover):hover {
+      background-color: rgba(126, 134, 158, 0.25);
+      border-radius: 0.8rem;
+      transition: background-color 0.25s cubic-bezier(0.075, 0.42, 0.165, 1);
+      transition: border-radius 0.25s cubic-bezier(0.075, 0.32, 0.165, 1);
 
-    svg {
-      scale: 1.09;
+      svg {
+        scale: 1.09;
+      }
     }
   }
 
@@ -291,8 +287,7 @@ export const SideElementWrapper = styled.div`
     margin-top: 2.5rem;
   }
 
-  @media screen and (max-width: 768px),
-    (max-height: 768px) and (orientation: landscape) {
+  @media only screen and (max-width: 768px), (max-height: 600px) {
     margin: 1rem 0;
     width: 3rem;
     height: 3rem;
@@ -332,8 +327,7 @@ export const SideElement = styled(motion.div)`
     border-radius: 0.8rem;
   }
 
-  @media screen and (max-width: 768px),
-    (max-height: 768px) and (orientation: landscape) {
+  @media only screen and (max-width: 768px), (max-height: 600px) {
     width: 3rem;
     height: 3rem;
 

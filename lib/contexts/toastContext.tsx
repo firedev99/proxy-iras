@@ -12,8 +12,8 @@ export function ToastProvider({ children }: ToastProviderType) {
   const [toasts, setToasts] = useState<ToastStateValues[]>([])
 
   function addToast(content: string) {
-    // only allow 3 notifications at a time
-    if (toasts.length >= 3) return
+    // // only allow 3 notifications at a time
+    // if (toasts.length >= 3) return
     setToasts((toasts) => [...toasts, { id: firey.uniqueID(), content }])
   }
 

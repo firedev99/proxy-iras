@@ -3,16 +3,6 @@ import { motion } from "framer-motion"
 
 type Props = {}
 
-const ls_wrapper_variants = {}
-
-const letter_variants = {
-  initial: {},
-  animate: {
-    y: 0,
-    transition: { duration: 1.4, ease: [0.6, 0.01, -0.05, 0.9] },
-  },
-}
-
 export default function LaunchingSoon({}: Props) {
   return (
     <TextWrapper initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

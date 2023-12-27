@@ -1,5 +1,5 @@
 import type { ReactElement } from "react"
-import { Layout, LoginForm } from "@components"
+import { LoginForm, SimpleLayout } from "@components"
 import Scenerio from "@bg"
 import { LoginPageWrapper } from "@styles/LoginStyles"
 
@@ -13,5 +13,12 @@ export default function LoginPage() {
 }
 
 LoginPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>
+  return (
+    <SimpleLayout
+      title="Login | Proxy IRAS "
+      description="Login to your iras account using iub's student credentials! Simple and Easy 🍻"
+    >
+      {page}
+    </SimpleLayout>
+  )
 }

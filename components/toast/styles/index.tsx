@@ -1,24 +1,25 @@
 import { motion } from "framer-motion"
 import styled from "styled-components"
 
-export const ToastContainerWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
-
 export const ToastWrapper = styled(motion.div)`
+  position: fixed;
+  text-align: center;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 14.5rem;
   padding: 0.8rem;
-  margin-top: 16px;
-  margin-right: 16px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   background: rgba(4, 176, 255, 1);
-  color: rgb(var(--background-base));
-  font-weight: 600;
+  font-weight: 500;
+  color: rgba(241, 245, 249, 0.8);
   border-radius: 0.5rem;
   word-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
+
+  @media only screen and (max-width: 415px) {
+    padding: 0.6rem;
+  }
 `

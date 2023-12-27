@@ -172,9 +172,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout nav={true} title="Dashboard | Proxy IRAS">
-      {page}
-    </Layout>
-  )
+  return <Layout title="Dashboard | Proxy IRAS">{page}</Layout>
 }

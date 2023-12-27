@@ -1,7 +1,10 @@
 import dynamic from "next/dynamic"
 import styled from "styled-components"
 import { Layout } from "@components"
-import { ReactElement } from "react"
+import { ReactElement, useState } from "react"
+import { useToast } from "@/hooks/useToast"
+import { firey } from "@/lib/utils"
+import { greetingLines } from "@/lib/dummy/greetings"
 
 type Props = {}
 
@@ -13,15 +16,24 @@ const LaunchingSoon = dynamic(
 )
 
 export default function TestPage({}: Props) {
-  return <Wrapper>{/* <LaunchingSoon /> */}</Wrapper>
+  const { addToast } = useToast()
+  const greeting = firey.generateRandomValue(greetingLines)
+
+  return (
+    <Wrapper>
+      <button
+        onClick={() => {
+          addToast(`${greeting}`)
+        }}
+      >
+        CLICK
+      </button>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div``
 
-TestPage.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout nav={true} working={true} title="Dashboard | Proxy IRAS">
-      {page}
-    </Layout>
-  )
-}
+// TestPage.getLayout = function getLayout(page: ReactElement) {
+//   return <Layout title="TEST | Proxy IRAS">{page}</Layout>
+// }

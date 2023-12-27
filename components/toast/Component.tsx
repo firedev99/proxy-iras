@@ -21,17 +21,13 @@ export function Toast({ notifications }: ToastStateProps) {
 
   return (
     <AnimatePresence>
-      {notifications.map((item) => (
-        <ToastWrapper
-          initial={{ opacity: 0, x: 250 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 250 }}
-          layout
-          key={item.id}
-        >
-          {item.content}
-        </ToastWrapper>
-      ))}
+      <ToastWrapper
+        initial={{ opacity: 0, y: -200, x: "-50%" }}
+        animate={{ opacity: 1, y: 15 }}
+        exit={{ opacity: 0, y: 200 }}
+      >
+        {notifications[0].content}
+      </ToastWrapper>
     </AnimatePresence>
   )
 }

@@ -11,31 +11,30 @@ export default function CoursesPage(props: any) {
   console.log(courseWork)
 
   return (
-    <CourseHomePageWrapper />
-    // <CourseHomePageWrapper>
-    //   <h1>Courses Page</h1>
-    //   <button onClick={logoutFromGoogle}>Signout from Google</button>
-    //   {courses.length !== 0 ? (
-    //     courses.map((course: any) => (
-    //       <div key={`classroom_course_${course.id}`}>
-    //         <Link
-    //           href={`/courses/${course.id}?code=${course.name
-    //             .split("-")[2]
-    //             .toLowerCase()}`}
-    //         >
-    //           <h3>{course.name}</h3>
-    //         </Link>
-    //       </div>
-    //     ))
-    //   ) : (
-    //     <>
-    //       <h3>No course found</h3>
-    //       {/* for any sort of fallback - e.g if the user destroys the permission from their google account settings */}
-    //       <GoogleUI />
-    //     </>
-    //   )}
-    //   {!g_auth && <GoogleUI />}
-    // </CourseHomePageWrapper>
+    <CourseHomePageWrapper>
+      <h1>Courses Page</h1>
+      <button onClick={logoutFromGoogle}>Signout from Google</button>
+      {courses.length !== 0 ? (
+        courses.map((course: any) => (
+          <div key={`classroom_course_${course.id}`}>
+            <Link
+              href={`/courses/${course.id}?code=${course.name
+                .split("-")[2]
+                .toLowerCase()}`}
+            >
+              <h3>{course.name}</h3>
+            </Link>
+          </div>
+        ))
+      ) : (
+        <>
+          <h3>No course found</h3>
+          {/* for any sort of fallback - e.g if the user destroys the permission from their google account settings */}
+          <GoogleUI />
+        </>
+      )}
+      {!g_auth && <GoogleUI />}
+    </CourseHomePageWrapper>
   )
 }
 
@@ -85,7 +84,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 CoursesPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout nav={true} working={true} title="Classroom Courses | Proxy IRAS">
+    <Layout nav={true} title="Classroom Courses | Proxy IRAS">
       {page}
     </Layout>
   )

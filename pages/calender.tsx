@@ -1,5 +1,5 @@
 import { days } from "@/lib/dummy/days"
-import { Layout } from "@components"
+import { LaunchingTemplate, Layout } from "@components"
 import { startOfToday, format, parse, add } from "date-fns"
 import { ReactElement, useState } from "react"
 import { AnimatePresence } from "framer-motion"
@@ -43,39 +43,9 @@ export default function CalenderPage({ courseList, courseWork }: Props) {
   }
 
   return (
-    <CalenderPageWrapper />
-    // <CalenderPageWrapper>
-    //   {/* Calender Controls */}
-    //   <CalenderHeader
-    //     firstDayCurrentMonth={firstDayCurrentMonth}
-    //     previousMonth={previousMonth}
-    //     nextMonth={nextMonth}
-    //     courseWork={courseWork}
-    //   />
-
-    //   {/* Calender Dates */}
-    //   <AnimatePresence key={currentMonth}>
-    //     <CalenderElementWrapper
-    //       initial={{ x: direction > 0 ? "50%" : "-50%", opacity: 0 }}
-    //       animate={{ x: "0%", opacity: 1 }}
-    //       exit={{ x: direction < 0 ? "50%" : "-50%", opacity: 0 }}
-    //     >
-    //       {/* weekdays name */}
-    //       {days.map((d, idx) => (
-    //         <div className="day_title" key={`dt-${idx}`}>
-    //           <h3>{d}</h3>
-    //         </div>
-    //       ))}
-
-    //       {/* current preview dates  */}
-    //       <CalenderPreview
-    //         firstDayCurrentMonth={firstDayCurrentMonth}
-    //         courseList={courseList}
-    //         courseWork={courseWork}
-    //       />
-    //     </CalenderElementWrapper>
-    //   </AnimatePresence>
-    // </CalenderPageWrapper>
+    <CalenderPageWrapper>
+      <LaunchingTemplate />
+    </CalenderPageWrapper>
   )
 }
 
@@ -122,9 +92,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 CalenderPage.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout nav={true} working={true} title="Calender | Proxy IRAS">
-      {page}
-    </Layout>
-  )
+  return <Layout title="Calender | Proxy IRAS">{page}</Layout>
 }
