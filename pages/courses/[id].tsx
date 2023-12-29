@@ -66,8 +66,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 CoursePage.getLayout = function getLayout(page: ReactElement) {
+  // const title =
+  //   page.props.children[2].props.children.props.children.props.code || ""
+  const childSize = page.props.children.length
   const title =
-    page.props.children[2].props.children.props.children.props.code || ""
+    page.props.children[childSize - 1].props.children.props.children.props
+      .code || ""
+
+  console.log(title)
   return (
     <Layout title={`${title ? title.toUpperCase() + " |" : ""} Proxy IRAS`}>
       {page}
