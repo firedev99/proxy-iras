@@ -3,21 +3,18 @@ import styled from "styled-components"
 
 export const ProfileMenu = styled(motion.div)`
   position: absolute;
-  left: 2.5rem;
-  bottom: 4.6rem;
+  left: 2.2rem;
+  bottom: 4.5rem;
   width: 11rem;
   background: rgb(var(--text-base));
   border-radius: 0.4rem;
-
-  .theme_settings {
-    border-bottom-left-radius: 0.3rem !important;
-    border-bottom-right-radius: 0.3rem !important;
-  }
 
   .only_small {
     visibility: hidden !important;
     display: none !important;
     will-change: visibility display;
+    border-bottom-left-radius: 0.3rem !important;
+    border-bottom-right-radius: 0.3rem !important;
   }
 
   button,
@@ -267,7 +264,7 @@ export const SideElementWrapper = styled.div`
   position: relative;
   width: 3.5rem;
   height: 3.5rem;
-  margin: 1.4rem 0.8rem;
+  margin: 1.4rem 0.9rem;
   border-radius: 50%;
 
   @media (hover: hover) {

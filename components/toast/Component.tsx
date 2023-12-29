@@ -22,9 +22,9 @@ export function Toast({ notifications }: ToastStateProps) {
   return (
     <AnimatePresence>
       <ToastWrapper
-        initial={{ opacity: 0, y: -200, x: "-50%" }}
-        animate={{ opacity: 1, y: 15 }}
-        exit={{ opacity: 0, y: 200 }}
+        initial={{ opacity: 0, y: 100, x: "-50%" }}
+        animate={{ opacity: 1, y: -32 }}
+        exit={{ opacity: 0 }}
       >
         {notifications[0].content}
       </ToastWrapper>

@@ -1,7 +1,22 @@
 import styled from "styled-components"
 
+export const PasswordIconWrapper = styled.div`
+  @media (hover: hover) {
+    cursor: pointer;
+  }
+`
+
 export const InputWrapper = styled.div`
   margin: 1rem 0;
+  position: relative;
+  user-select: none;
+
+  svg {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
   input {
     width: 100%;

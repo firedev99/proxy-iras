@@ -52,7 +52,7 @@ export function useForm<T>({
       if (isSubmitting && errorsCrossChecked) {
         onSubmit(values)
       }
-      setIsSubmitting(false)
+      // setIsSubmitting(false)
     }, 2000)
 
     return () => {
@@ -98,6 +98,7 @@ export function useForm<T>({
     handleSubmit,
     handleFormSubmit,
     isSubmitting,
+    setIsSubmitting,
   }
 }
 

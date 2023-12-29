@@ -1,7 +1,8 @@
-import { memo } from "react"
+import { memo, useState } from "react"
 import { firey } from "@/lib/utils"
-import { InputWrapper } from "./styles"
+import { InputWrapper, PasswordIconWrapper } from "./styles"
 import { InputProps } from "@types"
+import Icon from "@/lib/icons"
 
 const CustomInput = memo(function CustomInput({
   type,
@@ -13,11 +14,14 @@ const CustomInput = memo(function CustomInput({
   onBlur,
 }: InputProps) {
   const _name = firey.camelize(name)
+  const [unlockPassword, setUnlockPassword] = useState<boolean>(false)
 
   return (
     <InputWrapper>
       <input
-        type={type}
+        type={
+          type === "password" ? (unlockPassword ? "text" : "password") : type
+        }
         name={_name}
         placeholder={placeholder}
         value={value}
@@ -27,6 +31,15 @@ const CustomInput = memo(function CustomInput({
           borderColor: errStaus ? "rgba(203, 74, 74, 0.7)" : "initial",
         }}
       />
+      {type === "password" && (
+        <PasswordIconWrapper onClick={() => setUnlockPassword((prev) => !prev)}>
+          {unlockPassword ? (
+            <Icon name="eye-open" />
+          ) : (
+            <Icon name="eye-close" />
+          )}
+        </PasswordIconWrapper>
+      )}
     </InputWrapper>
   )
 })

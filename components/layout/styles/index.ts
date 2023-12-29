@@ -14,7 +14,7 @@ export const MetaLayoutWrapper = styled.div`
 `
 
 export const RootLayoutWrapper = styled.div`
-  margin: 0 2rem 0 6rem;
+  margin: 0 2rem 0 6.5rem;
   height: 100vh;
   height: 100svh;
 

@@ -2,6 +2,8 @@ import {
   CalenderIcon,
   ChartIcon,
   CheckboardIcon,
+  EyeCloseIcon,
+  EyeOpenIcon,
   HomeIcon,
   LogoutIcon,
   RightArrowIcon,
@@ -47,6 +49,12 @@ export default function Icon({ name, className }: IconProps) {
 
     case "semi-star-shape":
       return <SemiStarShapeIcon className={className} />
+
+    case "eye-open":
+      return <EyeOpenIcon />
+
+    case "eye-close":
+      return <EyeCloseIcon />
 
     default:
       return <div />

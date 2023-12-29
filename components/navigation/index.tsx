@@ -69,12 +69,6 @@ export default function Navigation() {
 
   return (
     <>
-      {/* settings */}
-      <TopRightNav>
-        <Icon name="settings" />
-      </TopRightNav>
-
-      {/* sidebar */}
       <NavbarWrapper>
         {/* top portion */}
         <UpperWrapper>
@@ -130,10 +124,6 @@ export default function Navigation() {
                   },
                 }}
               >
-                <button onClick={() => handleSingout()}>
-                  <Icon name="logout" />
-                  <span>Signout</span>
-                </button>
                 <button
                   className="only_small"
                   onClick={() => {
@@ -144,10 +134,10 @@ export default function Navigation() {
                   <Icon name="user" />
                   <span>View Profile</span>
                 </button>
-                <div className="theme_settings only_small">
+                <button onClick={() => handleSingout()}>
                   <Icon name="logout" />
-                  <span>Theme</span>
-                </div>
+                  <span>Signout</span>
+                </button>
               </ProfileMenu>
             )}
           </AnimatePresence>

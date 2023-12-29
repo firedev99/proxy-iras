@@ -3,6 +3,7 @@ import { StudentProvider } from "@/lib/contexts/studentContext"
 import { GlobalStyles } from "@styles/GlobalStyles"
 import { AppPropsWithLayout } from "@types"
 import { Noto_Sans_Display, Noto_Sans_Mono } from "next/font/google"
+import NextNProgress from "nextjs-progressbar"
 
 const noto_sans_display = Noto_Sans_Display({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         }
       `}</style>
       <GlobalStyles />
+      <NextNProgress height={4} options={{ showSpinner: false }} />
       <ToastProvider>
         <StudentProvider>
           <Component {...pageProps} />

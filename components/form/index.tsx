@@ -28,6 +28,7 @@ export default function LoginForm() {
     handleBlur,
     errors,
     isSubmitting,
+    setIsSubmitting,
     handleFormSubmit,
   } = useForm({
     formValues: {
@@ -45,6 +46,7 @@ export default function LoginForm() {
       if (response.ok) {
         const { student } = await response.json()
         addStudent(student)
+        setIsSubmitting(false)
 
         if (callbackURL) {
           // redirect to the page it logged out from or asked to visit
@@ -54,8 +56,8 @@ export default function LoginForm() {
           setTimeout(() => router.reload(), 2000)
         }
 
-        setValues({ user: "", password: "" })
         addToast(`${greeting} ${student.studentName}`)
+        setValues({ user: "", password: "" })
       } else {
         addToast(`user id or password is incorrent😔`)
       }

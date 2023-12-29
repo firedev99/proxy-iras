@@ -77,6 +77,8 @@ export type IconProps = {
     | "logout"
     | "square-stack"
     | "right-arrow"
+    | "eye-open"
+    | "eye-close"
 
   className?: string
   active?: boolean

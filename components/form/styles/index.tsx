@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const LoginFormWrapper = styled.form`
   max-width: 456px;
+  margin-top: -2rem;
 
   h1 {
     font-family: var(--font-mono);
@@ -40,6 +41,10 @@ export const LoginFormWrapper = styled.form`
     &:hover {
       cursor: pointer;
     }
+  }
+
+  @media only screen and (max-height: 600px) {
+    margin-top: -1rem;
   }
 
   @media only screen and (max-width: 486px) {
