@@ -15,8 +15,8 @@ export const MetaLayoutWrapper = styled.div`
 
 export const RootLayoutWrapper = styled.div`
   margin: 0 2rem 0 6.5rem;
-  height: 100vh;
-  height: 100svh;
+  /* height: 100vh;
+  height: 100svh; */
 
   @media only screen and (max-width: 768px), (max-height: 600px) {
     height: calc(100vh - 4.2rem); //fallback

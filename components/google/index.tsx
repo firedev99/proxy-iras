@@ -1,4 +1,3 @@
-import { services } from "@/lib/services"
 import { useScript } from "@hooks/useScript"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"

@@ -12,7 +12,6 @@ export const HomePageWrapper = styled.div`
 export const UserInformationWrapper = styled.div`
   display: flex;
   align-items: center;
-  /* padding-top: 2rem; */
 
   @media only screen and (max-width: 415px) {
     flex-direction: column;
@@ -106,7 +105,7 @@ export const UserDetails = styled.div`
     }
   }
 
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 600px) {
     margin-left: 0.6rem;
 
     h3 {
@@ -138,7 +137,7 @@ export const UserDetails = styled.div`
     }
   }
 
-  @media only screen and (max-width: 330px) {
+  @media only screen and (max-width: 338px) {
     h3 {
       font-size: 1.2rem;
       line-height: 2rem;
@@ -183,7 +182,7 @@ export const UserMetaDataWrapper = styled.div`
     }
   }
 
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 600px) {
     padding: 0.9rem 0;
 
     span {
@@ -208,7 +207,7 @@ export const UserMetaDataWrapper = styled.div`
     }
   }
 
-  @media only screen and (max-width: 330px) {
+  @media only screen and (max-width: 338px) {
     margin-bottom: 1rem;
 
     span {
@@ -217,5 +216,3 @@ export const UserMetaDataWrapper = styled.div`
     }
   }
 `
-
-export const HomeFooterWrapper = styled.div``

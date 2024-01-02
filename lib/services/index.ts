@@ -64,7 +64,7 @@ async function getUniRules() {
 }
 
 async function getCourseData(token: string, studentID: string) {
-  const currentYear = new Date().getFullYear()
+  const uniRules = await getUniRules()
 
   const courses = (await services.getDataWithToken(
     `https://iras.iub.edu.bd:8079//api/v1/registration/student-registered-courses/${studentID}/all`,
@@ -73,7 +73,10 @@ async function getCourseData(token: string, studentID: string) {
 
   // destructer response and send only courses that are from this year
   const currentCourses = courses.data
-    .filter((course) => Number(course.regYear) === currentYear)
+    .filter(
+      (course) =>
+        Number(course.regYear) === Number(uniRules.data[0].attendanceYear)
+    )
     .map(
       ({
         courseName,

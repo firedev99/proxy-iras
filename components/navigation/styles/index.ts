@@ -3,8 +3,8 @@ import styled from "styled-components"
 
 export const ProfileMenu = styled(motion.div)`
   position: absolute;
-  left: 2.2rem;
-  bottom: 4.5rem;
+  left: 1.4rem;
+  bottom: 5.1rem;
   width: 11rem;
   background: rgb(var(--text-base));
   border-radius: 0.4rem;
@@ -13,8 +13,6 @@ export const ProfileMenu = styled(motion.div)`
     visibility: hidden !important;
     display: none !important;
     will-change: visibility display;
-    border-bottom-left-radius: 0.3rem !important;
-    border-bottom-right-radius: 0.3rem !important;
   }
 
   button,
@@ -28,9 +26,10 @@ export const ProfileMenu = styled(motion.div)`
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 
     span {
-      font-weight: 800;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
       opacity: 0.7;
+      font-family: var(--font-mono);
     }
 
     svg {
@@ -64,8 +63,8 @@ export const ProfileMenu = styled(motion.div)`
 
   @media screen and (max-width: 768px), (max-height: 600px) {
     left: unset;
-    bottom: 3.7rem;
-    right: 3.2rem;
+    bottom: 4.3rem;
+    right: 2.1rem;
 
     .only_small {
       visibility: visible !important;
@@ -81,18 +80,19 @@ export const ProfileMenu = styled(motion.div)`
       &:last-of-type {
         border-top-left-radius: unset !important;
         border-top-right-radius: unset !important;
+        border-bottom-left-radius: 0.3rem !important;
+        border-bottom-right-radius: 0.3rem !important;
       }
     }
   }
 
-  @media only screen and (max-width: 576px) {
-    bottom: 3.5rem;
-    right: 2.8rem;
+  @media only screen and (max-width: 600px) {
+    right: 1.6rem;
   }
 
   @media only screen and (max-width: 415px) {
-    bottom: 3.2rem;
-    right: 2.4rem;
+    /* bottom: 3.2rem;
+    right: 2.4rem; */
   }
 `
 
@@ -238,7 +238,7 @@ export const BottomWrapper = styled.div`
     justify-content: space-around;
   }
 
-  @media only screen and (max-width: 576px) {
+  @media only screen and (max-width: 600px) {
     margin-right: 1.4rem;
   }
 

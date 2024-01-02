@@ -10,7 +10,6 @@ import { firey } from "@/lib/utils"
 import Link from "next/link"
 
 import {
-  HomeFooterWrapper,
   HomePageWrapper,
   ProfileAvatar,
   UserDetails,
@@ -104,7 +103,6 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
       </UserMetaDataWrapper>
       {courseList.length > 0 && <HomeSchedule courses={courseList} />}
       <HomeCourses courses={courseList} />
-      <HomeFooterWrapper></HomeFooterWrapper>
     </HomePageWrapper>
   )
 }
@@ -121,9 +119,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // check if user is connected with a google account
   const googleUser = g_token || refreshToken
 
-  // fetch course details based on user status
+  // fetch course details only if iub token is available
   if (token && studentID && !googleUser) {
     const courses = await services.getCourseData(token, studentID)
+
     return {
       props: {
         courses: JSON.parse(JSON.stringify(courses)),
@@ -131,10 +130,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  // fetch course details based on user status
+  // fetch course details if both iub and google tokens are available
   if (token && studentID && googleUser) {
     // iub courses
     const courses = await services.getCourseData(token, studentID)
+
     // google classroom courses
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL}/api/google/classroom/courses`,

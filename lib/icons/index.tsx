@@ -4,11 +4,11 @@ import {
   CheckboardIcon,
   EyeCloseIcon,
   EyeOpenIcon,
+  GoogleClassroomIcon,
   HomeIcon,
   LogoutIcon,
   RightArrowIcon,
   SemiStarShapeIcon,
-  SettingsIcon,
   SpinningLoader,
   SqaureStackIcon,
   UserIcon,
@@ -44,9 +44,8 @@ export default function Icon({ name, className }: IconProps) {
     case "chart":
       return <ChartIcon />
 
-    case "settings":
-      return <SettingsIcon />
-
+    case "google-classroom":
+      return <GoogleClassroomIcon />
     case "semi-star-shape":
       return <SemiStarShapeIcon className={className} />
 

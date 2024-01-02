@@ -45,6 +45,21 @@ export const LoginFormWrapper = styled.form`
 
   @media only screen and (max-height: 600px) {
     margin-top: -1rem;
+
+    h1 {
+      font-size: 3rem;
+      line-height: 3.7rem;
+    }
+
+    span:not(.btn) {
+      font-size: 0.9rem;
+    }
+
+    button {
+      height: 3.6rem;
+      border-radius: 0.6rem;
+      margin-top: 0.5rem;
+    }
   }
 
   @media only screen and (max-width: 486px) {
@@ -94,6 +109,7 @@ export const LoginFormWrapper = styled.form`
       font-size: 2.4rem;
       line-height: 2.6rem;
     }
+
     span:not(.btn) {
       font-size: 0.75rem;
     }

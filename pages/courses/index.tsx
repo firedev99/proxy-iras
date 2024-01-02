@@ -1,39 +1,53 @@
-import { GoogleUI, Layout } from "@/components"
+import { AssginmentPreview, GoogleUI, Layout } from "@/components"
+import Icon from "@/lib/icons"
 import { logoutFromGoogle } from "@/lib/snippets/logoutFromGoogle"
-import { CourseHomePageWrapper } from "@styles/CourseStyles"
+import {
+  ClassroomIconWrapper,
+  CourseHomePageWrapper,
+  CoursePageTitleWrapper,
+  GoogleLoginWrapper,
+} from "@styles/CourseStyles"
+import { classroom_v1 } from "googleapis"
 import { GetServerSideProps } from "next"
-import Link from "next/link"
+import dynamic from "next/dynamic"
 import { ReactElement } from "react"
 
-export default function CoursesPage(props: any) {
+type CoursePageProps = {
+  g_auth: boolean
+  courses: classroom_v1.Schema$Course[]
+  courseWork: classroom_v1.Schema$CourseWork[]
+}
+
+const ClassroomCourses = dynamic(
+  () => import("../../components/course/ClassroomCourses"),
+  { ssr: false }
+)
+
+export default function CoursesPage(props: CoursePageProps) {
   const { g_auth, courses, courseWork } = props
-  console.log(courses)
-  console.log(courseWork)
 
   return (
     <CourseHomePageWrapper>
-      <h1>Courses Page</h1>
-      <button onClick={logoutFromGoogle}>Signout from Google</button>
-      {courses.length !== 0 ? (
-        courses.map((course: any) => (
-          <div key={`classroom_course_${course.id}`}>
-            <Link
-              href={`/courses/${course.id}?code=${course.name
-                .split("-")[2]
-                .toLowerCase()}`}
-            >
-              <h3>{course.name}</h3>
-            </Link>
-          </div>
-        ))
-      ) : (
-        <>
-          <h3>No course found</h3>
-          {/* for any sort of fallback - e.g if the user destroys the permission from their google account settings */}
-          <GoogleUI />
-        </>
+      <CoursePageTitleWrapper>
+        <ClassroomIconWrapper>
+          <Icon name="google-classroom" />
+        </ClassroomIconWrapper>
+        <h2>Classroom</h2>
+      </CoursePageTitleWrapper>
+
+      {g_auth && (
+        <AssginmentPreview courseWork={courseWork} courseList={courses} />
       )}
-      {!g_auth && <GoogleUI />}
+      {g_auth && (
+        <ClassroomCourses courseList={courses} courseWork={courseWork} />
+      )}
+      {!g_auth && (
+        <GoogleLoginWrapper>
+          <h1>connect your google classroom account now</h1>
+          <GoogleUI />
+        </GoogleLoginWrapper>
+      )}
+      {/* <button onClick={logoutFromGoogle}>Signout from Google</button> */}
     </CourseHomePageWrapper>
   )
 }

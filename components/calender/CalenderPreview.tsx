@@ -14,17 +14,12 @@ import { useState } from "react"
 import { classroom_v1 } from "googleapis"
 import { CalenderElement } from "./styles"
 import PreviewElement from "./PreviewElement"
+import { GoogleDueTimeProps } from "@/types"
 
 type Props = {
   firstDayCurrentMonth: Date
   courseList: classroom_v1.Schema$Course[]
   courseWork: classroom_v1.Schema$CourseWork[]
-}
-
-type GoogleDueTimeProps = {
-  day: number
-  month: number
-  year: number
 }
 
 type HoveredModalProps = {

@@ -2,7 +2,7 @@ import { parse, serialize } from "cookie"
 import { NextApiRequest, NextApiResponse } from "next"
 import { services } from "../services"
 import { StudentProps } from "@/types"
-import { saveStudent } from "./saveStudent"
+import { sql } from "@vercel/postgres"
 
 export default async function generateIubAuthFlow(
   req: NextApiRequest,
@@ -53,7 +53,7 @@ export default async function generateIubAuthFlow(
 
     // get student profile details from iub api
     const {
-      data: { sex },
+      data: { sex, email, cellPhone },
     } = await services.getDataWithToken(
       `https://iras.iub.edu.bd:8079//api/v2/profile/${studentId}/load-student-details`,
       token
@@ -77,18 +77,15 @@ export default async function generateIubAuthFlow(
       picture: `https://res.cloudinary.com/firey/image/upload/v1694607133/iub/${sex.toLowerCase()}_${randomNumber}.jpg`,
     } as StudentProps
 
-    // create a new student object to save
-    const newStudent = {
-      studentID: studentId,
-      studentName: studentName.slice(1),
-      email: `${studentId}@iub.edu.bd`,
-      createdAt: new Date().toLocaleString("en-GB", {
-        hour12: false,
-      }),
-    }
-
-    // save the student details
-    await saveStudent(newStudent)
+    // save few details from first session
+    await sql`
+      INSERT INTO Students (id, name, email, contact, image)
+      VALUES (${studentId}, ${studentName.slice(
+      1
+    )}, ${email}, ${cellPhone}, ${`https://iras.iub.edu.bd:8079/photo/${studentId}.jpg`})
+      ON CONFLICT (email)
+      DO NOTHING;
+    `
 
     // set iub token and id as cookie
     res.setHeader("Set-Cookie", [

@@ -1,10 +1,10 @@
 import { CourseProps } from "@/types"
 
-type ScheduledCoursesProps = {
+type Props = {
   course: CourseProps
 }
 
-export default function ScheduledCourse({ course }: ScheduledCoursesProps) {
+export default function ScheduledCourse({ course }: Props) {
   return (
     <>
       <span>{course.courseID}</span>

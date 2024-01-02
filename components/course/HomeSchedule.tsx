@@ -1,9 +1,9 @@
-import { dayAbbreviations } from "@/lib/dummy/days"
-import { CourseProps } from "@/types"
-import { format } from "date-fns"
 import { useEffect, useState } from "react"
-import { ClassScheduleWrapper } from "./styles/HomeCourseStyles"
+import { format } from "date-fns"
+import { CourseProps } from "@/types"
+import { dayAbbreviations } from "@/lib/dummy/days"
 import ScheduledCourse from "./ScheduleCourse"
+import { ClassScheduleWrapper } from "./styles/HomeCourseScheduleStyles"
 
 type Props = {
   courses: CourseProps[]

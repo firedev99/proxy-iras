@@ -79,6 +79,15 @@ export const InputWrapper = styled.div`
     }
   }
 
+  /* for mobile landscape view */
+  @media only screen and (max-height: 600px) {
+    margin: 0.75rem 0;
+
+    input {
+      height: 2.8rem;
+    }
+  }
+
   @media only screen and (max-width: 486px) {
     margin: 0.75rem 0;
 

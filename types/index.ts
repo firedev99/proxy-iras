@@ -79,6 +79,7 @@ export type IconProps = {
     | "right-arrow"
     | "eye-open"
     | "eye-close"
+    | "google-classroom"
 
   className?: string
   active?: boolean
@@ -168,4 +169,22 @@ export type CourseProps = {
 export type HomePageType = {
   courses?: CourseProps[]
   classroomCourses?: any
+}
+
+export type GoogleDueTimeProps = {
+  day: number
+  month: number
+  year: number
+}
+
+export type FunckyStickerProps = {
+  src: string
+  top_lg?: string
+  top_sm?: string
+  right_lg?: string
+  right_sm?: string
+  bottom_lg?: string
+  bottom_sm?: string
+  left_lg?: string
+  left_sm?: string
 }

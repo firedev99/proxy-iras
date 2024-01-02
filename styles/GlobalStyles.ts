@@ -10,7 +10,7 @@ export const GlobalStyles = styled.createGlobalStyle`
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --background-base: 18, 18, 18;
+      --background-base: 32, 33, 36;
       --text-base: 241, 245, 249;
     }
   }

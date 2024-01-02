@@ -1,10 +1,12 @@
-import { CourseProps } from "@/types"
 import React, { useEffect, useState } from "react"
+import { CourseProps } from "@/types"
 import {
   CourseElementWrapper,
   CourseElement,
   GradeWrapper,
   HomeCoursesWrapper,
+  HomeCourseAttendanceStatus,
+  HomeCourseMeta,
 } from "./styles/HomeCourseStyles"
 import { colors } from "@/lib/dummy/colors"
 import Icon from "@/lib/icons"
@@ -51,13 +53,17 @@ export default function HomeCourses({ courses }: Props) {
                   backgroundColor: getNextRandomColor() ?? "#FFF",
                 }}
               >
-                <h3>{course.courseName}</h3>
-                <h5 className="time">{course.classTime}</h5>
-                <h5>{course.roomID}</h5>
-                <span>
-                  {course.attendedClasses ?? 0} /{" "}
-                  {course.totalClasses ? course.totalClasses - 1 : 0}
-                </span>
+                <HomeCourseMeta>
+                  <h3>{course.courseName}</h3>
+                  <h5 className="time">{course.classTime}</h5>
+                  <h5>{course.roomID}</h5>
+                </HomeCourseMeta>
+                <HomeCourseAttendanceStatus>
+                  <span>
+                    {course.attendedClasses ?? 0} /{" "}
+                    {course.totalClasses ? course.totalClasses - 1 : 0}
+                  </span>
+                </HomeCourseAttendanceStatus>
               </CourseElement>
             </Link>
             {course.grade !== "Z" && (
