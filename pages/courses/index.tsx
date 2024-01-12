@@ -1,6 +1,6 @@
 import { AssginmentPreview, GoogleUI, Layout } from "@/components"
+import BGScene from "@/components/bg"
 import Icon from "@/lib/icons"
-import { logoutFromGoogle } from "@/lib/snippets/logoutFromGoogle"
 import {
   ClassroomIconWrapper,
   CourseHomePageWrapper,
@@ -45,6 +45,7 @@ export default function CoursesPage(props: CoursePageProps) {
         <GoogleLoginWrapper>
           <h1>connect your google classroom account now</h1>
           <GoogleUI />
+          <BGScene />
         </GoogleLoginWrapper>
       )}
       {/* <button onClick={logoutFromGoogle}>Signout from Google</button> */}
@@ -97,5 +98,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 CoursesPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout title="Classroom Courses | Proxy IRAS">{page}</Layout>
+  return <Layout title="Classroom Courses - Proxy IRAS">{page}</Layout>
 }

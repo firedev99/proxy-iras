@@ -51,8 +51,9 @@ export default function FancySticker() {
             <Image
               fill
               src={funkySticker.src}
-              alt="test"
+              alt={`${funkySticker.src}.jpg`}
               sizes="(max-width: 768px) 100vw, 33vw"
+              priority
             />
           </FancyStickerImage>
         </FancyStickerWrapper>

@@ -1,29 +1,45 @@
-import { IconProps } from "@/types"
+export const navFooter = [
+  {
+    title: "Terms",
+    href: "/terms",
+    blank: false,
+  },
+  {
+    title: "Privacy Policy",
+    href: "/terms/privacy",
+    blank: false,
+  },
+  {
+    title: "Github",
+    href: "https://github.com/firedev99",
+    blank: true,
+  },
+  {
+    title: "Twitter",
+    href: "https://twitter.com/thedevguy99",
+    blank: true,
+  },
+]
 
-export const upperLinks = [
+export const navLinks = [
   {
-    icon: "home",
+    title: "Home",
     href: "/",
-    context: "Dashboard",
   },
   {
-    icon: "checkboard",
+    title: "Courses",
     href: "/courses",
-    context: "Classroom Courses",
   },
   {
-    icon: "calender",
+    title: "Calender",
     href: "/calender",
-    context: "View Calender",
   },
   {
-    icon: "user",
+    title: "Profile",
     href: "/profile",
-    context: "View Profile",
   },
   {
-    icon: "chart",
+    title: "Tools",
     href: "/helpers",
-    context: "Plan Schedule & Calculate GPA",
   },
-] as { icon: IconProps["name"]; href: string; context: string }[]
+]

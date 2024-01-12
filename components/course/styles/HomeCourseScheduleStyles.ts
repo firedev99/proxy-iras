@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
 export const ClassScheduleWrapper = styled.div`
-  margin-left: 1.2rem;
-  margin-bottom: 3.2rem;
+  margin-left: 0.5rem;
+  margin-top: 1.5rem;
 
   h2 {
     font-size: 1.5rem;

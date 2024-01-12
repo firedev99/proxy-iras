@@ -2,7 +2,11 @@ import styled from "styled-components"
 
 export const LoginFormWrapper = styled.form`
   max-width: 456px;
-  margin-top: -2rem;
+  /* margin-top: -2rem; */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   h1 {
     font-family: var(--font-mono);
@@ -21,7 +25,7 @@ export const LoginFormWrapper = styled.form`
     width: 100%;
     height: 3.8rem;
     border-radius: 0.75rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     border: none;
     color: rgb(241, 245, 249);
     font-family: var(--font-mono);
@@ -43,8 +47,10 @@ export const LoginFormWrapper = styled.form`
     }
   }
 
-  @media only screen and (max-height: 600px) {
-    margin-top: -1rem;
+  @media only screen and (max-height: 600px), (max-width: 768px) {
+    margin-top: -0.5rem;
+    max-width: 80%;
+    width: 80%;
 
     h1 {
       font-size: 3rem;
@@ -56,13 +62,13 @@ export const LoginFormWrapper = styled.form`
     }
 
     button {
-      height: 3.6rem;
+      height: 3.2rem;
       border-radius: 0.6rem;
-      margin-top: 0.5rem;
+      margin-top: 0.2rem;
     }
   }
 
-  @media only screen and (max-width: 486px) {
+  @media only screen and (max-width: 485px) {
     max-width: 100%;
     width: 100%;
 
@@ -82,7 +88,7 @@ export const LoginFormWrapper = styled.form`
     }
   }
 
-  @media only screen and (max-width: 360px) {
+  @media only screen and (max-width: 380px) {
     h1 {
       font-size: 2.7rem;
       line-height: 3.2rem;
@@ -94,13 +100,12 @@ export const LoginFormWrapper = styled.form`
     }
 
     .btn {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     button {
-      height: 3.4rem;
+      height: 3.2rem;
       border-radius: 0.4rem;
-      margin-top: 0.4rem;
     }
   }
 

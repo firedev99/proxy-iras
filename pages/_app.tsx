@@ -12,7 +12,11 @@ const noto_sans_mono = Noto_Sans_Mono({
   subsets: ["latin"],
 })
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App({
+  Component,
+  pageProps,
+  router,
+}: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
   return getLayout(
     <>
@@ -27,7 +31,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <NextNProgress height={4} options={{ showSpinner: false }} />
       <ToastProvider>
         <StudentProvider>
-          <Component {...pageProps} />
+          <Component {...pageProps} key={router.asPath} />
         </StudentProvider>
       </ToastProvider>
     </>

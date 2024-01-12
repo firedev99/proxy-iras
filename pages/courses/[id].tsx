@@ -1,4 +1,5 @@
 import { Layout } from "@/components"
+import LaunchingSoon from "@/components/template/LaunchingSoon"
 import { classroom_v1 } from "googleapis"
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router"
@@ -15,7 +16,9 @@ export default function CoursePage(props: Props) {
   console.log(announcements, courseWork, courseWorkMaterials, "in client")
   const router = useRouter()
 
-  return <div>{router.query.id}</div>
+  // return <div>{router.query.id}</div>
+
+  return <LaunchingSoon />
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -75,7 +78,7 @@ CoursePage.getLayout = function getLayout(page: ReactElement) {
 
   console.log(title)
   return (
-    <Layout title={`${title ? title.toUpperCase() + " |" : ""} Proxy IRAS`}>
+    <Layout title={`${title ? title.toUpperCase() + " -" : ""} Proxy IRAS`}>
       {page}
     </Layout>
   )

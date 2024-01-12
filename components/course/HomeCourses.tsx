@@ -7,11 +7,12 @@ import {
   HomeCoursesWrapper,
   HomeCourseAttendanceStatus,
   HomeCourseMeta,
+  HomeEmptyWrapper,
 } from "./styles/HomeCourseStyles"
 import { colors } from "@/lib/dummy/colors"
-import Icon from "@/lib/icons"
 import Link from "next/link"
 import { firey } from "@/lib/utils"
+import BGScene from "../bg"
 
 type Props = {
   courses?: CourseProps[]
@@ -19,6 +20,10 @@ type Props = {
 
 export default function HomeCourses({ courses }: Props) {
   const [randomColors, setRandomColors] = useState<string[]>([])
+  // check if the grade has been submited
+  const gradeSubmited =
+    courses && courses.some((course) => course.grade !== "Z")
+  // const gradeSubmited = temp && temp.some((course) => course.grade !== "Z")
 
   // Create a shuffled copy of the colors array
   useEffect(() => {
@@ -40,7 +45,7 @@ export default function HomeCourses({ courses }: Props) {
   }
 
   return (
-    <HomeCoursesWrapper>
+    <HomeCoursesWrapper $graded={!!gradeSubmited}>
       {courses && courses.length !== 0 ? (
         courses.map((course) => (
           <CourseElementWrapper
@@ -68,19 +73,16 @@ export default function HomeCourses({ courses }: Props) {
             </Link>
             {course.grade !== "Z" && (
               <GradeWrapper>
-                <Icon
-                  name="semi-star-shape"
-                  className={
-                    course.grade === "F" ? "shape_fill_f" : "shape_fill"
-                  }
-                />
                 <span>{course.grade}</span>
               </GradeWrapper>
             )}
           </CourseElementWrapper>
         ))
       ) : (
-        <h1>no class, atm 🍻</h1>
+        <HomeEmptyWrapper>
+          <h1>no class, atm 🍻</h1>
+          <BGScene classname="home" />
+        </HomeEmptyWrapper>
       )}
     </HomeCoursesWrapper>
   )

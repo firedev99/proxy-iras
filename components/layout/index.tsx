@@ -1,8 +1,12 @@
+import { LayoutType } from "@/types"
 import Head from "next/head"
-import { LayoutType } from "@types"
-import { MetaLayoutWrapper } from "./styles"
+import dynamic from "next/dynamic"
+import Footer from "../footer"
+import { LayoutWrapper } from "./styles"
 
-export default function MetaLayout({
+const Menu = dynamic(() => import("../menu"), { ssr: false })
+
+export default function Layout({
   children,
   title,
   description,
@@ -21,7 +25,11 @@ export default function MetaLayout({
         />
         <link rel="icon" href={icon || "/favicon.ico"} />
       </Head>
-      <MetaLayoutWrapper>{children}</MetaLayoutWrapper>
+      <Menu />
+      <LayoutWrapper>
+        {children}
+        <Footer />
+      </LayoutWrapper>
     </>
   )
 }

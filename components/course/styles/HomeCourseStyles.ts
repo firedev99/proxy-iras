@@ -1,14 +1,18 @@
 import { motion } from "framer-motion"
 import styled from "styled-components"
 
-export const HomeCoursesWrapper = styled.div`
+export const HomeCoursesWrapper = styled.div<{ $graded: boolean }>`
   min-height: 25rem;
-  margin-left: 1.05rem;
+  margin-left: ${(props) => (props.$graded ? `-1.05rem` : `-0.7rem`)};
+  margin-top: ${(props) => (props.$graded ? `3rem` : `1.8rem`)};
+  margin-bottom: 1rem;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
   grid-auto-rows: 14rem;
-  gap: 2rem;
+  gap: ${(props) => (props.$graded ? `2.4rem` : `1.5rem`)};
+  padding: 0 1rem;
+  padding-right: ${(props) => !props.$graded && "0"};
 
   h1 {
     margin: auto;
@@ -16,20 +20,21 @@ export const HomeCoursesWrapper = styled.div`
     text-transform: uppercase;
     font-weight: 800;
     opacity: 0.7;
+    text-align: center;
   }
 
   @media only screen and (max-width: 1024px) {
     grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
-    margin-left: 0.8rem;
+    margin-left: -0.8rem;
   }
 
   @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
-    gap: 1.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(156px, 1fr));
+    gap: ${(props) => (props.$graded ? `2rem` : `1.2rem`)};
     grid-auto-rows: 12rem;
-    gap: 1.2rem;
-    margin-left: -0.2rem;
-    margin-bottom: 1rem;
+    padding-left: 0.6rem;
+    padding-right: ${(props) => (props.$graded ? "1rem" : "0")};
+    margin-top: ${(props) => (props.$graded ? `2.5rem` : `1.6rem`)};
 
     h1 {
       font-size: 2rem;
@@ -37,9 +42,7 @@ export const HomeCoursesWrapper = styled.div`
   }
 
   @media only screen and (max-width: 415px) {
-    grid-template-columns: repeat(auto-fit, minmax(146px, 1fr));
-    margin-left: -0.6rem;
-    padding: 0 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
     grid-auto-rows: 10rem;
 
     h1 {
@@ -48,12 +51,8 @@ export const HomeCoursesWrapper = styled.div`
   }
 
   @media only screen and (max-width: 380px) {
-    grid-auto-rows: 10rem;
-    margin-left: -0.5rem;
-  }
-
-  @media only screen and (max-width: 338px) {
-    padding: 0 0.5rem;
+    gap: ${(props) => (props.$graded ? `1.6rem` : `1rem`)};
+    padding-left: 0.8rem;
   }
 `
 
@@ -93,25 +92,22 @@ export const HomeCourseMeta = styled.div`
   }
 
   h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-family: var(--font-mono);
-    font-weight: 800;
+    font-weight: 600;
     text-align: center;
-    text-shadow: 1px 2px 2px rgba(var(--background-base), 0.1);
+    margin-bottom: 0.2rem;
   }
 
   h5 {
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: 0.9rem;
     text-shadow: 1px 2px 2px rgba(var(--background-base), 0.1);
   }
 
   @media only screen and (max-width: 1024px) {
     h3 {
-      font-size: 1.2rem;
       line-height: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.1rem;
     }
 
     h5 {
@@ -151,7 +147,7 @@ export const HomeCourseAttendanceStatus = styled.div`
   font-weight: 600;
   font-size: 1.1rem;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1024px) {
     span {
       font-size: 0.9rem;
       font-weight: 500;
@@ -167,55 +163,55 @@ export const HomeCourseAttendanceStatus = styled.div`
 
 export const GradeWrapper = styled.div`
   position: absolute;
-  right: -2.65rem;
-  top: -1.2rem;
-  width: 5rem;
-  height: 5rem;
+  right: -1.5rem;
+  top: -1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
   display: flex;
-
-  .shape_fill {
-    fill: #0ecac2;
-  }
-
-  .shape_fill_f {
-    fill: rgb(252, 75, 108);
-  }
+  background: rgb(var(--btn-color));
+  align-items: center;
+  justify-content: center;
 
   span {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: 800;
-    margin-top: -0.9rem;
-    margin-left: -0.75rem;
+    color: rgb(235, 239, 248);
+    font-size: 1.25rem;
+    font-weight: 600;
   }
 
   @media only screen and (max-width: 768px) {
-    width: 3.8rem;
-    height: 3.8rem;
-    right: -2rem;
-    top: -1.5rem;
+    width: 2.8rem;
+    height: 2.8rem;
 
     span {
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-top: -0.05rem;
-      margin-left: -0.5rem;
+      font-size: 1rem;
     }
   }
 
-  @media only screen and (max-width: 768px) {
-    width: 3.2rem;
-    height: 3.2rem;
-    right: -1.8rem;
-    top: -1.8rem;
+  @media only screen and (max-width: 380px) {
+    width: 2.5rem;
+    height: 2.5rem;
+    right: -1.2rem;
+    top: -1.2rem;
 
     span {
-      font-weight: 600;
       font-size: 0.85rem;
-      margin-top: 0.35rem;
-      margin-left: -0.4rem;
     }
+  }
+`
+
+export const HomeEmptyWrapper = styled.div`
+  min-height: 27rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  .home {
+    margin-top: 1rem;
   }
 `

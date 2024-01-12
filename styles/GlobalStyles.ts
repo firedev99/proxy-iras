@@ -2,7 +2,7 @@ import * as styled from "styled-components"
 
 export const GlobalStyles = styled.createGlobalStyle`
   :root {
-    --background-base: 241, 245, 249;
+    --background-base: 235, 239, 248;
     --text-base: 18, 18, 18;
     --btn-color: 23, 58, 116;
     --primary-blue: 12, 140, 233;
@@ -30,7 +30,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   html,
   body {
     max-width: 100vw;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     font-family: var(--font-display);
   }
 
@@ -54,6 +54,11 @@ export const GlobalStyles = styled.createGlobalStyle`
   /* style the hover context */
   [data-title] {
     position: relative;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--btn-color));
+    outline-offset: 4px;
   }
 
   /* only allow hover */

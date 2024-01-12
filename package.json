@@ -23,6 +23,7 @@
     "framer-motion": "^10.15.0",
     "googleapis": "^124.0.0",
     "lodash": "^4.17.21",
+    "lottie-web": "^5.12.2",
     "next": "13.4.12",
     "nextjs-progressbar": "^0.0.16",
     "pdf-parse": "^1.1.1",

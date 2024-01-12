@@ -76,15 +76,7 @@ export const InputWrapper = styled.div`
       font-size: 0.95rem;
       font-weight: 400;
       border-radius: 0.4rem;
-    }
-  }
-
-  /* for mobile landscape view */
-  @media only screen and (max-height: 600px) {
-    margin: 0.75rem 0;
-
-    input {
-      height: 2.8rem;
+      padding-left: 0.8rem !important;
     }
   }
 

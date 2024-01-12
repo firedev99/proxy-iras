@@ -1,10 +1,9 @@
 import Head from "next/head"
-import { RootLayoutWrapper } from "./styles"
 import { LayoutType } from "@types"
 import dynamic from "next/dynamic"
 import { AnimatePresence, Variants, motion } from "framer-motion"
 
-const Navigation = dynamic(() => import("../navigation"), { ssr: false })
+// const Navigation = dynamic(() => import("../navigation"), { ssr: false })
 const LaunchingSoon = dynamic(() => import("../template/LaunchingSoon"), {
   ssr: false,
 })
@@ -65,9 +64,7 @@ export default function RootLayout({
             duration: 0.2,
           }}
         > */}
-        <main>
-          <RootLayoutWrapper>{children}</RootLayoutWrapper>
-        </main>
+        <main>{/* <RootLayoutWrapper>{children}</RootLayoutWrapper> */}</main>
       </AnimatePresence>
     </>
   )

@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { firey } from "../utils"
-import { scenes } from "../dummy/scenes"
 
 export default function Scenerio() {
-  const [imgSrc, setImgSrc] = useState(scenes[0])
+  const [imgSrc, setImgSrc] = useState(
+    `https://res.cloudinary.com/firey/image/upload/v1705007870/iub/bgi-5.svg`
+  )
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     if (!loaded) {
-      // generates a random value from the scene array
-      let _src = firey.generateRandomValue(scenes)
+      let _src = `https://res.cloudinary.com/firey/image/upload/v1705007870/iub/bgi-${
+        Math.floor(Math.random() * 15) + 1
+      }.svg`
       setImgSrc(_src)
       setLoaded(true)
     }

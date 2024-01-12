@@ -35,7 +35,8 @@ export const AssignmentPreviewWrapper = styled.div<{ $expand?: boolean }>`
     min-height: ${(props) => (props.$expand ? "6rem" : "4rem")};
 
     h2 {
-      margin-top: 0.3rem;
+      margin-top: 0.35rem;
+      font-size: 0.9rem;
     }
 
     h4 {
@@ -54,12 +55,19 @@ export const AssignmentPreviewWrapper = styled.div<{ $expand?: boolean }>`
 
     h2 {
       font-size: 0.85rem;
-      margin-top: 0.7rem;
+      margin-top: 0.6rem;
     }
 
     h4 {
       font-size: 0.75rem;
       font-weight: 600;
+    }
+  }
+
+  @media only screen and (max-width: 330px) {
+    h2 {
+      font-size: 0.8rem;
+      margin-top: 0.6rem;
     }
   }
 `

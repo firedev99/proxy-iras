@@ -10,5 +10,5 @@ export default function HelpersPage({}: Props) {
 }
 
 HelpersPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout title="Helpers | Proxy IRAS">{page}</Layout>
+  return <Layout title="Proxy-IRAS Assistant - Proxy IRAS">{page}</Layout>
 }

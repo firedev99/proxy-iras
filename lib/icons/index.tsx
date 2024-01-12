@@ -6,7 +6,6 @@ import {
   EyeOpenIcon,
   GoogleClassroomIcon,
   HomeIcon,
-  LogoutIcon,
   RightArrowIcon,
   SemiStarShapeIcon,
   SpinningLoader,
@@ -25,9 +24,6 @@ export default function Icon({ name, className }: IconProps) {
 
     case "square-stack":
       return <SqaureStackIcon />
-
-    case "logout":
-      return <LogoutIcon />
 
     case "home":
       return <HomeIcon />

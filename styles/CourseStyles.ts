@@ -1,10 +1,18 @@
 import styled from "styled-components"
 
 export const CourseHomePageWrapper = styled.div`
-  padding: 2.8rem 0 3rem 0;
+  padding: 4rem 0;
+
+  @media only screen and (max-width: 1536px) {
+    padding: 4rem 0.5rem;
+  }
 
   @media only screen and (max-width: 768px) {
-    padding: 1.5rem 0 2rem 0;
+    padding: 5rem 0.5rem;
+  }
+
+  @media only screen and (max-width: 600px) {
+    padding: 3rem 0.5rem;
   }
 `
 
@@ -55,6 +63,7 @@ export const GoogleLoginWrapper = styled.div`
   place-items: center;
   margin: 0 auto;
   text-align: center;
+  margin-top: 2rem;
 
   h1 {
     font-family: var(--font-mono);
