@@ -1,4 +1,4 @@
-import MetaLayout from "@/components/layout/MetaLayout"
+import { SimpleLayout } from "@/components"
 import Icon from "@/lib/icons"
 import {
   TermSection,
@@ -138,5 +138,9 @@ export default function TermsPage() {
 }
 
 TermsPage.getLayout = function getLayout(page: ReactElement) {
-  return <MetaLayout title="Privacy Policy - Proxy IRAS">{page}</MetaLayout>
+  return (
+    <SimpleLayout title="Privacy Policy - Proxy IRAS, Student Management System">
+      {page}
+    </SimpleLayout>
+  )
 }

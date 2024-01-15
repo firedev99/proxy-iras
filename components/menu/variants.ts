@@ -29,14 +29,10 @@ export const mlv: Variants = {
   initial: {
     opacity: 0,
     x: 120,
-    y: 40,
-    filter: "blur(12px)",
   },
   animate: (i) => ({
     x: 0,
     opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.8,
       ease: [0.76, 0, 0.24, 1],
@@ -45,7 +41,6 @@ export const mlv: Variants = {
   }),
   exit: {
     opacity: 0,
-    filter: "blur(12px)",
     transition: {
       delay: 0.2,
     },

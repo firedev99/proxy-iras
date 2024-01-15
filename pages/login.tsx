@@ -25,10 +25,7 @@ export default function LoginPage() {
 
 LoginPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <SimpleLayout
-      title="Login - Proxy IRAS "
-      description="Login to your iras account using iub's student credentials! Simple and Easy 🍻"
-    >
+    <SimpleLayout title="Login - Proxy IRAS, Student Management System">
       {page}
     </SimpleLayout>
   )

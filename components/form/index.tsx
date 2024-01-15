@@ -11,14 +11,20 @@ import { greetingLines } from "@/lib/dummy/greetings"
 import { LoginFormWrapper } from "./styles"
 import { AuthCredentials } from "@types"
 import Icon from "@icons"
+import Link from "next/link"
+import { ChangeEvent, useState } from "react"
 
 export default function LoginForm() {
   const { addToast } = useToast()
   const { addStudent } = useStudent()
   const router = useRouter()
+  const [permission, setPermission] = useState<boolean>(true)
   const greeting = firey.generateRandomValue(greetingLines)
 
   const callbackURL = router.query.callback as string | undefined
+
+  const handlePermission = (e: ChangeEvent<HTMLInputElement>) =>
+    setPermission((prev) => !prev)
 
   // handle form actions
   const {
@@ -36,6 +42,11 @@ export default function LoginForm() {
       password: "",
     } as AuthCredentials,
     onSubmit: async function (values) {
+      if (!permission) {
+        addToast(`You need to agree to the terms and policy to log in 🤐`)
+        setIsSubmitting(false)
+        return
+      }
       // get the csrf token
       const csrfTokenResponse = await fetch(`/api/iub`)
       const csrfToken = await csrfTokenResponse.json()
@@ -92,6 +103,20 @@ export default function LoginForm() {
         onBlur={handleBlur}
         errStaus={errStatus("password")}
       />
+      <div className="permission_checkbox">
+        <input
+          type="checkbox"
+          id="permission"
+          name="scales"
+          checked={permission}
+          onChange={handlePermission}
+        />
+        <label htmlFor="permission">
+          By signing in, you agree to our{" "}
+          <Link href="/terms/privacy">Privacy Policy</Link> and the{" "}
+          <Link href="/terms">Terms and Conditions</Link>.
+        </label>
+      </div>
       <motion.button
         whileTap={{ scale: 0.92 }}
         transition={{ duration: 0.33 }}

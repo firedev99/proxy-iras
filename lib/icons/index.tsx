@@ -4,9 +4,13 @@ import {
   CheckboardIcon,
   EyeCloseIcon,
   EyeOpenIcon,
+  FireIcon,
   GoogleClassroomIcon,
   HomeIcon,
+  NotAllowedIcon,
   RightArrowIcon,
+  SearchFilterIcon,
+  SearchInsertionIcon,
   SemiStarShapeIcon,
   SpinningLoader,
   SqaureStackIcon,
@@ -50,6 +54,18 @@ export default function Icon({ name, className }: IconProps) {
 
     case "eye-close":
       return <EyeCloseIcon />
+
+    case "search-insertion":
+      return <SearchInsertionIcon />
+
+    case "search-filter":
+      return <SearchFilterIcon />
+
+    case "not-allowed":
+      return <NotAllowedIcon />
+
+    case "fire":
+      return <FireIcon />
 
     default:
       return <div />

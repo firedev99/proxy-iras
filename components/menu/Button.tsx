@@ -25,7 +25,7 @@ export default function LogoutButton() {
 
   return (
     <LogoutBtnWrapper onClick={handleLogout} whileHover={{ scale: 0.95 }}>
-      Singout
+      Signout
     </LogoutBtnWrapper>
   )
 }

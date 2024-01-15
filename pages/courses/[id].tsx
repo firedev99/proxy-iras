@@ -78,7 +78,11 @@ CoursePage.getLayout = function getLayout(page: ReactElement) {
 
   console.log(title)
   return (
-    <Layout title={`${title ? title.toUpperCase() + " -" : ""} Proxy IRAS`}>
+    <Layout
+      title={`${
+        title ? title.toUpperCase() + " -" : ""
+      } Proxy IRAS, Student Management System`}
+    >
       {page}
     </Layout>
   )

@@ -8,6 +8,29 @@ export const LoginFormWrapper = styled.form`
   top: 50%;
   transform: translate(-50%, -50%);
 
+  .permission_checkbox {
+    display: flex;
+    margin-top: -0.25rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.2rem;
+    /* align-items: center; */
+
+    label {
+      opacity: 0.8;
+
+      a {
+        color: #e35384;
+      }
+    }
+
+    input {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.5rem;
+      margin-top: 0.22rem;
+    }
+  }
+
   h1 {
     font-family: var(--font-mono);
     font-size: 3.85rem;
@@ -52,6 +75,15 @@ export const LoginFormWrapper = styled.form`
     max-width: 80%;
     width: 80%;
 
+    .permission_checkbox {
+      input {
+        margin-top: 0.15rem;
+      }
+      label {
+        font-size: 0.9rem;
+      }
+    }
+
     h1 {
       font-size: 3rem;
       line-height: 3.7rem;
@@ -71,6 +103,12 @@ export const LoginFormWrapper = styled.form`
   @media only screen and (max-width: 485px) {
     max-width: 100%;
     width: 100%;
+
+    .permission_checkbox {
+      input {
+        margin-right: 0.4rem;
+      }
+    }
 
     h1 {
       font-size: 3rem;

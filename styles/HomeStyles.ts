@@ -2,11 +2,7 @@ import styled from "styled-components"
 
 export const HomePageWrapper = styled.div`
   width: 100%;
-  padding: 2.625rem 0;
-
-  @media only screen and (max-width: 768px) {
-    padding: 1.5rem 0;
-  }
+  padding: 1.5rem 0;
 `
 
 export const UserInformationWrapper = styled.div`

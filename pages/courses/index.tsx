@@ -98,5 +98,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 CoursesPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout title="Classroom Courses - Proxy IRAS">{page}</Layout>
+  return (
+    <Layout title="Classroom Courses - Proxy IRAS, Student Management System">
+      {page}
+    </Layout>
+  )
 }

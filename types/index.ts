@@ -36,6 +36,7 @@ export type LayoutType = {
   title?: string
   description?: string
   icon?: string
+  footer?: boolean
 }
 
 export type ToastContextType = {
@@ -80,6 +81,10 @@ export type IconProps = {
     | "eye-open"
     | "eye-close"
     | "google-classroom"
+    | "search-insertion"
+    | "search-filter"
+    | "fire"
+    | "not-allowed"
 
   className?: string
   active?: boolean
@@ -187,4 +192,35 @@ export type FunckyStickerProps = {
   bottom_sm?: string
   left_lg?: string
   left_sm?: string
+}
+
+export interface CourseOffering {
+  capacity?: number
+  catalogId?: string
+  catalogTypeId?: string
+  coOfferCourseId?: string
+  concentrationId?: string
+  courseCategoryId?: string
+  courseCode?: string
+  courseGroupId?: string
+  courseId?: string
+  courseName?: string
+  creditHour?: number
+  enrolled?: number
+  facualtyName?: string
+  gp?: number
+  grade?: string
+  isMandatoryFail?: number
+  monTimeString?: string
+  programId?: number
+  regSemester?: string
+  regYear?: string
+  roomCapacity?: number
+  section?: number
+  seqNo?: string
+  status?: number
+  timeSlot?: string
+  timeString?: string
+  vacancy?: number
+  wedTimeString?: string
 }
