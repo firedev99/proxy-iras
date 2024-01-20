@@ -61,7 +61,7 @@ export default function ClassroomCourses({ courseList, courseWork }: Props) {
                   {
                     courseWork.filter(
                       (assignmets) => assignmets.courseId === course.id
-                    )[0].title
+                    )[0]?.title
                   }
                 </span>
               )}

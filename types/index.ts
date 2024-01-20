@@ -1,3 +1,4 @@
+import { classroom_v1 } from "googleapis"
 import type { NextPage } from "next"
 import type { AppProps } from "next/app"
 import type {
@@ -172,8 +173,8 @@ export type CourseProps = {
 }
 
 export type HomePageType = {
-  courses?: CourseProps[]
-  classroomCourses?: any
+  courses: CourseProps[]
+  classroomCourses: classroom_v1.Schema$Course[]
 }
 
 export type GoogleDueTimeProps = {

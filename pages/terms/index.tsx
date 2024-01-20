@@ -46,7 +46,7 @@ export default function TermsPage() {
             academic tasks seamlessly. Designed with the modern student
             environment in mind, our platform offers a simplified yet powerful
             alternative to the traditional university management system.As you
-            have just clicked our Terms of Service, please pause, grab a cup of
+            have just clicked our Terms of Use, please pause, grab a cup of
             coffee and carefully read the following pages. It will take you
             approximately 10 minutes.
           </p>
@@ -107,7 +107,7 @@ export default function TermsPage() {
             You may use our website and services solely for academic and
             educational purposes in alignment with the policies and regulations
             set forth by Independent University, Bangladesh. The content and
-            features on our website are intended for students with Independent
+            features on our website are intended for students from Independent
             University, Bangladesh.
           </p>
         </TermSection>

@@ -13,13 +13,14 @@ export const LoginFormWrapper = styled.form`
     margin-top: -0.25rem;
     margin-bottom: 0.5rem;
     margin-left: 0.2rem;
-    /* align-items: center; */
 
     label {
       opacity: 0.8;
+      font-weight: 500;
 
       a {
         color: #e35384;
+        font-weight: 600;
       }
     }
 
@@ -79,6 +80,7 @@ export const LoginFormWrapper = styled.form`
       input {
         margin-top: 0.15rem;
       }
+
       label {
         font-size: 0.9rem;
       }

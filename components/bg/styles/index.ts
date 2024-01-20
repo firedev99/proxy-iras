@@ -14,7 +14,7 @@ export const BGSceneWrapper = styled.div`
   }
 
   @media only screen and (max-width: 390px) {
-    width: 12rem;
-    height: 12rem;
+    min-width: 12rem;
+    min-height: 12rem;
   }
 `

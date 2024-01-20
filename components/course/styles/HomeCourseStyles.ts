@@ -211,7 +211,20 @@ export const HomeEmptyWrapper = styled.div`
     margin-bottom: 0;
   }
 
+  p {
+    text-align: center;
+    opacity: 0.7;
+  }
+
   .home {
     margin-top: 1rem;
+  }
+
+  @media only screen and (max-width: 600px) {
+    p {
+      font-size: 0.7rem;
+    }
+
+    margin-top: -10rem;
   }
 `

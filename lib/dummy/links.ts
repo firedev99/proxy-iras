@@ -40,6 +40,6 @@ export const navLinks = [
   },
   {
     title: "Tools",
-    href: "/helpers",
+    href: "/tools",
   },
 ]

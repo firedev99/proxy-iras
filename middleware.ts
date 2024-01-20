@@ -7,7 +7,7 @@ export const config = {
     "/courses/:path*",
     "/calender",
     "/profile",
-    "/helpers",
+    "/tools",
   ],
 }
 

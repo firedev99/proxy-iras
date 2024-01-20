@@ -81,6 +81,9 @@ export default function HomeCourses({ courses }: Props) {
       ) : (
         <HomeEmptyWrapper>
           <h1>no class, atm 🍻</h1>
+          <p>
+            (might be an issue with the server, try signing out and re-login )
+          </p>
           <BGScene classname="home" />
         </HomeEmptyWrapper>
       )}

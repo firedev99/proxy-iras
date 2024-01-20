@@ -52,7 +52,7 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
         return {
           ...courseI,
           // redirect to the courses page if something went wrong
-          classroomLink: matchingClassroomCourse
+          classroomLink: matchingClassroomCourse?.name
             ? `/courses/${
                 matchingClassroomCourse.id
               }?code=${matchingClassroomCourse.name
@@ -165,8 +165,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // default value
   return {
     props: {
-      courses: undefined,
-      classroomCourses: undefined,
+      courses: null,
+      classroomCourses: null,
     },
   }
 }
