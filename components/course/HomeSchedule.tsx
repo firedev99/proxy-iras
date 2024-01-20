@@ -64,10 +64,10 @@ export default function HomeSchedule({ courses }: Props) {
         <h4>Sec</h4>
         <h4>Room</h4>
         <h4>Time</h4>
-        {courseSchedule.map((course) => {
+        {courseSchedule.map((course, i) => {
           return (
             <ScheduledCourse
-              key={`schedule_${course.courseID}`}
+              key={`schedule_${course.courseID}_${i}`}
               course={course}
             />
           )

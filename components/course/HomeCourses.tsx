@@ -47,9 +47,9 @@ export default function HomeCourses({ courses }: Props) {
   return (
     <HomeCoursesWrapper $graded={!!gradeSubmited}>
       {courses && courses.length !== 0 ? (
-        courses.map((course) => (
+        courses.map((course, i) => (
           <CourseElementWrapper
-            key={course.courseID}
+            key={`${course.courseID}_${i}`}
             whileHover={{ scale: 0.96 }}
           >
             <Link href={course.classroomLink ?? "/courses"}>
@@ -82,7 +82,7 @@ export default function HomeCourses({ courses }: Props) {
         <HomeEmptyWrapper>
           <h1>no class, atm 🍻</h1>
           <p>
-            (might be an issue with the server, try signing out and re-login )
+            (might be an issue with the server, try signing out and re-login)
           </p>
           <BGScene classname="home" />
         </HomeEmptyWrapper>

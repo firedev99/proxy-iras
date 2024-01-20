@@ -44,7 +44,7 @@ export default function ClassroomCourses({ courseList, courseWork }: Props) {
           key={`classroom_course_${course.id}`}
           href={`/courses/${course.id}?code=${(course.name as string)
             .split("-")[2]
-            .toLowerCase()}`}
+            ?.toLowerCase()}`}
         >
           <ClassroomCourseWrapper
             style={{
