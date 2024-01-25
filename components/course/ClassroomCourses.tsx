@@ -39,7 +39,6 @@ export default function ClassroomCourses({ courseList, courseWork }: Props) {
 
   return (
     <ClassroomCoursesWrapper>
-      {/* <div /> */}
       {courseList.map((course) => (
         <Link
           key={`classroom_course_${course.id}`}

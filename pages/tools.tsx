@@ -27,41 +27,41 @@ interface CourseOfferingResponse {
 }
 
 export default function HelpersPage({ token }: Props) {
-  // const [loaded, setLoaded] = useState<boolean>(false)
-  // const [courses, setCourses] = useState<any>([])
+  const [loaded, setLoaded] = useState<boolean>(false)
+  const [courses, setCourses] = useState<any>([])
 
-  // const { student } = useStudent()
+  const { student } = useStudent()
 
-  // useEffect(() => {
-  //   ;(async function requestData() {
-  //     if (!token || !student || loaded) return
+  useEffect(() => {
+    ;(async function requestData() {
+      if (!token || !student || loaded) return
 
-  //     const res = (await services.getDataWithToken(
-  //       `https://iras.iub.edu.bd:8079//api/v1/registration/${student.studentID}/all-offer-courses`,
-  //       token
-  //     )) as CourseOfferingResponse
+      const res = (await services.getDataWithToken(
+        `https://iras.iub.edu.bd:8079//api/v1/registration/${student.studentID}/all-offer-courses`,
+        token
+      )) as CourseOfferingResponse
 
-  //     if (res.success) {
-  //       const { eligibleOfferCourses } = res.data
+      if (res.success) {
+        const { eligibleOfferCourses } = res.data
 
-  //       eligibleOfferCourses.forEach((subArr: any) => {
-  //         setCourses((prev: any) => [...prev, subArr])
-  //       })
+        eligibleOfferCourses.forEach((subArr: any) => {
+          setCourses((prev: any) => [...prev, subArr])
+        })
 
-  //       setLoaded(true)
-  //     }
-  //   })()
-  // }, [token, student, loaded])
+        setLoaded(true)
+      }
+    })()
+  }, [token, student, loaded])
 
-  // if (!loaded) return <Loader />
+  if (!loaded) return <Loader />
 
-  // return (
-  //   <HelpersPageWrapper>
-  //     {courses.length !== 0 && <ScheduleTool courses={courses} />}
-  //   </HelpersPageWrapper>
-  // )
+  return (
+    <HelpersPageWrapper>
+      {courses.length !== 0 && <ScheduleTool courses={courses} />}
+    </HelpersPageWrapper>
+  )
 
-  return <LaunchingTemplate />
+  // return <LaunchingTemplate />
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
