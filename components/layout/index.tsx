@@ -25,8 +25,9 @@ export default function Layout({
           }
         />
         <link rel="icon" href={icon || "/favicon.ico"} />
+
         {/* Open Graph meta tags for Facebook and other platforms */}
-        <meta property="og:title" content="Your Website Title" />
+        <meta property="og:title" content={title || "Proxy IRAS"} />
         <meta
           property="og:description"
           content={

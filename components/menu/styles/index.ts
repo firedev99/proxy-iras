@@ -380,7 +380,7 @@ export const NavFooter = styled(motion.div)`
       }
 
       :nth-of-type(2) {
-        letter-spacing: -1px;
+        /* letter-spacing: -1px; */
       }
     }
   }
