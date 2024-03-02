@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const FooterWrapper = styled.footer`
   text-align: center;
-  font-family: var(--font-mono);
+  font-family: var(--font-josefin), sans-serif;
   font-size: 1.1rem;
   letter-spacing: -1px;
   margin-top: auto;

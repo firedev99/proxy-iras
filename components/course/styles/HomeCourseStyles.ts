@@ -71,7 +71,11 @@ export const CourseElement = styled.div`
   justify-content: center;
   padding: 1.5rem;
   color: rgba(var(--text-base), 0.9);
-  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.1);
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.1);
+  }
 
   @media only screen and (max-width: 768px) {
     padding: 1rem;
@@ -92,11 +96,10 @@ export const HomeCourseMeta = styled.div`
   }
 
   h3 {
-    font-size: 1.1rem;
-    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    font-family: var(--font-josefin), sans-serif;
     font-weight: 600;
     text-align: center;
-    margin-bottom: 0.2rem;
   }
 
   h5 {
@@ -107,23 +110,22 @@ export const HomeCourseMeta = styled.div`
 
   @media only screen and (max-width: 1024px) {
     h3 {
-      line-height: 1.4rem;
+      font-size: 1.2rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     h5 {
-      font-weight: 400;
+      font-weight: 500;
     }
   }
 
   @media only screen and (max-width: 768px) {
     h3 {
       font-size: 1rem;
-      line-height: 1.15rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     h5 {
@@ -134,7 +136,6 @@ export const HomeCourseMeta = styled.div`
   @media only screen and (max-width: 380px) {
     h3 {
       font-size: 0.9rem;
-      line-height: 1rem;
     }
 
     h5 {
@@ -148,9 +149,9 @@ export const HomeCourseAttendanceStatus = styled.div`
   font-size: 1.1rem;
 
   @media only screen and (max-width: 1024px) {
+    opacity: 0.9;
     span {
       font-size: 0.9rem;
-      font-weight: 500;
     }
   }
 

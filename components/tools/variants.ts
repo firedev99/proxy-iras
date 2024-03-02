@@ -1,10 +1,10 @@
 import { Variants } from "framer-motion"
 
-export const ttv: Variants = {
+export const toolFeatureCardVar: Variants = {
   initial: {
-    height: 48,
+    scale: 0.97,
   },
   animate: {
-    height: 464,
+    scale: 1.03,
   },
 }

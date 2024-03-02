@@ -29,11 +29,16 @@ export const LoginFormWrapper = styled.form`
       height: 1rem;
       margin-right: 0.5rem;
       margin-top: 0.22rem;
+
+      &::placeholder {
+        font-family: var(--font-josefin), sans-serif;
+      }
     }
   }
 
   h1 {
-    font-family: var(--font-mono);
+    font-family: var(--font-josefin), sans-serif;
+    text-transform: uppercase;
     font-size: 3.85rem;
     font-weight: 800;
     margin-left: -0.2rem;
@@ -88,7 +93,6 @@ export const LoginFormWrapper = styled.form`
 
     h1 {
       font-size: 3rem;
-      line-height: 3.7rem;
     }
 
     span:not(.btn) {
@@ -114,7 +118,6 @@ export const LoginFormWrapper = styled.form`
 
     h1 {
       font-size: 3rem;
-      line-height: 3.7rem;
     }
 
     span:not(.btn) {
@@ -131,8 +134,7 @@ export const LoginFormWrapper = styled.form`
   @media only screen and (max-width: 380px) {
     h1 {
       font-size: 2.7rem;
-      line-height: 3.2rem;
-      margin-left: -0.1rem;
+      margin-left: -0.2rem;
     }
 
     span:not(.btn) {
@@ -152,7 +154,6 @@ export const LoginFormWrapper = styled.form`
   @media only screen and (max-width: 320px) {
     h1 {
       font-size: 2.4rem;
-      line-height: 2.6rem;
     }
 
     span:not(.btn) {

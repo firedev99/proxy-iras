@@ -24,13 +24,19 @@ export function StudentProvider({ children }: StudentProviderType) {
   function addStudent(student: StudentProps) {
     if (typeof window !== "undefined" && window.localStorage) {
       // get previously saved picture
-      let previouslySavedPicture = localStorage.getItem(
+      const previouslySavedPicture = localStorage.getItem(
         `saved-${student.studentID}-picture`
+      )
+
+      // get previously saved name
+      const previouslySavedName = localStorage.getItem(
+        `saved-${student.studentID}-name`
       )
 
       // assign student in the state
       setStudent({
         ...student,
+        studentName: previouslySavedName ?? student.studentName,
         picture: previouslySavedPicture ?? student.picture,
       })
 
@@ -39,6 +45,7 @@ export function StudentProvider({ children }: StudentProviderType) {
         "student-info",
         JSON.stringify({
           ...student,
+          studentName: previouslySavedName ?? student.studentName,
           picture: previouslySavedPicture ?? student.picture,
         })
       )

@@ -1,8 +1,8 @@
+import { useState } from "react"
 import { LinkWrapper } from "./styles"
-import Link from "next/link"
 import { miv, mlv } from "./variants"
 import { AnimatePresence, motion } from "framer-motion"
-import { useState } from "react"
+import Link from "next/link"
 
 type Props = {
   title: string

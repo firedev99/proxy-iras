@@ -10,7 +10,7 @@ export const AssignmentPreviewWrapper = styled.div<{ $expand?: boolean }>`
   position: relative;
   z-index: 1;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
-  border: 2px solid rgb(217, 217, 217);
+  border: 2px solid rgba(var(--text-base), 0.7);
   box-shadow: 8px 8px rgba(242, 156, 152, 0.7);
   border-radius: 0.6rem;
   padding: 1rem;
@@ -69,6 +69,10 @@ export const AssignmentPreviewWrapper = styled.div<{ $expand?: boolean }>`
       font-size: 0.8rem;
       margin-top: 0.6rem;
     }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    border: 2px solid rgb(217, 217, 217);
   }
 `
 

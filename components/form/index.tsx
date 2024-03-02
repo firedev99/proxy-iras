@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from "react"
 import { useRouter } from "next/router"
 import { motion } from "framer-motion"
 import { Input } from "@components"
@@ -12,7 +13,6 @@ import { LoginFormWrapper } from "./styles"
 import { AuthCredentials } from "@types"
 import Icon from "@icons"
 import Link from "next/link"
-import { ChangeEvent, useState } from "react"
 
 export default function LoginForm() {
   const { addToast } = useToast()
@@ -57,7 +57,6 @@ export default function LoginForm() {
       if (response.ok) {
         const { student } = await response.json()
         addStudent(student)
-        setIsSubmitting(false)
 
         if (callbackURL) {
           // redirect to the page it logged out from or asked to visit
@@ -72,6 +71,8 @@ export default function LoginForm() {
       } else {
         addToast(`user id or password is incorrent😔`)
       }
+
+      setIsSubmitting(false)
     },
     validationFunc: login,
   })

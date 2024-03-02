@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { CourseProps } from "@/types"
+import { colors } from "@/lib/dummy/colors"
+import { firey } from "@/lib/utils"
 import {
   CourseElementWrapper,
   CourseElement,
@@ -9,9 +11,7 @@ import {
   HomeCourseMeta,
   HomeEmptyWrapper,
 } from "./styles/HomeCourseStyles"
-import { colors } from "@/lib/dummy/colors"
 import Link from "next/link"
-import { firey } from "@/lib/utils"
 import BGScene from "../bg"
 
 type Props = {
@@ -20,12 +20,12 @@ type Props = {
 
 export default function HomeCourses({ courses }: Props) {
   const [randomColors, setRandomColors] = useState<string[]>([])
+
   // check if the grade has been submited
   const gradeSubmited =
     courses && courses.some((course) => course.grade !== "Z")
-  // const gradeSubmited = temp && temp.some((course) => course.grade !== "Z")
 
-  // Create a shuffled copy of the colors array
+  // create a shuffled copy of the colors array
   useEffect(() => {
     const shuffledColors = firey.shuffleArray([...colors])
     setRandomColors(shuffledColors)
@@ -34,6 +34,7 @@ export default function HomeCourses({ courses }: Props) {
   // get the next non repeating random color
   function getNextRandomColor() {
     const color = firey.getRandomNonRepeatingValue(randomColors)
+
     if (color) {
       return color
     } else {

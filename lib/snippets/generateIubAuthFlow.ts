@@ -1,8 +1,9 @@
 import { parse, serialize } from "cookie"
 import { NextApiRequest, NextApiResponse } from "next"
 import { services } from "../services"
-import { StudentProps } from "@/types"
+import { StudentCreditStatus, StudentProps } from "@/types"
 import { sql } from "@vercel/postgres"
+import { semesterList } from "../dummy/semesters"
 
 export default async function generateIubAuthFlow(
   req: NextApiRequest,
@@ -34,14 +35,14 @@ export default async function generateIubAuthFlow(
 
     // get the student informations
     const studentInfo = await services.getDataWithToken(
-      `https://iras.iub.edu.bd:8079//api/v1/landing/notichboard/${credentials.email}/student`,
+      `${process.env.IUB_API}//api/v1/landing/notichboard/${credentials.email}/student`,
       token
     )
 
     // idk whom iub hired as the developer, figuring out these mess made me sick :)
     // give me money and a few months, i'll let you know what top notch feels like
     const studentCatalogue = await services.getDataWithToken(
-      `https://iras.iub.edu.bd:8079//api/v1/registration/student-catelogue-requirment/${credentials.email}`,
+      `${process.env.IUB_API}//api/v1/registration/student-catelogue-requirment/${credentials.email}`,
       token
     )
 
@@ -49,13 +50,40 @@ export default async function generateIubAuthFlow(
     const { attendanceSemester, attendanceYear } = uniRules.data[0]
     const { studentId, studentName, major, minor, notificationMessages } =
       studentInfo.data
+
     const { cgpa, creditEarned, advisorName } = studentCatalogue.data[0]
+
+    // extract foundation, core, minor, major etc credit status
+    const studentCreditStatus = studentCatalogue.data.reduce(
+      (acc: any, cat: any) => {
+        // if the courseGroupName is already in acc, update doneCredit and minRequirement
+        if (acc[cat.courseGroupName]) {
+          acc[cat.courseGroupName].doneCredit += parseInt(cat.doneCredit)
+          acc[cat.courseGroupName].minRequirement += parseInt(cat.minRequirment)
+        } else {
+          // initial insertion of courseGroupName
+          acc[cat.courseGroupName] = {
+            courseGroupId: cat.courseGroupId,
+            courseGroupName: cat.courseGroupName,
+            doneCredit: parseInt(cat.doneCredit),
+            minRequirement: parseInt(cat.minRequirment),
+          }
+        }
+        return acc
+      },
+      {}
+    )
+
+    // convert the accumulated object into an array
+    const creditStatus = Object.values(
+      studentCreditStatus
+    ) as StudentCreditStatus[]
 
     // get student profile details from iub api
     const {
       data: { sex, email, cellPhone },
     } = await services.getDataWithToken(
-      `https://iras.iub.edu.bd:8079//api/v2/profile/${studentId}/load-student-details`,
+      `${process.env.IUB_API}//api/v2/profile/${studentId}/load-student-details`,
       token
     )
 
@@ -73,8 +101,11 @@ export default async function generateIubAuthFlow(
       cgpa,
       creditEarned,
       advisorName,
+      sex,
+      creditStatus,
+      semesterName: semesterList[parseInt(attendanceSemester) - 1],
       // generate a random bit emoji based on their gender
-      picture: `https://res.cloudinary.com/firey/image/upload/v1694607133/iub/${sex.toLowerCase()}_${randomNumber}.jpg`,
+      picture: `https://res.cloudinary.com/firey/image/upload/v1708816390/iub/${sex.toLowerCase()}_${randomNumber}.jpg`,
     } as StudentProps
 
     // save few details from first session
@@ -82,7 +113,7 @@ export default async function generateIubAuthFlow(
       INSERT INTO Students (id, name, email, contact, image)
       VALUES (${studentId}, ${studentName.slice(
       1
-    )}, ${email}, ${cellPhone}, ${`https://iras.iub.edu.bd:8079/photo/${studentId}.jpg`})
+    )}, ${email}, ${cellPhone}, ${`${process.env.IUB_API}/photo/${studentId}.jpg`})
       ON CONFLICT (email)
       DO NOTHING;
     `

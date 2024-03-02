@@ -11,7 +11,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   @media (prefers-color-scheme: dark) {
     :root {
       --background-base: 32, 33, 36;
-      --text-base: 241, 245, 249;
+      --text-base: 227, 227, 227;
     }
   }
 
@@ -30,8 +30,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   html,
   body {
     max-width: 100vw;
-    /* overflow-x: hidden; */
-    font-family: var(--font-display);
+    font-family: var(--font-display), sans-serif;
   }
 
   body {
@@ -78,10 +77,10 @@ export const GlobalStyles = styled.createGlobalStyle`
       font-size: 0.8rem;
       padding: 0.55rem 0.8rem;
       border-radius: 0.25rem;
-      bottom: -1.9rem;
+      bottom: -2.1rem;
       white-space: nowrap;
       position: absolute;
-      left: 95%;
+      left: 55%;
       box-shadow: 1px 1px 4px rgba(18, 18, 18, 0.7);
       z-index: 99999;
       opacity: 0;

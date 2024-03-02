@@ -9,6 +9,17 @@ export const LoginPageWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
 
+  .login_warning {
+    max-width: 420px;
+    text-align: center;
+
+    h4 {
+      opacity: 0.8;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  }
+
   footer {
     position: relative;
     bottom: 2rem;

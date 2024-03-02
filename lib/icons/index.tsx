@@ -1,20 +1,33 @@
 import {
+  AddIcon,
+  BoxCopiedIcon,
+  BrushIcon,
+  CalculatorIcon,
   CalenderIcon,
   ChartIcon,
   CheckboardIcon,
+  CrossIcon,
+  ExitIcon,
   EyeCloseIcon,
   EyeOpenIcon,
   FireIcon,
+  FontIcon,
+  FrameArtIcon,
   GoogleClassroomIcon,
   HomeIcon,
+  LeftArrow,
+  LinkIcon,
   NotAllowedIcon,
+  ResetIcon,
   RightArrowIcon,
   SearchFilterIcon,
   SearchInsertionIcon,
   SemiStarShapeIcon,
   SpinningLoader,
   SqaureStackIcon,
+  TrashIcon,
   UserIcon,
+  WebPageSceneIcon,
 } from "./icons"
 import { IconProps } from "@types"
 
@@ -23,8 +36,44 @@ export default function Icon({ name, className }: IconProps) {
     case "spinning-loader":
       return <SpinningLoader />
 
+    case "frame-art-icon":
+      return <FrameArtIcon />
+
+    case "font-icon":
+      return <FontIcon />
+
+    case "brush-icon":
+      return <BrushIcon />
+
+    case "add-icon":
+      return <AddIcon />
+
+    case "reset-icon":
+      return <ResetIcon />
+
+    case "calculator-icon":
+      return <CalculatorIcon />
+
+    case "left-arrow":
+      return <LeftArrow />
+
+    case "trash":
+      return <TrashIcon />
+
     case "right-arrow":
       return <RightArrowIcon />
+
+    case "cross-icon":
+      return <CrossIcon />
+
+    case "web-page-scene":
+      return <WebPageSceneIcon />
+
+    case "copied-clipboard":
+      return <BoxCopiedIcon />
+
+    case "link-icon":
+      return <LinkIcon />
 
     case "square-stack":
       return <SqaureStackIcon />

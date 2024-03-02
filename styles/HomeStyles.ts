@@ -14,21 +14,6 @@ export const UserInformationWrapper = styled.div`
   }
 `
 
-export const ProfileAvatar = styled.div`
-  position: relative;
-  width: 186px;
-  height: 186px;
-  border-radius: 50%;
-
-  img {
-    border-radius: inherit !important;
-  }
-
-  @media only screen and (max-width: 768px) {
-    width: 124px;
-    height: 124px;
-  }
-`
 export const UserDetails = styled.div`
   margin-left: 1.5rem;
   user-select: none;
@@ -36,9 +21,8 @@ export const UserDetails = styled.div`
   h3 {
     font-size: 2.4rem;
     margin-left: -0.08rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-josefin), sans-serif;
     font-weight: 900;
-    line-height: 3rem;
 
     /* fading in hover effect */
     color: transparent;
@@ -59,12 +43,10 @@ export const UserDetails = styled.div`
   }
 
   h5 {
-    font-size: 1.5rem;
-    font-family: var(--font-mono);
-    font-weight: 800;
-    color: rgba(var(--text-base), 0.75);
-    margin-top: -0.2rem;
-    margin-left: -1px;
+    font-size: 1.2rem;
+    font-family: var(--font-josefin), sans-serif;
+    font-weight: 500;
+    color: rgba(var(--text-base), 0.7);
   }
 
   @media only screen and (max-width: 1024px) {
@@ -72,13 +54,10 @@ export const UserDetails = styled.div`
 
     h3 {
       font-size: 2.1rem;
-      line-height: 2.7rem;
     }
 
     h5 {
       font-size: 1.2rem;
-      margin-top: -0.3rem;
-      font-weight: 600;
     }
   }
 
@@ -88,30 +67,34 @@ export const UserDetails = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin-top: 0.6rem;
 
     h3 {
       font-size: 2rem;
-      line-height: 2.8rem;
       margin-left: 0;
     }
 
     h5 {
-      font-size: 1rem;
-      margin-top: -0.3rem;
-      font-weight: 600;
+      font-family: var(--text-base), sans-serif;
+      font-size: 0.9rem;
+      margin-top: -0.25rem;
+      line-height: 1.1rem;
+      font-weight: 500;
       color: rgba(var(--text-base), 0.8);
     }
   }
 
   @media only screen and (max-width: 600px) {
+    margin-top: 0.5rem;
+
     h5 {
-      font-size: 0.9rem;
+      margin-top: 0rem;
     }
 
     h3 {
       text-align: center;
-      font-size: 1.4rem;
-      line-height: 2.2rem;
+      font-size: 1.8rem;
+      /* line-height: 2.2rem; */
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
@@ -121,15 +104,14 @@ export const UserDetails = styled.div`
   }
 
   @media only screen and (max-width: 415px) {
-    margin: 0;
+    margin-top: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     h3 {
       text-align: center;
-      font-size: 1.4rem;
-      line-height: 2.2rem;
+      font-size: 1.6rem;
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
@@ -140,17 +122,16 @@ export const UserDetails = styled.div`
 
   @media only screen and (max-width: 338px) {
     h3 {
-      font-size: 1.2rem;
-      line-height: 2rem;
+      font-size: 1.3rem;
     }
 
     h5 {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
   }
 `
 
-export const UserMetaDataWrapper = styled.div`
+export const UserMetaDataWrapper = styled.div<{ $hide: boolean }>`
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
@@ -162,6 +143,24 @@ export const UserMetaDataWrapper = styled.div`
     letter-spacing: 0.3px;
     font-weight: 600;
     color: rgba(var(--text-base), 0.8);
+
+    &:nth-child(1) {
+      position: relative;
+      width: fit-content;
+
+      &:after {
+        display: ${(props) => (props.$hide ? `inline-block` : `none`)};
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: rgba(217, 217, 217, 0.1);
+        backdrop-filter: blur(4px);
+        z-index: 2;
+        border-radius: 2px;
+        left: 0;
+      }
+    }
   }
 
   @media only screen and (max-width: 1536px) {
@@ -175,6 +174,7 @@ export const UserMetaDataWrapper = styled.div`
     align-items: center;
 
     span {
+      font-weight: 500;
       font-size: 0.9rem;
       letter-spacing: 0.1px;
     }

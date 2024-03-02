@@ -1,29 +1,48 @@
-import { days } from "@/lib/dummy/days"
-import { LaunchingTemplate, Layout } from "@components"
-import { startOfToday, format, parse, add } from "date-fns"
-import { ReactElement, useState } from "react"
-import { AnimatePresence } from "framer-motion"
+import { ReactElement, useEffect, useState } from "react"
 import { GetServerSideProps } from "next"
 import { classroom_v1 } from "googleapis"
+import { AnimatePresence } from "framer-motion"
+import { startOfToday, format, parse, add } from "date-fns"
+import { days as _days } from "@/lib/dummy/days"
+import { useWindowSize } from "@hooks/useWindowSize"
+import { Layout } from "@components"
 import {
   CalenderElementWrapper,
   CalenderPageWrapper,
 } from "@/styles/CalenderStyles"
-import CalenderHeader from "@/components/calender/CalenderHeader"
-import CalenderPreview from "@/components/calender/CalenderPreview"
+
+import dynamic from "next/dynamic"
 
 type Props = {
   courseList: classroom_v1.Schema$Course[]
   courseWork: classroom_v1.Schema$CourseWork[]
 }
 
+const CalenderHeader = dynamic(
+  () => import("../components/calender/CalenderHeader"),
+  {
+    ssr: false,
+  }
+)
+
+const CalenderPreview = dynamic(
+  () => import("../components/calender/CalenderPreview"),
+  {
+    ssr: false,
+  }
+)
+
 export default function CalenderPage({ courseList, courseWork }: Props) {
+  // get today
   let today = startOfToday()
 
   const [currentMonth, setCurrentMonth] = useState<string>(
     format(today, "MMM-yyyy")
   )
 
+  const [days, setDays] = useState<string[]>(_days)
+
+  // get the first day of the current month
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date())
 
   const [direction, setDirection] = useState<number>(0)
@@ -42,42 +61,52 @@ export default function CalenderPage({ courseList, courseWork }: Props) {
     setDirection(1)
   }
 
-  // return (
-  //   <CalenderPageWrapper>
-  //     {/* Calender Controls */}
-  //     <CalenderHeader
-  //       firstDayCurrentMonth={firstDayCurrentMonth}
-  //       previousMonth={previousMonth}
-  //       nextMonth={nextMonth}
-  //       courseWork={courseWork}
-  //     />
+  // get windows width
+  const { width } = useWindowSize()
 
-  //     {/* Calender Dates */}
-  //     <AnimatePresence key={currentMonth}>
-  //       <CalenderElementWrapper
-  //         initial={{ x: direction > 0 ? "50%" : "-50%", opacity: 0 }}
-  //         animate={{ x: "0%", opacity: 1 }}
-  //         exit={{ x: direction < 0 ? "50%" : "-50%", opacity: 0 }}
-  //       >
-  //         {/* weekdays name */}
-  //         {days.map((d, idx) => (
-  //           <div className="day_title" key={`dt-${idx}`}>
-  //             <h3>{d}</h3>
-  //           </div>
-  //         ))}
+  useEffect(() => {
+    if (typeof window === "undefined") return
 
-  //         {/* current preview dates  */}
-  //         <CalenderPreview
-  //           firstDayCurrentMonth={firstDayCurrentMonth}
-  //           courseList={courseList}
-  //           courseWork={courseWork}
-  //         />
-  //       </CalenderElementWrapper>
-  //     </AnimatePresence>
-  //   </CalenderPageWrapper>
-  // )
+    // handle weekdays abbreviations
+    if (width < 768) {
+      setDays((prev) => prev.map((item) => item.slice(0, 3)))
+    }
+  }, [width])
 
-  return <LaunchingTemplate />
+  return (
+    <CalenderPageWrapper>
+      {/* Calender Controls */}
+      <CalenderHeader
+        firstDayCurrentMonth={firstDayCurrentMonth}
+        previousMonth={previousMonth}
+        nextMonth={nextMonth}
+        courseWork={courseWork}
+      />
+
+      {/* Calender Dates */}
+      <AnimatePresence key={currentMonth}>
+        <CalenderElementWrapper
+          initial={{ x: direction > 0 ? "50%" : "-50%", opacity: 0 }}
+          animate={{ x: "0%", opacity: 1 }}
+          exit={{ x: direction < 0 ? "50%" : "-50%", opacity: 0 }}
+        >
+          {/* weekdays name */}
+          {days.map((d, idx) => (
+            <div className="day_title" key={`dt-${idx}`}>
+              <h3>{d}</h3>
+            </div>
+          ))}
+
+          {/* current preview dates  */}
+          <CalenderPreview
+            firstDayCurrentMonth={firstDayCurrentMonth}
+            courseList={courseList}
+            courseWork={courseWork}
+          />
+        </CalenderElementWrapper>
+      </AnimatePresence>
+    </CalenderPageWrapper>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -115,6 +144,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   // sent the default values
   return {
+    redirect: {
+      permanent: false,
+      destination: "/courses?warn=auth",
+    },
     props: {
       courseList: [],
       courseWork: [],
@@ -126,7 +159,7 @@ CalenderPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout
       title="Student Calender - Proxy IRAS, Student Management System"
-      // footer={true}
+      footer={false}
     >
       {page}
     </Layout>

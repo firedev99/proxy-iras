@@ -1,18 +1,10 @@
 import Link from "next/link"
-import React from "react"
-import { FooterWrapper, WalingDogWrapper } from "./styles"
-import styled from "styled-components"
-import dynamic from "next/dynamic"
-
-const WalkingDog = dynamic(() => import("../lottie/WalkingDog"))
+import { FooterWrapper } from "./styles"
 
 export default function Footer() {
   return (
     <FooterWrapper>
-      <WalingDogWrapper>
-        <WalkingDog />
-      </WalingDogWrapper>
-      Made by{" "}
+      made by{" "}
       <Link
         target="_blank"
         rel="noreferrer"

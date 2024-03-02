@@ -20,20 +20,19 @@ export const InputWrapper = styled.div`
 
   input {
     width: 100%;
-    height: 3.5rem;
+    height: 3.2rem;
     background: transparent;
-    font-size: 17px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
     color: rgba(var(--text-base), 0.7);
     border: solid 2px rgba(var(--text-base), 0.4);
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     padding-left: 1.2rem !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     &::placeholder {
-      font-size: 17px;
-      font-weight: 600;
-      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 500;
       letter-spacing: 0.005rem;
       color: rgba(var(--text-base), 0.6);
     }

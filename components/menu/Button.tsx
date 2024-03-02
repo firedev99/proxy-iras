@@ -4,6 +4,7 @@ import { LogoutBtnWrapper } from "./styles"
 export default function LogoutButton() {
   const router = useRouter()
 
+  // handle user logout
   async function handleLogout() {
     try {
       await Promise.allSettled([
@@ -14,6 +15,12 @@ export default function LogoutButton() {
           method: "DELETE",
         }),
       ]).then(() => {
+        // remove student from local storage
+        if (typeof window !== "undefined") {
+          localStorage.removeItem(`student-info`)
+        }
+
+        // hard reload the page to updates
         router.reload()
       })
     } catch (err) {

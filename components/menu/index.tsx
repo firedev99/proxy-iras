@@ -1,4 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/router"
+import { useBodyLocked } from "@hooks/useBodyLocked"
+import { useClicksOutside } from "@hooks/useClicksOutside"
+import { mbv, mfv, mov, msv } from "./variants"
+import { navFooter, navLinks } from "@/lib/dummy/links"
+import { AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion"
 import {
   MenuWrapperBtn,
   NavFooter,
@@ -7,31 +13,22 @@ import {
   NavigationOverlay,
   NavigationWrapper,
 } from "./styles"
-import {
-  AnimatePresence,
-  useMotionValue,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion"
-import { navFooter, navLinks } from "@/lib/dummy/links"
 import Link from "next/link"
 import Curve from "./Curve"
-import { mbv, mfv, mov, msv } from "./variants"
-import NavLink from "./NavLink"
-import { useClicksOutside } from "@/hooks/useClicksOutside"
-import { useRouter } from "next/router"
 import LogoutButton from "./Button"
+import NavLink from "./NavLink"
 
 export default function Menu() {
   const [expand, setExpand] = useState<boolean>(false)
   const [hidden, setHidden] = useState<boolean>(false)
+
   const modalRef = useRef<HTMLDivElement>(null)
   const btnRef = useRef<HTMLButtonElement>(null)
 
-  const { scrollY } = useScroll()
-
   const router = useRouter()
   const active = router.pathname
+
+  const { scrollY } = useScroll()
 
   // handle clicks and touch outside the menu
   useClicksOutside([modalRef, btnRef], (event) => {
@@ -40,6 +37,7 @@ export default function Menu() {
     }
   })
 
+  // show menu based on scrolling
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious()
 
@@ -50,25 +48,16 @@ export default function Menu() {
     }
   })
 
+  // toggle menu handler
   const toggleMenu = () => setExpand((prev) => !prev)
+
+  // check if the nav link is active
   const isActive = (href: string) => href === active
 
-  // hide the scrollbar and other styles when the menu is expanded
-  useLayoutEffect(() => {
-    if (expand) {
-      document.body.style.overflow = "hidden"
-    } else {
-      const timeoutId = setTimeout(() => {
-        document.body.style.overflow = "unset"
-      }, 1000)
+  // hide the scrollbar when the menu gets expanded
+  useBodyLocked(expand)
 
-      return () => {
-        clearTimeout(timeoutId)
-      }
-    }
-  }, [expand])
-
-  // handle navigation on route changes
+  // handle modal on route changes
   useEffect(() => {
     const handler = () => setExpand(false)
     router.events.on("routeChangeStart", handler)

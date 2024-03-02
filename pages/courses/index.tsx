@@ -1,18 +1,19 @@
-import { AssginmentPreview, GoogleUI, Layout } from "@/components"
-import BGScene from "@/components/bg"
-import Icon from "@/lib/icons"
+import { ReactElement } from "react"
+import { useRouter } from "next/router"
+import { classroom_v1 } from "googleapis"
+import { GetServerSideProps } from "next"
+import { AssginmentPreview, GoogleUI, Layout } from "@components"
 import {
   ClassroomIconWrapper,
   CourseHomePageWrapper,
   CoursePageTitleWrapper,
   GoogleLoginWrapper,
 } from "@styles/CourseStyles"
-import { classroom_v1 } from "googleapis"
-import { GetServerSideProps } from "next"
 import dynamic from "next/dynamic"
-import { ReactElement } from "react"
+import BGScene from "@/components/bg"
+import Icon from "@/lib/icons"
 
-type CoursePageProps = {
+type Props = {
   g_auth: boolean
   courses: classroom_v1.Schema$Course[]
   courseWork: classroom_v1.Schema$CourseWork[]
@@ -23,11 +24,15 @@ const ClassroomCourses = dynamic(
   { ssr: false }
 )
 
-export default function CoursesPage(props: CoursePageProps) {
-  const { g_auth, courses, courseWork } = props
+export default function CoursesPage({ g_auth, courses, courseWork }: Props) {
+  // router context
+  const router = useRouter()
+
+  // find if a warning exists
+  const warning = Boolean(router.query.warn)
 
   return (
-    <CourseHomePageWrapper>
+    <CourseHomePageWrapper $g_auth={g_auth}>
       <CoursePageTitleWrapper>
         <ClassroomIconWrapper>
           <Icon name="google-classroom" />
@@ -38,17 +43,21 @@ export default function CoursesPage(props: CoursePageProps) {
       {g_auth && (
         <AssginmentPreview courseWork={courseWork} courseList={courses} />
       )}
+
       {g_auth && (
         <ClassroomCourses courseList={courses} courseWork={courseWork} />
       )}
+
       {!g_auth && (
         <GoogleLoginWrapper>
-          <h1>connect your google classroom account now</h1>
+          <h1>
+            connect your google classroom account{" "}
+            {warning ? `to view calender` : `now`}
+          </h1>
           <GoogleUI />
           <BGScene />
         </GoogleLoginWrapper>
       )}
-      {/* <button onClick={logoutFromGoogle}>Signout from Google</button> */}
     </CourseHomePageWrapper>
   )
 }

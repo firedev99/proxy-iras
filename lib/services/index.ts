@@ -17,7 +17,7 @@ async function auth(values: AuthCredentials, csrfToken: string) {
 }
 
 async function getToken(values: AuthCredentials) {
-  const res = await fetch("https://iras.iub.edu.bd:8079//v2/account/token", {
+  const res = await fetch(`${process.env.IUB_API}//v2/account/token`, {
     method: "POST",
     body: JSON.stringify(values),
     headers: {
@@ -49,7 +49,7 @@ async function getDataWithToken(endpoint: string, token: string) {
 
 async function getUniRules() {
   const res = await fetch(
-    `https://iras.iub.edu.bd:8079//v1/commonsetting/UniversitySetting`,
+    `${process.env.IUB_API}//v1/commonsetting/UniversitySetting`,
     {
       method: "POST",
       body: JSON.stringify("01"),
@@ -67,7 +67,7 @@ async function getCourseData(token: string, studentID: string) {
   const uniRules = await getUniRules()
 
   const courses = (await services.getDataWithToken(
-    `https://iras.iub.edu.bd:8079//api/v1/registration/student-registered-courses/${studentID}/all`,
+    `${process.env.IUB_API}//api/v1/registration/student-registered-courses/${studentID}/all`,
     token
   )) as IUBCourseProps
 

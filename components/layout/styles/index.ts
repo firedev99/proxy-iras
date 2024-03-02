@@ -6,10 +6,13 @@ export const LayoutWrapper = styled.div`
   width: 100%;
   max-width: 1536px;
   margin: 0 auto;
-  padding: 2rem 1rem;
-
+  padding: 4vh 0;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (max-width: 1920px) {
+    padding: 2rem 1rem;
+  }
 
   @media only screen and (max-width: 380px) {
     padding: 2rem 0.5rem;

@@ -1,7 +1,6 @@
-import { useLottie } from "@/hooks/useLottie"
-import sceneJSON from "@/lib/dummy/lottie-education.json"
+import { useLottie } from "@hooks/useLottie"
 import { MainScene, SceneWrapper } from "./styles/lottieStyles"
-import { useLayoutEffect } from "react"
+import sceneJSON from "@/lib/dummy/lottie-education.json"
 
 export default function EducationScene() {
   const { ref: scene } = useLottie(sceneJSON)

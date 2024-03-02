@@ -1,13 +1,9 @@
-import { useWindowSize } from "@/hooks/useWindowSize"
-import { classroom_v1 } from "googleapis"
 import { useState } from "react"
-import { AssignmentPreviewWrapper, CalenderHoverModal } from "./styles"
+import { classroom_v1 } from "googleapis"
+import { useWindowSize } from "@hooks/useWindowSize"
 import { AnimatePresence } from "framer-motion"
-
-type HoveredModalProps = {
-  isOpen: boolean
-  direction: "left" | "right"
-}
+import { HoveredModalProps } from "@types"
+import { AssignmentPreviewWrapper, CalenderHoverModal } from "./styles"
 
 type Props = {
   calenderIdx: number
@@ -34,6 +30,10 @@ export default function PreviewElement({
 
   // handle function when element is hovered for details
   function handleHoverStart(idx: number, e: MouseEvent) {
+    if (width < 1280) {
+      return
+    }
+
     // close the currently open modal (if there is any)
     if (activeModalIdx !== null) {
       const _modals = [...hoveredModals]
@@ -43,7 +43,8 @@ export default function PreviewElement({
 
     const modals = [...hoveredModals]
     const remainingWidth = width - e.clientX
-    if (remainingWidth > 242) {
+
+    if (remainingWidth > 350) {
       modals[idx] = { isOpen: true, direction: "right" }
     } else {
       modals[idx] = { isOpen: true, direction: "left" }
@@ -86,11 +87,11 @@ export default function PreviewElement({
             style={{
               left:
                 hoveredModals[calenderIdx].direction === "right"
-                  ? "104%"
+                  ? "50%"
                   : "unset",
               right:
                 hoveredModals[calenderIdx].direction === "left"
-                  ? "104%"
+                  ? "50%"
                   : "unset",
             }}
           >

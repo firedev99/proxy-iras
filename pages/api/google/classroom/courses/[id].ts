@@ -34,17 +34,17 @@ export default async function handler(
       courseId: id as string,
     })
 
-    // fetch course work materials from classroom
-    const courseWorkMaterials =
-      await classroom.courses.courseWorkMaterials.list({
-        courseId: id as string,
-      })
+    // // fetch course work materials from classroom
+    // const courseWorkMaterials =
+    //   await classroom.courses.courseWorkMaterials.list({
+    //     courseId: id as string,
+    //   })
 
     // return the annoucement list, course works and course work materials
     return res.status(200).send({
       announcements: announcementList.data.announcements || [],
       courseWork: courseWorkList.data.courseWork || [],
-      courseWorkMaterials: courseWorkMaterials.data.courseWorkMaterial || [],
+      // courseWorkMaterials: courseWorkMaterials.data.courseWorkMaterial || [],
     })
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {

@@ -16,13 +16,13 @@ export function useProfile() {
         setStudentDetails({
           studentName: student.studentName,
           studentID: student.studentId,
-          studentPrimaryImgSrc: `https://iras.iub.edu.bd:8079/photo/${student.studentId}.jpg`,
+          studentPrimaryImgSrc: `${process.env.NEXT_PUBLIC_IUB_API}/photo/${student.studentId}.jpg`,
           studentSecondaryImgSrc: student.googleProfilePicture ?? undefined,
           cgpa: student.cgpa,
           earnedCredit: student.earnedCredit,
           major: student.firstMajor,
           minor: student.minor,
-          schoolName: student.minor,
+          schoolName: student.schoolName,
           dob: student.dob,
           birthRegistrationNo: student.birthRegistrationNo,
           nid: student.nid,
@@ -41,7 +41,7 @@ export function useProfile() {
           // generate src links for dummy pictures for male
           const generatedSrc = [...Array(20)].map(
             (_, i) =>
-              `https://res.cloudinary.com/firey/image/upload/v1694607133/iub/male_${
+              `https://res.cloudinary.com/firey/image/upload/v1708816390/iub/male_${
                 i + 1
               }.jpg`
           )
@@ -52,7 +52,7 @@ export function useProfile() {
           // generate src links for dummy pictures for female
           const generatedSrc = [...Array(20)].map(
             (_, i) =>
-              `https://res.cloudinary.com/firey/image/upload/v1694607133/iub/female_${
+              `https://res.cloudinary.com/firey/image/upload/v1708816390/iub/female_${
                 i + 1
               }.jpg`
           )

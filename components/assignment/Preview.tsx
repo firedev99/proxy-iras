@@ -1,13 +1,14 @@
-import { GoogleDueTimeProps } from "@/types"
+import { GoogleDueTimeProps } from "@types"
 import { classroom_v1 } from "googleapis"
-import React from "react"
-import dynamic from "next/dynamic"
+import { convertToDeadline } from "@/lib/snippets/convertToDeadLine"
+import { dateOptions } from "@/lib/snippets/dateOptions"
 import {
   AssginmentPreviewElement,
   AssginmentPreviewTime,
   AssignmentPreviewMeta,
   AssignmentPreviewWrapper,
 } from "./styles/AssignmentPreviewStyles"
+import dynamic from "next/dynamic"
 
 const FancySticker = dynamic(() => import("./FancySticker"), { ssr: false })
 
@@ -16,22 +17,13 @@ type Props = {
   courseList: classroom_v1.Schema$Course[]
 }
 
-const options: Intl.DateTimeFormatOptions = {
-  weekday: "long",
-  month: "short",
-  day: "numeric",
-}
-
-// with extra one day
-function convertToDeadline({ day, month, year }: GoogleDueTimeProps): Date {
-  const deadlineDate = new Date(year, month - 1, day + 1)
-  return deadlineDate
-}
-
 export default function Preview({ courseWork, courseList }: Props) {
+  // get all the due assignments
   const dueAssignments = courseWork
     .filter((course) => {
       const currentDate = new Date()
+
+      // convert deadline using covertToDeadline() function
       const dueDate = course.dueDate
         ? convertToDeadline(course.dueDate as GoogleDueTimeProps)
         : new Date(0)
@@ -71,8 +63,8 @@ export default function Preview({ courseWork, courseList }: Props) {
                 {course.dueDate
                   ? convertToDeadline(
                       course.dueDate as GoogleDueTimeProps
-                    ).toLocaleDateString("en-us", options)
-                  : new Date(0).toLocaleDateString("en-us", options)}
+                    ).toLocaleDateString("en-us", dateOptions)
+                  : new Date(0).toLocaleDateString("en-us", dateOptions)}
               </AssginmentPreviewTime>
             )}
           </AssginmentPreviewElement>

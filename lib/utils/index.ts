@@ -63,6 +63,30 @@ function getRandomNonRepeatingValue(dict: string[]) {
   return dict.pop() || null
 }
 
+function convertTimeTo24Format(timeStr: string) {
+  // Split the time string into hours and minutes, handling optional spaces
+  const [hours, minutes] = timeStr.trim().split(":")
+
+  const hoursNum = Number(hours)
+
+  // check if it's AM or PM
+  const meridiem = timeStr.includes("PM") ? 12 : 0
+
+  // adjust hours for PM times
+  const adjustedHours = (hoursNum + meridiem) % 24
+
+  return `${adjustedHours.toString().padStart(2, "0")}:${minutes}`.split(" ")[0]
+}
+
+function linkify(text: string) {
+  const urlRegex =
+    /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/gi
+
+  return text.replace(urlRegex, (url) => {
+    return `<a class="f" href="${url}" target="_blank">${url}</a>`
+  })
+}
+
 export const firey = {
   uniqueID,
   generateRandomValue,
@@ -71,4 +95,6 @@ export const firey = {
   camelize,
   objEmpty,
   rgbDataURL,
+  convertTimeTo24Format,
+  linkify,
 }

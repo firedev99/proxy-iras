@@ -1,19 +1,20 @@
+import { ReactElement, useEffect, useState } from "react"
+import { useRouter } from "next/router"
 import { SimpleLayout } from "@/components"
-import Icon from "@/lib/icons"
 import {
   TermSection,
   TermsContentWrapper,
   TermsPageWrapper,
 } from "@/styles/TermStyles"
 import Link from "next/link"
-import { useRouter } from "next/router"
-import { ReactElement, useLayoutEffect, useState } from "react"
+import Icon from "@/lib/icons"
 
 export default function TermsPage() {
   const [mount, _] = useState(true)
   const router = useRouter()
 
-  useLayoutEffect(() => {
+  // when it's triggered from the navigation with hidden overflow, we need to unset the overflow
+  useEffect(() => {
     if (!mount) false
     document.body.style.overflow = "unset"
   }, [mount])

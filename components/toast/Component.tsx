@@ -13,7 +13,7 @@ export function Toast({ notifications }: ToastStateProps) {
       if (notifications.length) {
         removeToast(notifications[0].id)
       }
-    }, 2000)
+    }, 3000)
     return () => {
       clearInterval(intervalID)
     }
@@ -23,7 +23,7 @@ export function Toast({ notifications }: ToastStateProps) {
     <AnimatePresence>
       <ToastWrapper
         initial={{ opacity: 0, y: 100, x: "-50%" }}
-        animate={{ opacity: 1, y: -32 }}
+        animate={{ opacity: 1, y: -36 }}
         exit={{ opacity: 0 }}
       >
         {notifications[0].content}

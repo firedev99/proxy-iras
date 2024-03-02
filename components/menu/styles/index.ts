@@ -157,6 +157,10 @@ export const NavigationInner = styled(motion.div)`
     padding: 10rem 6.5rem 7.5rem 6.5rem;
   }
 
+  @media only screen and (max-width: 1366px) {
+    padding: 7.5rem 6.5rem 5rem 6.5rem;
+  }
+
   @media only screen and (max-width: 768px) {
     width: unset;
     width: 100%;
@@ -167,7 +171,7 @@ export const NavigationInner = styled(motion.div)`
   }
 
   @media only screen and (max-height: 768px) {
-    padding: 7rem 6.5rem 3rem 6.5rem;
+    padding: 6.5rem 6.5rem 3rem 6.5rem;
     overflow: auto;
 
     svg {
@@ -176,10 +180,10 @@ export const NavigationInner = styled(motion.div)`
   }
 
   @media only screen and (max-width: 600px) {
-    padding: 10rem 4.8rem 4rem 4.8rem;
+    padding: 7rem 4.8rem 4rem 4.8rem;
   }
 
-  @media only screen and (max-width: 415px) {
+  @media only screen and (max-width: 486px) {
     padding: 7rem 3rem 4rem 3rem;
   }
 
@@ -207,6 +211,16 @@ export const NavHeader = styled(motion.div)`
     width: 100%;
     height: 1px;
     background: rgba(var(--background-base), 0.7);
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 0.5rem;
+  }
+
+  @media only screen and (max-width: 330px) {
+    p {
+      margin-bottom: 0.5rem;
+    }
   }
 `
 
@@ -242,6 +256,13 @@ export const LinkWrapper = styled(motion.div)`
     }
   }
 
+  @media only screen and (max-width: 1366px) {
+    a {
+      font-size: 2.625rem;
+      line-height: 3.2rem;
+    }
+  }
+
   @media only screen and (max-height: 768px) {
     a {
       font-size: 2.625rem;
@@ -254,7 +275,7 @@ export const LinkWrapper = styled(motion.div)`
     overflow: hidden;
 
     a {
-      line-height: 4rem;
+      /* line-height: 4rem; */
       overflow: hidden;
     }
 
@@ -265,7 +286,7 @@ export const LinkWrapper = styled(motion.div)`
     }
   }
 
-  @media only screen and (max-width: 415px) {
+  @media only screen and (max-width: 486px) {
     margin-left: -0.2rem;
 
     a {
@@ -274,8 +295,16 @@ export const LinkWrapper = styled(motion.div)`
     }
   }
 
+  @media only screen and (max-width: 486px) and (max-height: 768px) {
+    a {
+      font-size: 2rem;
+      line-height: 2.2rem;
+    }
+  }
+
   @media only screen and (max-width: 330px) {
     margin-left: -0.1rem;
+
     a {
       font-size: 1.8rem;
       line-height: 2rem;
@@ -296,6 +325,7 @@ export const NavFooter = styled(motion.div)`
   ul {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0.5rem;
 
     a {
       font-family: var(--font-mono);
@@ -334,16 +364,16 @@ export const NavFooter = styled(motion.div)`
   @media only screen and (max-width: 600px) {
     button {
       margin-top: 1.3rem;
-      margin-left: 0;
+      margin-left: -0.3rem;
       margin-right: auto;
     }
   }
 
-  @media only screen and (max-height: 600px) {
+  @media only screen and (max-height: 636px) {
     margin-top: 5rem;
   }
 
-  @media only screen and (max-width: 415px) {
+  @media only screen and (max-width: 486px) {
     ul {
       a {
         font-size: 0.7rem;

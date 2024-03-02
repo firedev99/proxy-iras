@@ -68,6 +68,14 @@ export type CustomHookFormErrorType = {
 
 export type IconProps = {
   name:
+    | "frame-art-icon"
+    | "brush-icon"
+    | "font-icon"
+    | "add-icon"
+    | "reset-icon"
+    | "calculator-icon"
+    | "left-arrow"
+    | "trash"
     | "spinning-loader"
     | "home"
     | "checkboard"
@@ -86,9 +94,20 @@ export type IconProps = {
     | "search-filter"
     | "fire"
     | "not-allowed"
+    | "link-icon"
+    | "copied-clipboard"
+    | "web-page-scene"
+    | "cross-icon"
 
   className?: string
   active?: boolean
+}
+
+export type StudentCreditStatus = {
+  courseGroupId: string
+  courseGroupName: string
+  doneCredit: number
+  minRequirement: number
 }
 
 export type StudentProps = {
@@ -100,11 +119,19 @@ export type StudentProps = {
     messages: string
   }[]
   semesterByYear: string
+  semesterName: string
   year: string
   cgpa: string
   advisorName?: string
   creditEarned: string
   picture: string
+  sex?: string
+  creditStatus: StudentCreditStatus[]
+}
+
+export type RoutineTab = {
+  slide: string
+  label: string
 }
 
 export type StudentProfileProp = {
@@ -165,10 +192,10 @@ export type CourseProps = {
   attendedClasses?: number
   totalClasses?: number
   classTime: string
-  roomID: string
-  grade: string
-  semesterByYear: string
-  year: string
+  roomID?: string
+  grade?: string
+  semesterByYear?: string
+  year?: string
   classroomLink?: string
 }
 
@@ -205,7 +232,7 @@ export interface CourseOffering {
   courseCode?: string
   courseGroupId?: string
   courseId?: string
-  courseName?: string
+  courseName: string
   creditHour?: number
   enrolled?: number
   facualtyName?: string
@@ -220,8 +247,63 @@ export interface CourseOffering {
   section?: number
   seqNo?: string
   status?: number
-  timeSlot?: string
+  timeSlot: string
   timeString?: string
   vacancy?: number
   wedTimeString?: string
+}
+
+export interface RoutineCourseOffering extends CourseOffering {
+  firey: string
+}
+
+export type RoutineCourseSelection = {
+  course: CourseOffering
+  cb: () => void
+}
+
+export type RoutineCourseSelectionCallback = ({
+  course,
+  cb,
+}: RoutineCourseSelection) => void
+
+export type CalculatorCourseProps = {
+  name: string
+  credit: number
+  gp: number
+  grade: string
+}
+
+export type CalculatorResultProps = {
+  gp: number
+  credits: number
+  cgpa: number
+}
+
+export type HoveredModalProps = {
+  isOpen: boolean
+  direction: "left" | "right"
+}
+
+export type FriendsCourse = {
+  courseName: string
+  courseId: string
+  section: string
+  room: string
+  timeSlot: string
+}
+
+export type FriendsProps = {
+  name: string
+  sex: string
+  img: string
+  courses: FriendsCourse[]
+}
+
+// cause url have two types and both them contains different properties
+export type TernaryFriendsProps = {
+  name: string
+  sex: string
+  img: string
+  course?: FriendsCourse
 }

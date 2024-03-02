@@ -1,5 +1,4 @@
-import { useLottie } from "@/hooks/useLottie"
-import React from "react"
+import { useLottie } from "@hooks/useLottie"
 import sceneJSON from "@/lib/dummy/lottie-not-found.json"
 
 export default function EmptySearch() {

@@ -22,7 +22,7 @@ export default async function handler(
   if (token && studentID) {
     // get student profile details from iub api
     const { data } = await services.getDataWithToken(
-      `https://iras.iub.edu.bd:8079//api/v2/profile/${studentID}/load-student-details`,
+      `${process.env.IUB_API}//api/v2/profile/${studentID}/load-student-details`,
       token
     )
 

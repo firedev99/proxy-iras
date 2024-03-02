@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { useWindowSize } from "@/hooks/useWindowSize"
@@ -7,6 +6,7 @@ import {
   FancyStickerImage,
   FancyStickerWrapper,
 } from "./styles/FancyStickerStyles"
+import Image from "next/image"
 
 export default function FancySticker() {
   const [showSticker, setShowSticker] = useState<boolean>(true)
@@ -15,6 +15,7 @@ export default function FancySticker() {
       Math.floor(Math.random() * funckyStickerImgData.length)
     ]
 
+  // get width
   const { width } = useWindowSize()
 
   useEffect(() => {

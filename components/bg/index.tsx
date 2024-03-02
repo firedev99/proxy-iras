@@ -1,4 +1,3 @@
-import React from "react"
 import { BGSceneWrapper } from "./styles"
 import Scenerio from "@/lib/bg"
 

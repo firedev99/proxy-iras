@@ -1,23 +1,28 @@
 import { ReactElement, useEffect, useState } from "react"
+import { GetServerSideProps } from "next"
 import { Layout } from "@components"
 import { useStudent } from "@hooks/useStudent"
-import type { GetServerSideProps } from "next"
 import { services } from "@/lib/services"
-import { HomePageType, CourseProps } from "@/types"
-import Image from "next/image"
+import { HomePageType, CourseProps } from "@types"
 import dynamic from "next/dynamic"
-import { firey } from "@/lib/utils"
 import Link from "next/link"
 
 import {
   HomePageWrapper,
-  ProfileAvatar,
   UserDetails,
   UserInformationWrapper,
   UserMetaDataWrapper,
 } from "@/styles/HomeStyles"
 
-// class schedule UI
+// profile avatar
+const ProfileAvatar = dynamic(
+  () => import("../components/profile/ProfileAvatar"),
+  {
+    ssr: false,
+  }
+)
+
+// home class schedules
 const HomeSchedule = dynamic(
   () => import("../components/course/HomeSchedule"),
   {
@@ -25,14 +30,22 @@ const HomeSchedule = dynamic(
   }
 )
 
-// class courses UI
+// home main courses
 const HomeCourses = dynamic(() => import("../components/course/HomeCourses"), {
   ssr: false,
 })
 
+// friends
+const FriendsUI = dynamic(() => import("../components/friends"), {
+  ssr: false,
+})
+
 export default function Home({ courses, classroomCourses }: HomePageType) {
-  const { student } = useStudent()
   const [courseList, setCourseList] = useState<CourseProps[]>([])
+  const [blurred, setBlurred] = useState<boolean>(false)
+
+  // student context
+  const { student } = useStudent()
 
   useEffect(() => {
     if (!courses || !student) return
@@ -57,7 +70,9 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
                 matchingClassroomCourse.id
               }?code=${matchingClassroomCourse.name
                 .split("-")[2]
-                .toLowerCase()}`
+                .toLowerCase()}&sec=${
+                matchingClassroomCourse.name.split("-")[3]
+              }`
             : undefined,
         }
       })
@@ -70,23 +85,24 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
     }
   }, [courses, student, classroomCourses])
 
-  // show skeleton if the student does not exists
+  // handle cgpa hide feature state
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const exists = localStorage.getItem("blurred")
+    if (exists && exists === "true") {
+      setBlurred(true)
+    }
+  }, [])
+
+  // if student is not there show nothing
   if (!student) return <div />
 
   return (
     <HomePageWrapper>
+      <FriendsUI />
       <UserInformationWrapper>
-        <ProfileAvatar>
-          <Image
-            src={student.picture}
-            alt="cloudinary"
-            fill
-            sizes="(max-width: 768px) 124px, 186px"
-            quality={100}
-            placeholder="blur"
-            blurDataURL={firey.rgbDataURL(177, 144, 182)}
-          />
-        </ProfileAvatar>
+        <ProfileAvatar imgSrc={student.picture} courses={courseList} />
         <UserDetails>
           <Link href="/profile">
             <h3>{student.studentName}</h3>
@@ -94,12 +110,11 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
           <h5>ID: {student.studentID}</h5>
         </UserDetails>
       </UserInformationWrapper>
-      <UserMetaDataWrapper>
+      <UserMetaDataWrapper $hide={blurred}>
         <span>CGPA: {student.cgpa}</span>
         <span>Credit Earned: {student.creditEarned}</span>
         <span>Major: {student.major}</span>
         <span>Minor: {student.minor ?? "Not Declared"}</span>
-        <span>Advisor Name: {student.advisorName}</span>
       </UserMetaDataWrapper>
       {courseList.length > 0 && <HomeSchedule courses={courseList} />}
       <HomeCourses courses={courseList} />

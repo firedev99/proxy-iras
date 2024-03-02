@@ -1,24 +1,115 @@
-import { Layout } from "@/components"
-import LaunchingSoon from "@/components/template/LaunchingSoon"
-import { classroom_v1 } from "googleapis"
-import { GetServerSideProps } from "next"
 import { useRouter } from "next/router"
-import { ReactElement } from "react"
+import { ReactElement, useState } from "react"
+import { GetServerSideProps } from "next"
+import { classroom_v1 } from "googleapis"
+import { GoogleDueTimeProps } from "@types"
+import { Layout } from "@components"
+import { dateOptions } from "@/lib/snippets/dateOptions"
+import { convertToDeadline } from "@/lib/snippets/convertToDeadLine"
+import {
+  CoursePageContent,
+  CoursePageWrapper,
+  CoursePostsWrapper,
+} from "@/styles/CourseStyles"
+import dynamic from "next/dynamic"
 
 type Props = {
   announcements: classroom_v1.Schema$Announcement[]
   courseWork: classroom_v1.Schema$CourseWork[]
-  courseWorkMaterials: classroom_v1.Schema$CourseWorkMaterial[]
+  // courseWorkMaterials: classroom_v1.Schema$CourseWorkMaterial[]
 }
 
-export default function CoursePage(props: Props) {
-  const { announcements, courseWork, courseWorkMaterials } = props
-  console.log(announcements, courseWork, courseWorkMaterials, "in client")
+const CourseAnnouncement = dynamic(
+  () => import("../../components/announcements"),
+  {
+    ssr: false,
+  }
+)
+
+const PopupModal = dynamic(
+  () => import("../../components/modals/SimpleModal"),
+  {
+    ssr: false,
+  }
+)
+
+export default function CoursePage({ announcements, courseWork }: Props) {
+  const [showWarning, setShowWarning] = useState<boolean>(true)
+
+  // router context
   const router = useRouter()
+  const { code, sec } = router.query
 
-  // return <div>{router.query.id}</div>
+  // get all the assignments that haven't met deadline
+  const dueAssignments = courseWork.filter((course) => {
+    const currentDate = new Date()
 
-  return <LaunchingSoon />
+    // convert deadline
+    const dueDate = course.dueDate
+      ? convertToDeadline(course.dueDate as GoogleDueTimeProps)
+      : new Date(0)
+
+    // assginments that are on going
+    if (dueDate > currentDate) {
+      return course
+    }
+  })
+
+  // check if there is any due assignment pending
+  const isDue = dueAssignments.length > 0
+
+  // close warning modal
+  const closeWarning = () => setShowWarning(false)
+
+  return (
+    <>
+      <CoursePageWrapper>
+        <h2>
+          {code}
+          {sec && `-${sec}`}
+        </h2>
+
+        <CoursePageContent>
+          <CoursePostsWrapper>
+            {announcements.length > 0 &&
+              announcements.map((post, pI) => (
+                <CourseAnnouncement
+                  key={`course_announcement__${pI}`}
+                  post={post}
+                />
+              ))}
+          </CoursePostsWrapper>
+        </CoursePageContent>
+
+        {isDue && showWarning && (
+          <PopupModal
+            className="course_page_modal"
+            open={showWarning && isDue}
+            handler={closeWarning}
+          >
+            <h4>{courseWork[0].title}</h4>
+
+            {dueAssignments[0].dueDate && (
+              <span>
+                by{" "}
+                {dueAssignments[0].dueDate
+                  ? convertToDeadline(
+                      dueAssignments[0].dueDate as GoogleDueTimeProps
+                    ).toLocaleDateString("en-us", dateOptions)
+                  : new Date(0).toLocaleDateString("en-us", dateOptions)}
+              </span>
+            )}
+
+            <div>
+              <button className="due_assignment_next" onClick={closeWarning}>
+                OK
+              </button>
+            </div>
+          </PopupModal>
+        )}
+      </CoursePageWrapper>
+    </>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -43,14 +134,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     // send to data to client
     if (response.ok) {
-      const { announcements, courseWork, courseWorkMaterials } =
-        await response.json()
+      // const { announcements, courseWork, courseWorkMaterials } = await response.json()
+      const { announcements, courseWork } = await response.json()
 
       return {
         props: {
           announcements,
           courseWork,
-          courseWorkMaterials,
+          // courseWorkMaterials,
           code: ctx.query.code || "",
         },
       }
@@ -59,24 +150,25 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   // default value
   return {
+    redirect: {
+      permanent: false,
+      destination: "/courses",
+    },
     props: {
       announcements: [],
       courseWork: [],
-      courseWorkMaterials: [],
+      // courseWorkMaterials: [],
       code: ctx.query.code || "",
     },
   }
 }
 
 CoursePage.getLayout = function getLayout(page: ReactElement) {
-  // const title =
-  //   page.props.children[2].props.children.props.children.props.code || ""
   const childSize = page.props.children.length
   const title =
     page.props.children[childSize - 1].props.children.props.children.props
       .code || ""
 
-  console.log(title)
   return (
     <Layout
       title={`${

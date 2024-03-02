@@ -62,7 +62,7 @@ export const ClassroomCourseMeta = styled.div`
 export const ClassroomAssignmentStatus = styled.div`
   display: flex;
   flex-direction: column;
-  background: rgba(var(--text-base), 0.3);
+  background: rgba(var(--text-base), 0.1);
   border-bottom-left-radius: 0.45rem;
   border-bottom-right-radius: 0.45rem;
   padding: 0.5rem;
@@ -74,6 +74,7 @@ export const ClassroomAssignmentStatus = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
     min-height: 2rem;
+    opacity: 0.9;
 
     @supports (-webkit-line-clamp: 2) {
       overflow: hidden;
