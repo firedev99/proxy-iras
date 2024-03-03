@@ -57,6 +57,7 @@ export const ToolsModalInner = styled(motion.div)`
   color: rgb(var(--background-base));
   display: flex;
   position: relative;
+  transition: all 0.3s;
 
   @media only screen and (max-width: 800px) {
     border-radius: 16px;

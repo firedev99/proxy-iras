@@ -46,12 +46,12 @@ const ToolsModal = forwardRef<HTMLDivElement, Props>(
       <AnimatePresence>
         {open && (
           <>
-            {/* <PopupModalOverlay
+            <PopupModalOverlay
               variants={fmo}
               initial="initial"
               animate="animate"
               exit="exit"
-            /> */}
+            />
             <ToolsModalWrapper
               ref={ref}
               variants={fmv}
