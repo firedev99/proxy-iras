@@ -59,92 +59,94 @@ const ToolsModal = forwardRef<HTMLDivElement, Props>(
               animate="animate"
               exit="exit"
             >
-              <ToolsModalInner
-                initial={{ left: "0%" }}
-                animate={{
-                  left: nextTab ? "-100%" : "0%",
-                }}
-              >
-                {/* initial tab - start */}
-                <ToolsLeftPortion>
-                  {/* student information - start */}
-                  <ToolsStudentInformation>
-                    <ToolsModalHeader>
-                      {type === "calculator" && (
-                        <button
-                          className="calculator_control"
-                          onClick={toggleNextTab}
-                        >
-                          <Icon name="web-page-scene" />
+              <AnimatePresence>
+                <ToolsModalInner
+                  initial={{ left: "0%" }}
+                  animate={{
+                    left: nextTab ? "-100%" : "0%",
+                  }}
+                >
+                  {/* initial tab - start */}
+                  <ToolsLeftPortion>
+                    {/* student information - start */}
+                    <ToolsStudentInformation>
+                      <ToolsModalHeader>
+                        {type === "calculator" && (
+                          <button
+                            className="calculator_control"
+                            onClick={toggleNextTab}
+                          >
+                            <Icon name="web-page-scene" />
+                          </button>
+                        )}
+                        {type === "routine" && (
+                          <RoutinePreviewGrid onClick={toggleNextTab}>
+                            {[
+                              ...Array.from({ length: 5 }).map((_, i) => (
+                                <div
+                                  key={`grid_privew_${i}`}
+                                  className={`grid_${i + 1}`}
+                                />
+                              )),
+                            ]}
+                          </RoutinePreviewGrid>
+                        )}
+                        <button className="close_control" onClick={handler}>
+                          <Icon name="cross-icon" />
                         </button>
-                      )}
-                      {type === "routine" && (
-                        <RoutinePreviewGrid onClick={toggleNextTab}>
-                          {[
-                            ...Array.from({ length: 5 }).map((_, i) => (
-                              <div
-                                key={`grid_privew_${i}`}
-                                className={`grid_${i + 1}`}
-                              />
-                            )),
-                          ]}
-                        </RoutinePreviewGrid>
-                      )}
-                      <button className="close_control" onClick={handler}>
-                        <Icon name="cross-icon" />
-                      </button>
-                    </ToolsModalHeader>
-                    <h4>{student.studentName} 👋</h4>
-                    <span>Credit: {student.creditEarned}</span>
-                    <span>
-                      Foundation:{" "}
-                      {creditStatus("Foundation Courses")?.doneCredit} /{" "}
-                      {creditStatus("Foundation Courses")?.minRequirement}
-                    </span>
-                    <span>
-                      {`Core: ${creditStatus("Core Courses")?.doneCredit} / ${
-                        creditStatus("Core Courses")?.minRequirement
-                      }, Major: ${
-                        creditStatus(
-                          "Major/Concentration/Departmental Requirement"
-                        )?.doneCredit
-                      } / ${
-                        creditStatus(
-                          "Major/Concentration/Departmental Requirement"
-                        )?.minRequirement
-                      }`}
-                      ,
-                      {creditStatus("Minor") &&
-                        ` Minor: ${creditStatus("Minor")?.doneCredit} / ${
-                          creditStatus("Minor")?.minRequirement
+                      </ToolsModalHeader>
+                      <h4>{student.studentName} 👋</h4>
+                      <span>Credit: {student.creditEarned}</span>
+                      <span>
+                        Foundation:{" "}
+                        {creditStatus("Foundation Courses")?.doneCredit} /{" "}
+                        {creditStatus("Foundation Courses")?.minRequirement}
+                      </span>
+                      <span>
+                        {`Core: ${creditStatus("Core Courses")?.doneCredit} / ${
+                          creditStatus("Core Courses")?.minRequirement
+                        }, Major: ${
+                          creditStatus(
+                            "Major/Concentration/Departmental Requirement"
+                          )?.doneCredit
+                        } / ${
+                          creditStatus(
+                            "Major/Concentration/Departmental Requirement"
+                          )?.minRequirement
                         }`}
-                    </span>
-                    <span>
-                      {`Internship: ${
-                        creditStatus("Internship/Sr, Project/Study Abroad")
-                          ?.doneCredit
-                      } / ${
-                        creditStatus("Internship/Sr, Project/Study Abroad")
-                          ?.minRequirement
-                      }`}
-                    </span>
-                  </ToolsStudentInformation>
-                  {/* student information - end */}
+                        ,
+                        {creditStatus("Minor") &&
+                          ` Minor: ${creditStatus("Minor")?.doneCredit} / ${
+                            creditStatus("Minor")?.minRequirement
+                          }`}
+                      </span>
+                      <span>
+                        {`Internship: ${
+                          creditStatus("Internship/Sr, Project/Study Abroad")
+                            ?.doneCredit
+                        } / ${
+                          creditStatus("Internship/Sr, Project/Study Abroad")
+                            ?.minRequirement
+                        }`}
+                      </span>
+                    </ToolsStudentInformation>
+                    {/* student information - end */}
 
-                  {children && children}
-                </ToolsLeftPortion>
-                {/* initial tab - end */}
+                    {children && children}
+                  </ToolsLeftPortion>
+                  {/* initial tab - end */}
 
-                {/* next tab - start */}
-                <ToolsRightPortion>
-                  <button className="back_btn" onClick={toggleNextTab}>
-                    <Icon name="left-arrow" />
-                  </button>
-                  {type === "routine" && <RoutineNextPage />}
-                  {type === "calculator" && <CalculatorNextPage />}
-                </ToolsRightPortion>
-                {/* next tab - end */}
-              </ToolsModalInner>
+                  {/* next tab - start */}
+                  <ToolsRightPortion>
+                    <button className="back_btn" onClick={toggleNextTab}>
+                      <Icon name="left-arrow" />
+                    </button>
+                    {type === "routine" && <RoutineNextPage />}
+                    {type === "calculator" && <CalculatorNextPage />}
+                  </ToolsRightPortion>
+                  {/* next tab - end */}
+                </ToolsModalInner>
+              </AnimatePresence>
             </ToolsModalWrapper>
           </>
         )}
