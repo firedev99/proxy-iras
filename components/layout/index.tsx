@@ -3,6 +3,7 @@ import { LayoutType } from "@types"
 import Head from "next/head"
 import dynamic from "next/dynamic"
 import Footer from "../footer"
+import styled from "styled-components"
 
 const Menu = dynamic(() => import("../menu"), { ssr: false })
 
@@ -26,7 +27,11 @@ export default function Layout({
         />
         <link rel="icon" href={icon || "/favicon.ico"} />
         {/* address bar theme */}
-        <meta name="theme-color" content="rgb(var(--background-base))" />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: light)"
+          content="#e3e6e6"
+        />
         {/* Open Graph meta tags for Facebook and other platforms */}
         <meta property="og:title" content={title || "Proxy IRAS"} />
         <meta
