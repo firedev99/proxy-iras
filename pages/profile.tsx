@@ -7,6 +7,9 @@ import { services } from "@/lib/services"
 import { firey } from "@/lib/utils"
 import { CourseProps } from "@types"
 import {
+  ChangeAvatarWrapper,
+  ChangeNameWrapper,
+  EditFriendWrapper,
   ProfileAvatarWrapper,
   ProfileControls,
   ProfileHeading,
@@ -17,6 +20,7 @@ import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useToast } from "@/hooks/useToast"
 import { useRouter } from "next/router"
+import styled from "styled-components"
 
 type Props = {
   courses: CourseProps[]
@@ -143,25 +147,31 @@ export default function ProfilePage({ courses }: Props) {
         </button>
       </ProfileControls>
 
-      <ChangeName
-        open={openName}
-        setOpen={setOpenName}
-        name={name}
-        setName={setName}
-        studentDetails={studentDetails}
-      />
+      <ChangeNameWrapper>
+        <ChangeName
+          open={openName}
+          setOpen={setOpenName}
+          name={name}
+          setName={setName}
+          studentDetails={studentDetails}
+        />
+      </ChangeNameWrapper>
 
-      <ChangeAvatar
-        open={openAvatar}
-        setOpen={setOpenAvatar}
-        imgSet={dummyPictures}
-      />
+      <ChangeAvatarWrapper>
+        <ChangeAvatar
+          open={openAvatar}
+          setOpen={setOpenAvatar}
+          imgSet={dummyPictures}
+        />
+      </ChangeAvatarWrapper>
 
-      <EditFriend
-        open={openFriend}
-        setOpen={setOpenFriend}
-        handler={toggleFriendModal}
-      />
+      <EditFriendWrapper>
+        <EditFriend
+          open={openFriend}
+          setOpen={setOpenFriend}
+          handler={toggleFriendModal}
+        />
+      </EditFriendWrapper>
     </ProfilePageWrapper>
   )
 }

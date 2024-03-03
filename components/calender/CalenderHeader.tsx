@@ -43,7 +43,7 @@ export default function CalenderHeader({
       <CalenderMainControls>
         <h2>{format(firstDayCurrentMonth, "MMM, yyyy")}</h2>
         <div className="control_wrappers">
-          <div className="prev_button" data-title="Previous month">
+          <div className="prev_button">
             <motion.button
               whileTap={{ scale: 0.9 }}
               whileHover={{ scale: 1.07 }}
@@ -54,7 +54,7 @@ export default function CalenderHeader({
             </motion.button>
           </div>
 
-          <div data-title="Next month">
+          <div>
             <motion.button
               whileTap={{ scale: 0.9 }}
               whileHover={{ scale: 1.07 }}

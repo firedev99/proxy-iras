@@ -223,7 +223,9 @@ export const CalenderMainControls = styled.div`
     display: flex;
   }
 
-  [data-title]:after {
+  /* hover data context */
+
+  /* [data-title]:after {
     bottom: -1.8rem !important;
     left: 50% !important;
   }
@@ -231,7 +233,7 @@ export const CalenderMainControls = styled.div`
   .prev_button[data-title]:after {
     left: unset !important;
     right: 50% !important;
-  }
+  } */
 
   .prev_button {
     margin-left: 1.2rem;
@@ -287,6 +289,7 @@ export const CalenderMainControls = styled.div`
     max-width: 28.5rem;
     justify-content: space-between;
     padding: 0 0.8rem;
+    margin-top: 8rem;
 
     .prev_button {
       margin-left: 0;

@@ -25,7 +25,8 @@ export default function Layout({
           }
         />
         <link rel="icon" href={icon || "/favicon.ico"} />
-
+        {/* address bar theme */}
+        <meta name="theme-color" content="rgb(var(--background-base))" />
         {/* Open Graph meta tags for Facebook and other platforms */}
         <meta property="og:title" content={title || "Proxy IRAS"} />
         <meta
@@ -39,7 +40,7 @@ export default function Layout({
         <meta property="og:url" content={process.env.NEXT_PUBLIC_URL} />
         <meta
           property="og:image"
-          content="https://res.cloudinary.com/firey/image/upload/f_auto,q_auto/v1/iub/gut676q4mpo3xkzarxcw"
+          content="https://res.cloudinary.com/firey/image/upload/f_auto,q_auto/v1/iub/proxy-iras-seo"
         />
         <meta property="og:image:alt" content="thumbnail.jpg" />
         <meta property="og:site_name" content={title || "Proxy IRAS"} />
@@ -57,7 +58,7 @@ export default function Layout({
         />
         <meta
           name="twitter:image"
-          content="https://res.cloudinary.com/firey/image/upload/f_auto,q_auto/v1/iub/gut676q4mpo3xkzarxcw"
+          content="https://res.cloudinary.com/firey/image/upload/f_auto,q_auto/v1/iub/proxy-iras-seo"
         />
       </Head>
       <Menu />

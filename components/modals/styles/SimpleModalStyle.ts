@@ -6,6 +6,7 @@ export const PopupModalWrapper = styled(motion.div)<{ $overlay: boolean }>`
   min-width: 242px;
   min-height: 112px;
   background: rgb(235, 239, 248);
+  position: fixed;
   position: ${(props) => props.$overlay && "absolute"};
   z-index: 100;
   top: 50%;

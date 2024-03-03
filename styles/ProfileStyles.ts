@@ -1,5 +1,65 @@
 import styled, { keyframes } from "styled-components"
 
+export const ChangeNameWrapper = styled.div`
+  .edit_name_modal {
+    position: fixed;
+    min-width: 420px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    @media only screen and (max-height: 700px) {
+      min-height: 186px;
+      height: 186px;
+    }
+
+    @media only screen and (max-width: 464px) {
+      min-width: 90%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+`
+export const ChangeAvatarWrapper = styled.div`
+  .change_avatar_modal {
+    position: fixed;
+    min-width: 420px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    @media only screen and (max-height: 600px) {
+      min-height: 90%;
+      height: 90%;
+    }
+
+    @media only screen and (max-width: 464px) {
+      min-width: 90%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+`
+export const EditFriendWrapper = styled.div`
+  .edit_friend_modal {
+    position: fixed;
+    min-width: 420px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    @media only screen and (max-height: 600px) {
+      min-height: 92%;
+      height: 92%;
+      overflow: auto;
+    }
+
+    @media only screen and (max-width: 464px) {
+      min-width: 90%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      overflow: auto;
+    }
+  }
+`
+
 export const ProfilePageWrapper = styled.div`
   padding-top: 2rem;
   width: 100%;

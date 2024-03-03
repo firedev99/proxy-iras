@@ -2,7 +2,7 @@ import * as styled from "styled-components"
 
 export const GlobalStyles = styled.createGlobalStyle`
   :root {
-    --background-base: 235, 239, 248;
+    --background-base: 227, 230, 230;
     --text-base: 18, 18, 18;
     --btn-color: 23, 58, 116;
     --primary-blue: 12, 140, 233;
@@ -11,7 +11,7 @@ export const GlobalStyles = styled.createGlobalStyle`
   @media (prefers-color-scheme: dark) {
     :root {
       --background-base: 32, 33, 36;
-      --text-base: 227, 227, 227;
+      --text-base: 227, 230, 230;
     }
   }
 

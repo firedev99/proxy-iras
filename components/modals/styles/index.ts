@@ -43,10 +43,10 @@ export const ToolsModalWrapper = styled(motion.div)`
     border-radius: unset;
     position: fixed;
     overflow-y: auto;
-    width: 100vw;
-    min-width: 100vw;
-    min-height: 100vh;
-    height: 100vh;
+    width: 96vw;
+    min-width: 96vw;
+    min-height: 96vh;
+    height: 96vh;
   }
 `
 
@@ -430,6 +430,7 @@ export const RoutineTabCoursesWrapper = styled(motion.div)`
         position: absolute;
         width: 1rem;
         height: 1rem;
+        margin-top: -1px;
         border-radius: 0.1rem;
         top: 0;
         left: 0;

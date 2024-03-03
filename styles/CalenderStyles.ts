@@ -89,16 +89,10 @@ export const CalenderElementWrapper = styled(motion.div)`
     }
   }
 
-  @media only screen and (max-height: 768px) {
-    .calender_modal {
-      height: 100%;
-      min-height: 100%;
-    }
-  }
-
   @media only screen and (max-width: 600px) {
     max-width: 28.5rem;
     width: 95%;
+    margin-top: 8rem;
 
     .day_title {
       padding: 0rem;
@@ -130,6 +124,13 @@ export const CalenderElementWrapper = styled(motion.div)`
         font-size: 0.7rem;
         margin-left: -0.25rem;
       }
+    }
+  }
+
+  @media only screen and (max-height: 300px) {
+    .calender_modal {
+      height: 200px;
+      min-height: 200px;
     }
   }
 
