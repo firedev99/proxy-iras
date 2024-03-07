@@ -99,12 +99,6 @@ export default function CoursePage({ announcements, courseWork }: Props) {
                   : new Date(0).toLocaleDateString("en-us", dateOptions)}
               </span>
             )}
-
-            <div>
-              <button className="due_assignment_next" onClick={closeWarning}>
-                OK
-              </button>
-            </div>
           </PopupModal>
         )}
       </CoursePageWrapper>

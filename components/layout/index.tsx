@@ -3,7 +3,6 @@ import { LayoutType } from "@types"
 import Head from "next/head"
 import dynamic from "next/dynamic"
 import Footer from "../footer"
-import styled from "styled-components"
 
 const Menu = dynamic(() => import("../menu"), { ssr: false })
 

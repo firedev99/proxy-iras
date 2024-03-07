@@ -113,7 +113,8 @@ export const NavigationOverlay = styled(motion.div)`
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px) contrast(90%);
+  backdrop-filter: blur(8px) contrast(90%);
 
   @media only screen and (max-width: 768px) {
     display: none;

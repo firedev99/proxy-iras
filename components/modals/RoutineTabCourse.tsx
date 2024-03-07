@@ -1,7 +1,8 @@
 import { motion } from "framer-motion"
 import { RoutineCourse } from "@components"
-import { RoutineTabCoursesWrapper } from "./styles"
+import { EmptyRoutine, RoutineTabCoursesWrapper } from "./styles"
 import { CourseOffering, RoutineCourseSelectionCallback } from "@types"
+import Image from "next/image"
 
 type RoutineTabCourse = {
   active: boolean
@@ -28,14 +29,18 @@ export default function RoutineTabCourses({
           }}
           transition={{ duration: 0.5 }}
         >
-          <h4 />
-          <h4>Course</h4>
-          <h4>Title</h4>
-          <h4>Sec</h4>
-          <h4>Time</h4>
-          <h4>Capacity</h4>
-          <h4>Credit</h4>
-          <h4>Faculty</h4>
+          {courses && courses.length > 0 && (
+            <>
+              <h4 />
+              <h4>Course</h4>
+              <h4>Title</h4>
+              <h4>Sec</h4>
+              <h4>Time</h4>
+              <h4>Capacity</h4>
+              <h4>Credit</h4>
+              <h4>Faculty</h4>
+            </>
+          )}
           {courses &&
             courses.map((course, i) => (
               <RoutineCourse
@@ -45,6 +50,18 @@ export default function RoutineTabCourses({
               />
             ))}
         </motion.div>
+        {courses && courses.length === 0 && (
+          <EmptyRoutine>
+            <div className="empty_illustration">
+              <Image
+                src="https://res.cloudinary.com/firey/image/upload/v1707759937/iub/empty.svg"
+                alt="undraw-empty"
+                fill
+              />
+            </div>
+            <h3>No data!</h3>
+          </EmptyRoutine>
+        )}
       </RoutineTabCoursesWrapper>
     </>
   )

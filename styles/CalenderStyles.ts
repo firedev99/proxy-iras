@@ -18,6 +18,7 @@ export const CalenderElementWrapper = styled(motion.div)`
   grid-template-columns: repeat(7, minmax(100px, 1fr));
   gap: 0.6rem 1.2rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 
   .calender_modal {
     position: absolute;

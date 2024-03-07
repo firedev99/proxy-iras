@@ -106,6 +106,7 @@ export default function CalculatorCourse({
   // handle row delete
   function handleDeleteRow() {
     setCalculatorCourses((prev) => {
+      if (prev.length === 1) return prev
       const prevCourses = [...prev]
       const updatedCourses = prevCourses.filter((_, i) => i !== index)
       return updatedCourses

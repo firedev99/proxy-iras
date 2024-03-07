@@ -9,7 +9,15 @@ export default function ScheduledCourse({ course }: Props) {
     <>
       <span>{course.courseID}</span>
       <span>{course.courseName}</span>
-      <span className="section">{course.section}</span>
+      <span
+        className={
+          course.section.toString().length > 1
+            ? `section_double`
+            : `section_single`
+        }
+      >
+        {course.section}
+      </span>
       <span>{course.roomID}</span>
       <span>{course.classTime}</span>
     </>

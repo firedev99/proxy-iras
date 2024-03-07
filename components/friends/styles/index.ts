@@ -105,7 +105,8 @@ export const FriendIndicators = styled.div`
       top: -42px;
       left: 10px;
       background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px) contrast(60%);
+      backdrop-filter: blur(8px) contrast(60%);
       border-radius: 4px;
       font-size: 0.8rem;
       text-align: center;

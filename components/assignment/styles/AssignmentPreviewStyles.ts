@@ -47,6 +47,9 @@ export const AssignmentPreviewWrapper = styled.div<{ $expand?: boolean }>`
 
   @media only screen and (max-width: 600px) {
     margin-left: -0.1rem;
+    h2 {
+      margin-top: 0.3rem;
+    }
   }
 
   @media only screen and (max-width: 415px) {
@@ -54,8 +57,8 @@ export const AssignmentPreviewWrapper = styled.div<{ $expand?: boolean }>`
     margin-left: -0.3rem;
 
     h2 {
+      margin-top: 0.45rem;
       font-size: 0.85rem;
-      margin-top: 0.6rem;
     }
 
     h4 {
@@ -67,7 +70,7 @@ export const AssignmentPreviewWrapper = styled.div<{ $expand?: boolean }>`
   @media only screen and (max-width: 330px) {
     h2 {
       font-size: 0.8rem;
-      margin-top: 0.6rem;
+      margin-top: 0.45rem;
     }
   }
 

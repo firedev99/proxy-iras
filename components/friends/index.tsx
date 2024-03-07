@@ -69,7 +69,7 @@ export default function Friends() {
   })
 
   // get the current day abbreviation that matches iub classtimes
-  // const currentDayAbbreviation = dayAbbreviations["Sun"]
+  // const currentDayAbbreviation = dayAbbreviations["Sat"]
   const currentDayAbbreviation = dayAbbreviations[currentDay]
 
   // get every friend's today's class

@@ -3,11 +3,16 @@ import styled from "styled-components"
 
 export const MaterialInformation = styled.div`
   padding: 0.5rem 1rem;
+  width: 100%;
+  overflow: hidden;
 
   h4 {
     opacity: 0.7;
     font-weight: 500;
     font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   span {
@@ -54,16 +59,12 @@ export const PostMaterial = styled(Link)`
   margin-left: -0.15rem;
   background: rgba(0, 0, 0, 0.05);
 
-  @media (prefers-color-scheme: dark) {
-    background: rgba(235, 239, 248, 0.05);
-  }
-
   &:not(:nth-child(1)) {
     margin-top: 0rem;
   }
 
   .material_thumb {
-    width: 112px;
+    min-width: 112px;
     height: 64px;
     position: relative;
     border-radius: 4px;
@@ -76,9 +77,17 @@ export const PostMaterial = styled(Link)`
   }
 
   &:hover {
-    background: rgba(235, 239, 248, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease-out;
     cursor: pointer;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(235, 239, 248, 0.05);
+
+    &:hover {
+      background: rgba(235, 239, 248, 0.1);
+    }
   }
 
   @media only screen and (max-width: 600px) {

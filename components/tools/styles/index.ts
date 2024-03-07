@@ -132,18 +132,6 @@ export const ToolContent = styled.div`
   position: relative;
   transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-  &:before {
-    content: "";
-    position: absolute;
-    width: 0.5rem;
-    height: 100%;
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    left: 0;
-    top: 0;
-    background: rgb(var(--btn-color), 0.6);
-  }
-
   .course_status {
     display: flex;
     flex-direction: column;
@@ -184,28 +172,14 @@ export const ToolContent = styled.div`
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-
-    &:before {
-      background: rgb(var(--btn-color), 0.9);
-    }
   }
 
   @media (prefers-color-scheme: dark) {
     background: rgba(var(--text-base), 0.25);
 
-    &:before {
-      display: none;
-    }
-
     &:hover {
       background-color: rgba(var(--text-base), 0.35);
       cursor: pointer;
-
-      &:before {
-        display: block;
-        background: rgb(var(--btn-color), 0.9);
-      }
     }
   }
 

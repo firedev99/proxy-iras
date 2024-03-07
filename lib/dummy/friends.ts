@@ -37,6 +37,7 @@ export const friendclassTimes = [
   "02:40 PM",
   "4:20 PM",
   "6:30 PM",
+  "8:00 PM",
 ]
 
-export const positions = ["35", "70", "35", "60", "35", "70", "45"]
+export const positions = ["35", "70", "35", "60", "35", "70", "45", "65"]

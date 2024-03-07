@@ -18,7 +18,8 @@ export const ProfileAvatarWrapper = styled.div`
     right: 0.2rem;
     bottom: 1rem;
     background-color: rgba(126, 134, 158, 0.5);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px) contrast(60%);
+    backdrop-filter: blur(10px) contrast(60%);
     border: solid 3px rgb(var(--background-base));
     transition: all 0.3s ease-out;
 

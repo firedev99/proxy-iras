@@ -6,7 +6,7 @@ export default function EducationScene() {
   const { ref: scene } = useLottie(sceneJSON)
 
   return (
-    <SceneWrapper>
+    <SceneWrapper className="loading_scene">
       <MainScene ref={scene} />
     </SceneWrapper>
   )

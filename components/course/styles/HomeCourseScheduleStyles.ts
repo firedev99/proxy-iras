@@ -109,8 +109,12 @@ export const ClassScheduleWrapper = styled(motion.div)`
     grid-template-columns: 80px 224px 48px 82px 150px;
     row-gap: 0.2rem;
 
-    .section {
+    .section_single {
       margin-left: 0.45rem;
+    }
+
+    .section_double {
+      margin-left: 0.2rem;
     }
 
     span {
@@ -160,7 +164,7 @@ export const ClassScheduleWrapper = styled(motion.div)`
       font-size: 0.85rem;
       grid-template-columns: 60px 160px 36px 60px 110px;
 
-      .section {
+      .section_single {
         margin-left: 0.35rem;
       }
     }

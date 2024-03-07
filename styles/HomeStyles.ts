@@ -155,7 +155,8 @@ export const UserMetaDataWrapper = styled.div<{ $hide: boolean }>`
         width: 100%;
         height: 100%;
         background: rgba(217, 217, 217, 0.1);
-        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px) contrast(90%);
+        backdrop-filter: blur(4px) contrast(90%);
         z-index: 2;
         border-radius: 2px;
         left: 0;

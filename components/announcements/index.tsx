@@ -26,7 +26,10 @@ export default function CourseAnnouncement({ post }: Props) {
           <PostMaterialWrapper>
             {post.materials.map((item, mI) => (
               <PostMaterial
-                href={item.driveFile?.driveFile?.alternateLink as string}
+                href={
+                  item.link?.url ??
+                  (item.driveFile?.driveFile?.alternateLink as string)
+                }
                 key={`material__${mI}`}
                 target="_blank"
               >
@@ -34,7 +37,11 @@ export default function CourseAnnouncement({ post }: Props) {
                   <Image
                     fill
                     alt={`material__${mI}.jpg`}
-                    src={item.driveFile?.driveFile?.thumbnailUrl as string}
+                    src={
+                      (item.driveFile
+                        ? item.driveFile.driveFile?.thumbnailUrl
+                        : item.link?.thumbnailUrl) as string
+                    }
                     sizes="(max-width: 768px) 124px, 468px"
                     placeholder="blur"
                     // on image load show this fallback bg

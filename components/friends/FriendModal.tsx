@@ -1,12 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { PopupModal } from "@components"
-import { useClickOutside } from "@hooks/useClickOutside"
 import { useStudent } from "@hooks/useStudent"
 import { firey } from "@/lib/utils"
 import { FriendsProps } from "@types"
 import Image from "next/image"
-import styled from "styled-components"
 import {
   FriendAvatarImg,
   FriendAvatarWrapper,
@@ -23,8 +21,6 @@ export default function FriendModal({ open, setOpen }: Props) {
   const [selectedFriend, setSelectedFriend] = useState<number | null>(null)
   const [friends, setFriends] = useState<FriendsProps[]>([])
 
-  const friendModalRef = useRef<HTMLDivElement>(null)
-
   // student context
   const { student } = useStudent()
 
@@ -37,9 +33,6 @@ export default function FriendModal({ open, setOpen }: Props) {
   // close modal handler
   const closeModal = () => setOpen(false)
 
-  // handle click outside of the modal
-  useClickOutside(friendModalRef, closeModal)
-
   // handle image change
   const deleteFriend = () => {
     if (!student) return
@@ -48,7 +41,6 @@ export default function FriendModal({ open, setOpen }: Props) {
     const updatedFriend = friends.filter((_, i) => i !== selectedFriend)
 
     // store updated friends informations
-
     localStorage.setItem(
       `${student.studentID}_friends`,
       JSON.stringify(updatedFriend)
@@ -70,12 +62,7 @@ export default function FriendModal({ open, setOpen }: Props) {
   }, [student])
 
   return (
-    <PopupModal
-      className="edit_friend_modal"
-      ref={friendModalRef}
-      open={open}
-      handler={closeModal}
-    >
+    <PopupModal className="edit_friend_modal" open={open} handler={closeModal}>
       <FriendsWrapper>
         {friends.length > 0 &&
           friends.map((friend, i) => (

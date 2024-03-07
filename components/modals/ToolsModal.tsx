@@ -35,8 +35,10 @@ const ToolsModal = forwardRef<HTMLDivElement, Props>(
 
     // find credit status based on group
     function creditStatus(group: string) {
-      return student?.creditStatus.find(
-        (status) => status.courseGroupName === group
+      return (
+        student?.creditStatus.find(
+          (status) => status.courseGroupName === group
+        ) || { doneCredit: 0, minRequirement: 0 }
       )
     }
 
@@ -52,6 +54,7 @@ const ToolsModal = forwardRef<HTMLDivElement, Props>(
               animate="animate"
               exit="exit"
             />
+
             <ToolsModalWrapper
               ref={ref}
               variants={fmv}
@@ -71,14 +74,14 @@ const ToolsModal = forwardRef<HTMLDivElement, Props>(
                     {/* student information - start */}
                     <ToolsStudentInformation>
                       <ToolsModalHeader>
-                        {type === "calculator" && (
+                        {/* {type === "calculator" && (
                           <button
                             className="calculator_control"
                             onClick={toggleNextTab}
                           >
                             <Icon name="web-page-scene" />
                           </button>
-                        )}
+                        )} */}
                         {type === "routine" && (
                           <RoutinePreviewGrid onClick={toggleNextTab}>
                             {[

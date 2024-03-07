@@ -11,7 +11,8 @@ export const PopupModalOverlay = styled(motion.div)`
   height: 100vh;
   height: 100svh;
   background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px) contrast(90%);
+  backdrop-filter: blur(6px) contrast(90%);
 `
 
 // popup modal content wrapper
@@ -356,6 +357,11 @@ export const RoutineTabCoursesWrapper = styled(motion.div)`
   height: 242px;
   overflow-y: auto;
   overflow-x: auto;
+
+  .no_data {
+    margin-top: 2rem;
+    text-align: center;
+  }
 
   @media only screen and (min-width: 800px) {
     &::-webkit-scrollbar-track {
@@ -729,8 +735,9 @@ export const RoutineModalOverlay = styled(motion.div)`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(12px);
   z-index: 2;
+  -webkit-backdrop-filter: blur(12px) contrast(60%);
+  backdrop-filter: blur(12px) contrast(60%);
 `
 
 export const RoutineNextPageHeading = styled.div`

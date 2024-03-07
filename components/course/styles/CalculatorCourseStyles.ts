@@ -4,6 +4,10 @@ export const CalculatorCourseWrapper = styled.div`
   display: flex;
   align-items: center;
 
+  select {
+    padding: 0.2rem;
+  }
+
   button {
     margin-top: 0.65rem;
     width: 28px;
