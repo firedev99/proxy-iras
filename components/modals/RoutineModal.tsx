@@ -286,32 +286,32 @@ export default function RoutineModal({
               <RoutineTabCourses
                 active={selectedTab.label === "Offered Courses"}
                 courses={all}
-                selectedCourses={selectedCourses}
                 handleSelection={handleSelection}
+                routine={selectedCourses}
               />
               <RoutineTabCourses
                 active={selectedTab.label === "Foundation"}
                 courses={foundation}
-                selectedCourses={selectedCourses}
                 handleSelection={handleSelection}
+                routine={selectedCourses}
               />
               <RoutineTabCourses
                 active={selectedTab.label === "Core"}
                 courses={core}
-                selectedCourses={selectedCourses}
                 handleSelection={handleSelection}
+                routine={selectedCourses}
               />
               <RoutineTabCourses
                 active={selectedTab.label === "Major"}
                 courses={major}
-                selectedCourses={selectedCourses}
                 handleSelection={handleSelection}
+                routine={selectedCourses}
               />
               <RoutineTabCourses
                 active={selectedTab.label === "Minor"}
                 courses={minor}
-                selectedCourses={selectedCourses}
                 handleSelection={handleSelection}
+                routine={selectedCourses}
               />
             </RoutineModalTabsInner>
             <button
@@ -333,7 +333,6 @@ export default function RoutineModal({
               src="https://res.cloudinary.com/firey/image/upload/v1707759937/iub/empty.svg"
               alt="undraw-empty"
               fill
-              priority
             />
           </div>
           <h3>No data!</h3>

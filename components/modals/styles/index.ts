@@ -94,12 +94,19 @@ export const EmptyRoutine = styled.div`
   display: flex;
   flex-direction: column;
 
+  .empty_illustration {
+    margin: 0 auto;
+    position: relative;
+    width: 156px;
+    height: 156px;
+  }
+
   .empty_illustration_all {
     margin: 0 auto;
     position: relative;
     width: 156px;
     height: 156px;
-    margin-top: 112px;
+    margin-top: 96px;
   }
 
   h3 {

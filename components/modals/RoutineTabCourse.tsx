@@ -11,15 +11,15 @@ import Image from "next/image"
 type RoutineTabCourse = {
   active: boolean
   courses?: CourseOffering[]
-  selectedCourses: RoutineCourseOffering[]
   handleSelection: RoutineCourseSelectionCallback
+  routine: RoutineCourseOffering[]
 }
 
 export default function RoutineTabCourses({
   courses,
   active,
   handleSelection,
-  selectedCourses,
+  routine,
 }: RoutineTabCourse) {
   return (
     <>
@@ -52,8 +52,8 @@ export default function RoutineTabCourses({
               <RoutineCourse
                 key={`routine_course_preview_${i}`}
                 handleSelection={handleSelection}
-                selectedCourses={selectedCourses}
                 course={course}
+                routine={routine}
               />
             ))}
         </motion.div>

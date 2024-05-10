@@ -8,27 +8,23 @@ import {
 type RoutineCourseProps = {
   course: CourseOffering
   handleSelection: RoutineCourseSelectionCallback
-  selectedCourses: RoutineCourseOffering[]
+  routine: RoutineCourseOffering[]
 }
 
 export default function RoutineCourse({
   course,
   handleSelection,
-  selectedCourses,
+  routine,
 }: RoutineCourseProps) {
   const handleChange = () => {
     handleSelection({ course, cb: () => {} })
   }
 
   const checkIfExists = () => {
-    // assign an unique key before adding to selected courses
     const courseKey = `${course.courseName}--${course.section}`
+    const exists = routine.find((item) => item.firey === courseKey)
 
-    // check if the course is already selected
-    const exits = selectedCourses.find((item) => item.firey === courseKey)
-
-    if (exits) return true
-
+    if (exists) return true
     return false
   }
 
