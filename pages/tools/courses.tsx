@@ -4,6 +4,8 @@ import { ToolCoursesPageWrapper } from "@/styles/ToolStyles"
 import { Layout } from "@components"
 import { useCourses } from "@hooks/useCourses"
 import dynamic from "next/dynamic"
+import { EmptyRoutine } from "@/components/modals/styles"
+import Image from "next/image"
 
 const OfferedCourses = dynamic(
   () => import("../../components/tools/OfferedCourses"),
@@ -25,7 +27,19 @@ export default function ToolCoursesPage({ token, studentID }: Props) {
 
   return (
     <ToolCoursesPageWrapper>
-      {offeringCourses.length !== 0 && (
+      {offeringCourses.length === 0 ? (
+        <EmptyRoutine>
+          <div className="empty_illustration_all">
+            <Image
+              src="https://res.cloudinary.com/firey/image/upload/v1707759937/iub/empty.svg"
+              alt="undraw-empty"
+              fill
+              priority
+            />
+          </div>
+          <h3>No data!</h3>
+        </EmptyRoutine>
+      ) : (
         <OfferedCourses courses={offeringCourses} />
       )}
     </ToolCoursesPageWrapper>

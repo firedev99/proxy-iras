@@ -1,12 +1,17 @@
 import { motion } from "framer-motion"
 import { RoutineCourse } from "@components"
 import { EmptyRoutine, RoutineTabCoursesWrapper } from "./styles"
-import { CourseOffering, RoutineCourseSelectionCallback } from "@types"
+import {
+  CourseOffering,
+  RoutineCourseOffering,
+  RoutineCourseSelectionCallback,
+} from "@types"
 import Image from "next/image"
 
 type RoutineTabCourse = {
   active: boolean
   courses?: CourseOffering[]
+  selectedCourses: RoutineCourseOffering[]
   handleSelection: RoutineCourseSelectionCallback
 }
 
@@ -14,6 +19,7 @@ export default function RoutineTabCourses({
   courses,
   active,
   handleSelection,
+  selectedCourses,
 }: RoutineTabCourse) {
   return (
     <>
@@ -46,6 +52,7 @@ export default function RoutineTabCourses({
               <RoutineCourse
                 key={`routine_course_preview_${i}`}
                 handleSelection={handleSelection}
+                selectedCourses={selectedCourses}
                 course={course}
               />
             ))}
