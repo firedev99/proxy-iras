@@ -32,11 +32,7 @@ export default function App({
       <NextNProgress height={4} options={{ showSpinner: false }} />
       <ToastProvider>
         <StudentProvider>
-          <LaunchingTemplate
-            className="announcement"
-            title="This app fetches data from iub's existing system. Seems like they have turned off their main server which is IRAS Version 2. They might be facing some internal issues or smth else, just wait for some moments it will get fixed automatically and also thanks to everyone, this app was used by 1200+ students in just 2 days 🤧
-          "
-          />
+          <LaunchingTemplate />
           {/* <Component {...pageProps} key={router.asPath} /> */}
         </StudentProvider>
       </ToastProvider>
