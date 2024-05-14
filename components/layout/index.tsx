@@ -37,7 +37,7 @@ export default function Layout({
           property="og:description"
           content={
             description ||
-            "Welcome to Proxy IRAS, your comprehensive solution for managing academic tasks seamlessly. This platform is integrated with Independent University, Bangladesh's existing management system along with Google Classroom. Log in with your student id and password now. - @firedev99 | iub | proxy iub | iub proxy"
+            "Welcome to Proxy IRAS (IUB), your comprehensive solution for managing academic tasks seamlessly. This platform is integrated with Independent University, Bangladesh's existing management system along with Google Classroom. Log in with your student id and password now. - @firedev99 | iub | proxy iub | iub proxy"
           }
         />
         <meta property="og:type" content="website" />

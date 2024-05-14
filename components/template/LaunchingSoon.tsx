@@ -1,9 +1,18 @@
 import { TextWrapper } from "./styles"
 
-export default function LaunchingSoon() {
+type LSType = {
+  title?: string
+  className?: string
+}
+
+export default function LaunchingSoon({ title = "launching🚀soon🤞🏼" }: LSType) {
   return (
-    <TextWrapper initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <h3>launching🚀soon🤞🏼</h3>
+    <TextWrapper
+      className="announcement"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <h3>{title}</h3>
     </TextWrapper>
   )
 }

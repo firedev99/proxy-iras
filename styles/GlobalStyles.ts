@@ -123,4 +123,11 @@ export const GlobalStyles = styled.createGlobalStyle`
       display: none;
     }
   }
+
+  .announcement {
+    h3 {
+      max-width: 420px;
+      font-size: 1rem;
+    }
+  }
 `

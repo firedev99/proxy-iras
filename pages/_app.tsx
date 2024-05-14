@@ -5,6 +5,7 @@ import { GlobalStyles } from "@styles/GlobalStyles"
 import { AppPropsWithLayout } from "@types"
 import Head from "next/head"
 import NextNProgress from "nextjs-progressbar"
+import { LaunchingTemplate } from "@/components"
 
 export default function App({
   Component,
@@ -31,7 +32,12 @@ export default function App({
       <NextNProgress height={4} options={{ showSpinner: false }} />
       <ToastProvider>
         <StudentProvider>
-          <Component {...pageProps} key={router.asPath} />
+          <LaunchingTemplate
+            className="announcement"
+            title="This app fetches data from iub's existing system. Seems like they have turned off their main server which is IRAS Version 2. They might be facing some internal issues or smth else, just wait for some moments it will get fixed automatically and also thanks to everyone, this app was used by 1200+ students in just 2 days 🤧
+          "
+          />
+          {/* <Component {...pageProps} key={router.asPath} /> */}
         </StudentProvider>
       </ToastProvider>
     </>
