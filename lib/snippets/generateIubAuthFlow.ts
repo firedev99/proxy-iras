@@ -33,9 +33,19 @@ export default async function generateIubAuthFlow(
     const token = response.data[0].access_token
     const expires_in = response.data[0].expires
 
-    // get the student informations
-    const studentInfo = await services.getDataWithToken(
-      `${process.env.IUB_API}//api/v1/landing/notichboard/${credentials.email}/student`,
+    // get student profile details from iub api
+    const {
+      data: {
+        sex,
+        email,
+        cellPhone,
+        studentId,
+        studentName,
+        firstMajor,
+        minor,
+      },
+    } = await services.getDataWithToken(
+      `${process.env.IUB_API}//api/v2/profile/${credentials.email}/load-student-details`,
       token
     )
 
@@ -48,9 +58,6 @@ export default async function generateIubAuthFlow(
 
     // destructure student informations from the responses
     const { attendanceSemester, attendanceYear } = uniRules.data[0]
-    const { studentId, studentName, major, minor, notificationMessages } =
-      studentInfo.data
-
     const { cgpa, creditEarned, advisorName } = studentCatalogue.data[0]
 
     // extract foundation, core, minor, major etc credit status
@@ -79,23 +86,15 @@ export default async function generateIubAuthFlow(
       studentCreditStatus
     ) as StudentCreditStatus[]
 
-    // get student profile details from iub api
-    const {
-      data: { sex, email, cellPhone },
-    } = await services.getDataWithToken(
-      `${process.env.IUB_API}//api/v2/profile/${studentId}/load-student-details`,
-      token
-    )
-
     // get random number between 1-20
     let randomNumber = Math.floor(Math.random() * 20 + 1)
 
     const _student = {
       studentID: studentId,
-      studentName: studentName.slice(1),
-      major,
+      studentName,
+      major: firstMajor,
       minor,
-      notificationMessages,
+      // notificationMessages,
       semesterByYear: attendanceSemester,
       year: attendanceYear,
       cgpa,

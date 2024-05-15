@@ -94,11 +94,7 @@ export default function FriendModal({ open, setOpen }: Props) {
         )}
       </FriendsWrapper>
       {friends.length !== 0 && (
-        <button
-          className="delete_btn"
-          disabled={!selectedFriend}
-          onClick={deleteFriend}
-        >
+        <button className="delete_btn" onClick={deleteFriend}>
           Delete
         </button>
       )}

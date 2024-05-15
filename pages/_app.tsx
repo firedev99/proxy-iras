@@ -32,8 +32,8 @@ export default function App({
       <NextNProgress height={4} options={{ showSpinner: false }} />
       <ToastProvider>
         <StudentProvider>
-          <LaunchingTemplate />
-          {/* <Component {...pageProps} key={router.asPath} /> */}
+          {/* <LaunchingTemplate /> */}
+          <Component {...pageProps} key={router.asPath} />
         </StudentProvider>
       </ToastProvider>
     </>

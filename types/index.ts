@@ -115,9 +115,9 @@ export type StudentProps = {
   studentName: string
   major?: string
   minor?: string
-  notificationMessages: {
-    messages: string
-  }[]
+  // notificationMessages: {
+  //   messages: string
+  // }[]
   semesterByYear: string
   semesterName: string
   year: string

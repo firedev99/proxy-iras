@@ -17,11 +17,12 @@ async function auth(values: AuthCredentials, csrfToken: string) {
 }
 
 async function getToken(values: AuthCredentials) {
-  const res = await fetch(`${process.env.IUB_API}//v2/account/token`, {
+  const res = await fetch(`${process.env.IUB_API}//v3/account/token`, {
     method: "POST",
     body: JSON.stringify(values),
     headers: {
       "Content-Type": "application/json",
+      Referer: `${process.env.IUB_HOST}/`,
     },
   })
 
@@ -35,6 +36,8 @@ async function getDataWithToken(endpoint: string, token: string) {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        Referer: `${process.env.IUB_HOST}/`,
       },
     })
 
