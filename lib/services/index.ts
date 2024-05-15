@@ -22,7 +22,8 @@ async function getToken(values: AuthCredentials) {
     body: JSON.stringify(values),
     headers: {
       "Content-Type": "application/json",
-      Referer: `${process.env.IUB_HOST}/`,
+      Referer: `${process.env.IUB_HOST}`,
+      "Referrer-Policy": "strict-origin-when-cross-origin",
     },
   })
 
@@ -37,7 +38,8 @@ async function getDataWithToken(endpoint: string, token: string) {
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
-        Referer: `${process.env.IUB_HOST}/`,
+        Referer: `${process.env.IUB_HOST}`,
+        "Referrer-Policy": "strict-origin-when-cross-origin",
       },
     })
 
