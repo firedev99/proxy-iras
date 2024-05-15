@@ -4,7 +4,8 @@ import styled from "styled-components"
 export const TextWrapper = styled(motion.div)`
   width: 100%;
   /* min-height: 20rem; */
-  height: calc(100vh - 5rem);
+  /* height: calc(100vh - 5rem); */
+  height: 400px;
   margin-top: auto;
   display: grid;
   place-items: center;
@@ -46,7 +47,7 @@ export const TextWrapper = styled(motion.div)`
   }
 
   @media only screen and (max-width: 415px) {
-    height: calc(100vh - 4.3rem);
+    /* height: calc(100vh - 4.3rem); */
 
     h3 {
       font-size: 1.5rem;
