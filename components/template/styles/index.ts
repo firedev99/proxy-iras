@@ -31,9 +31,9 @@ export const TextWrapper = styled(motion.div)`
       font-size: 3.25rem;
     } */
 
-    h3 {
+    /* h3 {
       font-size: 2rem;
-    }
+    } */
   }
 
   @media screen and (max-width: 768px),
