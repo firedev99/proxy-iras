@@ -10,9 +10,9 @@ export const navFooter = [
     blank: false,
   },
   {
-    title: "Github",
-    href: "https://github.com/firedev99",
-    blank: true,
+    title: "FAQs",
+    href: "/faq",
+    blank: false,
   },
   {
     title: "Twitter",

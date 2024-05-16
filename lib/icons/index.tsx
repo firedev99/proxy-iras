@@ -18,6 +18,7 @@ import {
   LeftArrow,
   LinkIcon,
   NotAllowedIcon,
+  PlusIcon,
   ResetIcon,
   RightArrowIcon,
   SearchFilterIcon,
@@ -83,6 +84,9 @@ export default function Icon({ name, className }: IconProps) {
 
     case "checkboard":
       return <CheckboardIcon />
+
+    case "plus":
+      return <PlusIcon />
 
     case "calender":
       return <CalenderIcon />

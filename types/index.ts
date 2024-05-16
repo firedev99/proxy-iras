@@ -76,6 +76,7 @@ export type IconProps = {
     | "calculator-icon"
     | "left-arrow"
     | "trash"
+    | "plus"
     | "spinning-loader"
     | "home"
     | "checkboard"
