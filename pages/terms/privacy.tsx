@@ -37,7 +37,7 @@ export default function TermsPage() {
         </button>
         <TermSection>
           <h1>Privacy Policy</h1>
-          <span>Last updated: 12/01/2024</span>
+          <span>Last updated: 17/05/2024</span>
         </TermSection>
 
         <TermSection>
@@ -60,6 +60,7 @@ export default function TermsPage() {
             (“agreement”).
           </p>
         </TermSection>
+
         <TermSection>
           <h2>Information We Collect</h2>
           <p>
@@ -71,6 +72,7 @@ export default function TermsPage() {
             website and services.
           </p>
         </TermSection>
+
         <TermSection>
           <h2>How We Use Your Information</h2>
           <p>We use the information we collect to:</p>
@@ -86,6 +88,7 @@ export default function TermsPage() {
             getting stored is as minimal as it can be possible.
           </p>
         </TermSection>
+
         <TermSection>
           <h2>Google Classroom Integration</h2>
           <p>
@@ -95,23 +98,17 @@ export default function TermsPage() {
             information is subject to Google&apos;s privacy policy.
           </p>
         </TermSection>
+
         <TermSection>
           <h2>Security</h2>
           <p>
-            We implement appropriate security measures to protect your personal
-            information from unauthorized access, alteration, or disclosure in
-            accordance with all the concerned policies and regulations.
+            We implemented appropriate security measures to protect your
+            personal information from unauthorized access, alteration, or
+            disclosure in accordance with all the concerned policies and
+            regulations.
           </p>
         </TermSection>
-        <TermSection>
-          <h2>Third-Party Links</h2>
-          <p>
-            Our website may contain links to third-party websites. We are not
-            responsible for the privacy practices or content of those websites.
-            Please review the privacy policies of any third-party websites you
-            visit.
-          </p>
-        </TermSection>
+
         <TermSection>
           <h2>Changes to Privacy Policy</h2>
           <p>
@@ -120,6 +117,7 @@ export default function TermsPage() {
             periodically for updates.
           </p>
         </TermSection>
+
         <TermSection>
           <h2>Contact Us</h2>
           <p>

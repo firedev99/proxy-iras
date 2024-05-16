@@ -27,7 +27,6 @@ export const PageHeaderWrapper = styled.div`
 
   a {
     padding: 0.55rem 1.75rem;
-
     border-radius: 0.25rem;
     margin-top: 0.8rem;
     border: none;
@@ -47,16 +46,17 @@ export const PageHeaderWrapper = styled.div`
     }
 
     a {
-      font-size: 0.9rem;
-      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
     }
   }
 `
 
 export const QuestionsWrapper = styled.div`
   width: 100%;
-  padding: 1.2rem;
+  padding: 1.2rem 1.5rem;
   background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.4rem;
 
   .question_wrapper {
     border-bottom: 2px dashed;
@@ -114,7 +114,7 @@ export const QuestionsWrapper = styled.div`
   }
 
   @media only screen and (max-width: 486px) {
-    padding: 0.5rem;
+    padding: 0.5rem 1.2rem;
 
     .answers {
       .faq_list {
@@ -128,6 +128,7 @@ export const QuestionsWrapper = styled.div`
 
     .question {
       h4 {
+        font-size: 0.95rem;
         font-weight: 600;
       }
 

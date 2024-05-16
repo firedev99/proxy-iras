@@ -37,7 +37,7 @@ export default function TermsPage() {
         </button>
         <TermSection>
           <h1>Terms of Use</h1>
-          <span>Last updated: 12/01/2024</span>
+          <span>Last updated: 17/05/2024</span>
         </TermSection>
 
         <TermSection>
@@ -46,7 +46,7 @@ export default function TermsPage() {
             Welcome to Proxy IRAS, your comprehensive solution for managing
             academic tasks seamlessly. Designed with the modern student
             environment in mind, our platform offers a simplified yet powerful
-            alternative to the traditional university management system.As you
+            alternative to the traditional university management system. As you
             have just clicked our Terms of Use, please pause, grab a cup of
             coffee and carefully read the following pages. It will take you
             approximately 10 minutes.
@@ -60,12 +60,12 @@ export default function TermsPage() {
           </p>
           <p>
             At the heart of our platform it is integrated with our
-            university&apos;s existing management system (iras v1 / new iras),
-            leveraging its robust REST API to fetch essential details such as
-            course information, student profiles, and class schedules. This
-            ensures that you have access to the most up-to-date and accurate
-            information at your fingertips, making academic planning and
-            scheduling effortless.
+            university&apos;s existing management system (iras v1 / iras v2 /
+            iras v3), leveraging its robust REST API to fetch essential details
+            such as course information, student profiles, and class schedules.
+            This ensures that you have access to the most up-to-date and
+            accurate information at your fingertips, making academic planning
+            and scheduling effortless.
           </p>
           <p>
             But we didn&apos;t stop there. Recognizing the growing importance of
