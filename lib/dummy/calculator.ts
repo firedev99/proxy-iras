@@ -40,6 +40,7 @@ export const gradeValues = [
   "D",
   "F",
   "W",
+  "I",
 ]
 
 export const gradePoints = [
@@ -53,6 +54,7 @@ export const gradePoints = [
   "1.7",
   "1.3",
   "1",
+  "0",
   "0",
   "0",
 ]

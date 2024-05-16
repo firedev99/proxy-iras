@@ -110,9 +110,7 @@ export default async function generateIubAuthFlow(
     // save few details from first session
     await sql`
       INSERT INTO Students (id, name, email, contact, image)
-      VALUES (${studentId}, ${studentName.slice(
-      1
-    )}, ${email}, ${cellPhone}, ${`${process.env.IUB_API}/photo/${studentId}.jpg`})
+      VALUES (${studentId}, ${studentName}, ${email}, ${cellPhone}, ${`${process.env.IUB_API}/photo/${studentId}.jpg`})
       ON CONFLICT (email)
       DO NOTHING;
     `

@@ -93,7 +93,8 @@ export default function CalculatorCourse({
       const updatedCourses = [...prev]
       updatedCourses[index] = {
         name: updatedCourses[index].name,
-        credit: grade === "W" ? 0 : updatedCourses[index].credit,
+        // if the grade is "W" or "I" don't assign any credit or grade
+        credit: ["W", "I"].includes(grade) ? 0 : updatedCourses[index].credit,
         // if the user selects a non number value
         gp: isNaN(totalGp) ? 0 : totalGp,
         grade,
