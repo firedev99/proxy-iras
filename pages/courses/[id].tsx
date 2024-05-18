@@ -7,11 +7,13 @@ import { Layout } from "@components"
 import { dateOptions } from "@/lib/snippets/dateOptions"
 import { convertToDeadline } from "@/lib/snippets/convertToDeadLine"
 import {
+  AnimatedSceneWrapper,
   CoursePageContent,
   CoursePageWrapper,
   CoursePostsWrapper,
 } from "@/styles/CourseStyles"
 import dynamic from "next/dynamic"
+import WalkingDog from "@/components/lottie/WalkingDog"
 
 type Props = {
   announcements: classroom_v1.Schema$Announcement[]
@@ -71,13 +73,19 @@ export default function CoursePage({ announcements, courseWork }: Props) {
 
         <CoursePageContent>
           <CoursePostsWrapper>
-            {announcements.length > 0 &&
+            {announcements.length > 0 ? (
               announcements.map((post, pI) => (
                 <CourseAnnouncement
                   key={`course_announcement__${pI}`}
                   post={post}
                 />
-              ))}
+              ))
+            ) : (
+              <AnimatedSceneWrapper>
+                <WalkingDog />
+                <p>no announcements yet!</p>
+              </AnimatedSceneWrapper>
+            )}
           </CoursePostsWrapper>
         </CoursePageContent>
 

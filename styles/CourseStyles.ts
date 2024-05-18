@@ -250,6 +250,27 @@ export const CoursePageContent = styled.div`
   width: 100%;
 `
 
+export const AnimatedSceneWrapper = styled.div`
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+
+  p {
+    margin-top: -2.5rem;
+    margin-left: -1rem;
+  }
+
+  @media only screen and (max-width: 368px) {
+    p {
+      margin-top: -1.5rem;
+      margin-left: -0.5rem;
+    }
+  }
+`
+
 export const CourseWorksWrapper = styled.div`
   font-family: var(--font-josefin), sans-serif;
   margin-left: auto;
