@@ -331,10 +331,10 @@ export const ProfileAvatarWrapper = styled.div`
     border-radius: 3.125rem;
   }
 
-  @media only screen and (max-width: 338px) {
-    width: 16rem;
-    height: 16rem;
-    margin-bottom: 1rem;
+  @media only screen and (max-width: 768px) {
+    width: 15rem;
+    height: 15rem;
+    margin-bottom: 0.8rem;
   }
 `
 

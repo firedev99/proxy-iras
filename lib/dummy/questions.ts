@@ -2,8 +2,19 @@ export const questions = [
   {
     question: "How to add friends or share class timings with eachother?",
     answer:
-      "Inorder to share your class timings with your friends you need to tap on the profile picture in the home page where you can find an option to generate your shareable link or you can simply go the profile page where you can find an option for your shareable link. Provide the link to your friend and you're good to go. Make sure you both are logged in while sharing the links.",
+      "Proxy IRAS let's you share the class timings with your friends, you just need to tap on the profile picture in the home page where you can find a button to copy the share link or you can simply go to the profile page where you can find a button named 'Share Link'. Provide the link to your friends and you're good to go. Make sure you both are logged in while sharing the links.",
+    links: [
+      {
+        dest: "Home Page",
+        url: "/",
+      },
+      {
+        dest: "Profile Page",
+        url: "/profile",
+      },
+    ],
   },
+
   {
     question: "What is the contact number of IUB Registrar's Office?",
     list: [
@@ -57,15 +68,16 @@ export const questions = [
   {
     question: "What technologies has been used to make this app?",
     answer:
-      "This app was written in TypeScript. ReactJS/NextJS was used for frontend and NodeJs was used for backend. No database was used but for future feedback, some details were stored using PostgreSQL. This app is being hosted on a free-tier platform named Vercel.",
+      "This app was written in TypeScript. ReactJS/NextJS was used for frontend and NodeJS was used for backend. Google Classroom was merged in this app using GoogleAPIs. All sort of modern features like SSR, Hooks, State Management, etc was also being implemented. Most of the features are being excecuted through storing data in local storage but a little chunk of details were stored into a database using PostgreSQL. This app is being hosted on a free-tier platform named Vercel.",
   },
   {
     question: "What are the future plannings for this app?",
     list: [
-      "🔹 Todo App for managing different assignable tasks.",
+      "🔹 A Todo App for managing different assignable tasks.",
       "🔹 Virtual rooms where students can hangout and play games and watch different things together.",
       "🔹 AI Assitant which simulate IUB Registrar's Office queries.",
-      "🔹 As I'm not a designer so I want to collaborate with a desginer so that this app can get a fresh User Interface.",
+      "🔹 Faculty Reviews.",
+      "🔹 To collaborate with a desginer so that this app can get a fresh User Interface.",
     ],
   },
   {

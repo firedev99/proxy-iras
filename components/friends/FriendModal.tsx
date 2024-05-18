@@ -88,8 +88,8 @@ export default function FriendModal({ open, setOpen }: Props) {
 
         {friends.length === 0 && (
           <h3>
-            You haven&apos;t added any friend yet, try adding by clicking on the
-            Share Link 🤞🏼
+            Share your class timings with your friends, click on the share link
+            button and share the copied link.
           </h3>
         )}
       </FriendsWrapper>

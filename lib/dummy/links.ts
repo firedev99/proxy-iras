@@ -15,8 +15,8 @@ export const navFooter = [
     blank: false,
   },
   {
-    title: "Twitter",
-    href: "https://twitter.com/thedevguy99",
+    title: "Developer",
+    href: "https://www.instagram.com/tripyy_land/",
     blank: true,
   },
 ]

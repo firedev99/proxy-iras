@@ -131,7 +131,10 @@ export const UserDetails = styled.div`
   }
 `
 
-export const UserMetaDataWrapper = styled.div<{ $hide: boolean }>`
+export const UserMetaDataWrapper = styled.div<{
+  $hideCg: boolean
+  $hideCredits: boolean
+}>`
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
@@ -144,12 +147,34 @@ export const UserMetaDataWrapper = styled.div<{ $hide: boolean }>`
     font-weight: 600;
     color: rgba(var(--text-base), 0.8);
 
+    /* blur effect for cg */
     &:nth-child(1) {
       position: relative;
       width: fit-content;
 
       &:after {
-        display: ${(props) => (props.$hide ? `inline-block` : `none`)};
+        display: ${(props) => (props.$hideCg ? `inline-block` : `none`)};
+        position: absolute;
+        content: "";
+        width: 102%;
+        height: 100%;
+        background: rgba(217, 217, 217, 0.1);
+        -webkit-backdrop-filter: blur(4px) contrast(90%);
+        backdrop-filter: blur(4px) contrast(90%);
+        z-index: 2;
+        border-radius: 2px;
+        left: 0;
+      }
+    }
+
+    /* blur effect for credits */
+    &:nth-child(2) {
+      position: relative;
+      width: fit-content;
+      margin-top: ${(props) => (props.$hideCredits ? `0.2rem` : `0`)};
+
+      &:after {
+        display: ${(props) => (props.$hideCredits ? `inline-block` : `none`)};
         position: absolute;
         content: "";
         width: 100%;

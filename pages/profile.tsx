@@ -45,7 +45,8 @@ export default function ProfilePage({ courses }: Props) {
   const [openName, setOpenName] = useState<boolean>(false)
   const [openAvatar, setOpenAvatar] = useState<boolean>(false)
   const [openFriend, setOpenFriend] = useState<boolean>(false)
-  const [blurred, setBlurred] = useState<boolean>(false)
+  const [cgBlurred, setBlurred] = useState<boolean>(false)
+  const [creditBlurred, setCreditBlurred] = useState<boolean>(false)
 
   const [name, setName] = useState<string>("")
 
@@ -81,25 +82,48 @@ export default function ProfilePage({ courses }: Props) {
   // toggle friend modal
   const toggleFriendModal = () => setOpenFriend((prev) => !prev)
 
-  // save blurred status
-  const applyBlur = () => {
+  // save blurred status on cg
+  const applyBlurOnCg = () => {
     if (typeof window === "undefined") return
-    if (blurred) {
+
+    if (cgBlurred) {
       localStorage.setItem("blurred", "false")
       addToast(`Your CGPA blur feature is now off 😳`)
-      router.reload()
     } else {
       localStorage.setItem("blurred", "true")
       addToast(`Your CGPA blur feature is now on 🫠`)
     }
+
+    router.reload()
+  }
+
+  // save blurred status on credit
+  const applyBlurOnCredit = () => {
+    if (typeof window === "undefined") return
+
+    if (creditBlurred) {
+      localStorage.setItem("credit_blurred", "false")
+      addToast(`Your Credit blur feature is now off 😳`)
+    } else {
+      localStorage.setItem("credit_blurred", "true")
+      addToast(`Your Credit blur feature is now on 🫠`)
+    }
+
+    router.reload()
   }
 
   useEffect(() => {
     if (typeof window === "undefined") return
-    const exists = localStorage.getItem("blurred")
 
-    if (exists && exists === "true") {
+    const cgBlur = localStorage.getItem("blurred")
+    const creditBlur = localStorage.getItem("credit_blurred")
+
+    if (cgBlur && cgBlur === "true") {
       setBlurred(true)
+    }
+
+    if (creditBlur && creditBlur === "true") {
+      setCreditBlurred(true)
     }
   }, [])
 
@@ -137,13 +161,17 @@ export default function ProfilePage({ courses }: Props) {
           <Icon name="user" />
           <span>Change Avatar</span>
         </button>
-        <button onClick={applyBlur}>
+        <button onClick={applyBlurOnCg}>
           <Icon name="frame-art-icon" />
-          <span>{blurred ? `Reset` : `Hide`} Pain</span>
+          <span>{cgBlurred ? `Reset` : `Hide`} Pain</span>
         </button>
         <button onClick={toggleFriendModal}>
           <Icon name="checkboard" />
-          <span>Edit Friend</span>
+          <span>Edit Friends</span>
+        </button>
+        <button onClick={applyBlurOnCredit}>
+          <Icon name="frame-art-icon" />
+          <span>{creditBlurred ? `Show Credits` : `Hide Credits`}</span>
         </button>
       </ProfileControls>
 

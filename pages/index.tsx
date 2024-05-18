@@ -40,9 +40,14 @@ const FriendsUI = dynamic(() => import("../components/friends"), {
   ssr: false,
 })
 
-export default function Home({ courses, classroomCourses }: HomePageType) {
+export default function Home({
+  courses,
+  classroomCourses,
+  isInternalBrowser,
+}: HomePageType) {
   const [courseList, setCourseList] = useState<CourseProps[]>([])
-  const [blurred, setBlurred] = useState<boolean>(false)
+  const [cgBlurred, setCgBlurred] = useState<boolean>(false)
+  const [creditBlurred, setCreditBlurred] = useState<boolean>(false)
 
   // student context
   const { student } = useStudent()
@@ -89,9 +94,15 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
   useEffect(() => {
     if (typeof window === "undefined") return
 
-    const exists = localStorage.getItem("blurred")
-    if (exists && exists === "true") {
-      setBlurred(true)
+    const cgBlur = localStorage.getItem("blurred")
+    const creditsBlur = localStorage.getItem("credit_blurred")
+
+    if (cgBlur && cgBlur === "true") {
+      setCgBlurred(true)
+    }
+
+    if (creditsBlur && creditsBlur === "true") {
+      setCreditBlurred(true)
     }
   }, [])
 
@@ -100,7 +111,7 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
 
   return (
     <HomePageWrapper>
-      <FriendsUI />
+      <FriendsUI isInternalBrowser={isInternalBrowser} />
       <UserInformationWrapper>
         <ProfileAvatar imgSrc={student.picture} courses={courseList} />
         <UserDetails>
@@ -110,7 +121,7 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
           <h5>ID: {student.studentID}</h5>
         </UserDetails>
       </UserInformationWrapper>
-      <UserMetaDataWrapper $hide={blurred}>
+      <UserMetaDataWrapper $hideCg={cgBlurred} $hideCredits={creditBlurred}>
         <span>CGPA: {student.cgpa}</span>
         <span>Credit Earned: {student.creditEarned}</span>
         <span>Major: {student.major}</span>
@@ -123,6 +134,8 @@ export default function Home({ courses, classroomCourses }: HomePageType) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const userAgent = ctx.req.headers["user-agent"]
+
   // get iub tokens
   const token = ctx.req.cookies["user-token"]
   const studentID = ctx.req.cookies["_id"]
@@ -134,6 +147,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // check if user is connected with a google account
   const googleUser = g_token || refreshToken
 
+  // check if the browser is a internal browser
+  const isInternalBrowser = userAgent
+    ? userAgent.includes("FBAN/") || // fb
+      userAgent.includes("FBAV/") || // fb version
+      userAgent.includes("Messenger") || // messenger
+      userAgent.includes("Instagram") || // ig
+      userAgent.includes("WhatsApp") //wp
+    : false
+
   // fetch course details only if iub token is available
   if (token && studentID && !googleUser) {
     const courses = await services.getCourseData(token, studentID)
@@ -141,6 +163,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       props: {
         courses: JSON.parse(JSON.stringify(courses)),
+        isInternalBrowser,
       },
     }
   }
@@ -172,6 +195,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         props: {
           courses: JSON.parse(JSON.stringify(courses)),
           classroomCourses,
+          isInternalBrowser,
         },
       }
     }
@@ -182,6 +206,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     props: {
       courses: null,
       classroomCourses: null,
+      isInternalBrowser: false,
     },
   }
 }

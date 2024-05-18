@@ -4,12 +4,15 @@ import { useStudent } from "@hooks/useStudent"
 import { useToast } from "@hooks/useToast"
 import { PopupModal } from "@components"
 import { SharingPermissionWrapper } from "./styles/SharingPermissionStyles"
+import { useClipboard } from "@/hooks/useClipboard"
+import Icon from "@/lib/icons"
 
 type Props = {
   params: URLSearchParams
+  isInternal: boolean
 }
 
-export default function SharingPermissionModal({ params }: Props) {
+export default function SharingPermissionModal({ params, isInternal }: Props) {
   const [status, setStatus] = useState<boolean>(true)
 
   // router context
@@ -17,6 +20,9 @@ export default function SharingPermissionModal({ params }: Props) {
 
   // toast context
   const { addToast } = useToast()
+
+  // clipboard context
+  const clipboard = useClipboard()
 
   // student context
   const { student } = useStudent()
@@ -146,17 +152,32 @@ export default function SharingPermissionModal({ params }: Props) {
     router.push(router.pathname)
   }
 
+  function handleUrlCopy() {
+    clipboard.copy(`${process.env.NEXT_PUBLIC_URL}${router.asPath}`)
+  }
+
   const ignoreModal = () => setStatus(false)
 
   return (
     <SharingPermissionWrapper>
       <PopupModal open={status} className="schedule_sharing_modal" overlay>
-        <h3>{`${name} has shared ${sex === "Male" ? `his` : `her`} ${
-          type === "schedule" ? `class timings` : `saved rotuine`
-        } with you 🥺😳`}</h3>
+        <h3>
+          {!isInternal
+            ? `${name} has shared ${sex === "Male" ? `his` : `her`} ${
+                type === "schedule" ? `class timings` : `saved rotuine`
+              } with you 🥺😳`
+            : `To enable all the features, you need to open the website in an external browser like Chrome or Safari.`}
+        </h3>
         <div className="schedule_sharing_controls">
-          <button onClick={saveInformation}>Save Schedule</button>
-          <button onClick={ignoreModal}>Ignore it</button>
+          {isInternal && (
+            <button onClick={handleUrlCopy}>
+              {clipboard.status === "SUCCESS" ? `Copy Done 🦈` : `Copy Link 🔗`}
+            </button>
+          )}
+          {!isInternal && (
+            <button onClick={saveInformation}>Save Schedule</button>
+          )}
+          {!isInternal && <button onClick={ignoreModal}>Ignore it</button>}
         </div>
       </PopupModal>
     </SharingPermissionWrapper>

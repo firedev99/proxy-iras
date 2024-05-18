@@ -17,7 +17,11 @@ import {
 import Image from "next/image"
 import Avatar from "./Avatar"
 
-export default function Friends() {
+export default function Friends({
+  isInternalBrowser,
+}: {
+  isInternalBrowser: boolean
+}) {
   const [open, setOpen] = useState(false)
   const [openInfo, setOpenInfo] = useState<TernaryFriendsProps | null>(null)
   const [friends, setFriends] = useState<FriendsProps[]>([])
@@ -227,7 +231,9 @@ export default function Friends() {
           </PopupModal>
         </FriendsWrapper>
       )}
-      {type && <SharingPermission params={params} />}
+      {type && (
+        <SharingPermission isInternal={isInternalBrowser} params={params} />
+      )}
     </>
   )
 }

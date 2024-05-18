@@ -203,6 +203,7 @@ export type CourseProps = {
 export type HomePageType = {
   courses: CourseProps[]
   classroomCourses: classroom_v1.Schema$Course[]
+  isInternalBrowser: boolean
 }
 
 export type GoogleDueTimeProps = {
