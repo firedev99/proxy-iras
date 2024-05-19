@@ -7,7 +7,7 @@ export default function TodoPage() {
 
 TodoPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout title="Student Assistant - Proxy IRAS, Student Management System">
+    <Layout title="Todo App - Proxy IRAS, Student Management System">
       {page}
     </Layout>
   )

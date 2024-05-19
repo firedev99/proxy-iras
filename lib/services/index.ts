@@ -1,4 +1,9 @@
-import { AuthCredentials, CourseProps, IUBCourseProps } from "@types"
+import {
+  AuthCredentials,
+  CourseOffering,
+  CourseProps,
+  IUBCourseProps,
+} from "@types"
 
 async function auth(values: AuthCredentials, csrfToken: string) {
   const response = await fetch(`/api/iub`, {
@@ -28,6 +33,30 @@ async function getToken(values: AuthCredentials) {
 
   const data = res.json()
   return data
+}
+
+async function getOfferedCourses(token: string, studentID: string) {
+  try {
+    const response = await fetch(
+      `${process.env.IUB_API}//api/v1/registration/${studentID}/all-offer-courses`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Referer: `${process.env.IUB_HOST}`,
+        },
+      }
+    )
+
+    const retrivedData = await response.json()
+    const { eligibleOfferCourses } = retrivedData.data
+
+    return eligibleOfferCourses as CourseOffering[]
+  } catch (err) {
+    if (process.env.NODE_ENV !== "production") {
+      console.log(err)
+    }
+  }
 }
 
 async function getDataWithToken(endpoint: string, token: string) {
@@ -115,4 +144,5 @@ export const services = {
   getUniRules,
   getDataWithToken,
   getCourseData,
+  getOfferedCourses,
 }

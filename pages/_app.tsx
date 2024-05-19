@@ -5,7 +5,6 @@ import { GlobalStyles } from "@styles/GlobalStyles"
 import { AppPropsWithLayout } from "@types"
 import Head from "next/head"
 import NextNProgress from "nextjs-progressbar"
-import { LaunchingTemplate } from "@/components"
 
 export default function App({
   Component,

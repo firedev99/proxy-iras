@@ -158,7 +158,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 CalenderPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout
-      title="Student Calender - Proxy IRAS, Student Management System"
+      title="Google Calender - Proxy IRAS, Student Management System"
       footer={false}
     >
       {page}

@@ -86,7 +86,7 @@ export default function FAQPage() {
 
 FAQPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout title="Student Dashboard - Proxy IRAS, Student Management System">
+    <Layout title="Frequently Asked Questions - Proxy IRAS, Student Management System">
       {page}
     </Layout>
   )

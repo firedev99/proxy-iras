@@ -156,7 +156,7 @@ export default function CalculatorModal({
               </button>
               <button className="lower_btn" onClick={handleAddRow}>
                 <Icon name="add-icon" />
-                <span>Add Rows</span>
+                <span>Add Course</span>
               </button>
             </div>
             <div className="lower_btns_wrapper">

@@ -2,10 +2,12 @@ import { ReactElement } from "react"
 import { GetServerSideProps } from "next"
 import { ToolCoursesPageWrapper } from "@/styles/ToolStyles"
 import { Layout } from "@components"
-import { useCourses } from "@hooks/useCourses"
 import dynamic from "next/dynamic"
 import { EmptyRoutine } from "@/components/modals/styles"
 import Image from "next/image"
+import { CourseOffering } from "@/types"
+import { services } from "@/lib/services"
+// import { useCourses } from "@hooks/useCourses"
 
 const OfferedCourses = dynamic(
   () => import("../../components/tools/OfferedCourses"),
@@ -16,18 +18,21 @@ const Loader = dynamic(() => import("../../components/lottie/EducationScene"), {
 })
 
 type Props = {
-  token?: string
-  studentID?: string
+  token: string | null
+  studentID: string | null
+  offeredCourses: CourseOffering[]
 }
 
-export default function ToolCoursesPage({ token, studentID }: Props) {
-  const { loading, offeringCourses } = useCourses(token, studentID)
-
-  if (!token || loading) return <Loader />
+export default function ToolCoursesPage({
+  token,
+  studentID,
+  offeredCourses,
+}: Props) {
+  if (!token || !studentID) return <Loader />
 
   return (
     <ToolCoursesPageWrapper>
-      {offeringCourses.length === 0 ? (
+      {offeredCourses.length === 0 ? (
         <EmptyRoutine>
           <div className="empty_illustration_all">
             <Image
@@ -40,7 +45,7 @@ export default function ToolCoursesPage({ token, studentID }: Props) {
           <h3>No data!</h3>
         </EmptyRoutine>
       ) : (
-        <OfferedCourses courses={offeringCourses} />
+        <OfferedCourses courses={offeredCourses} />
       )}
     </ToolCoursesPageWrapper>
   )
@@ -50,17 +55,30 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = ctx.req.cookies["user-token"]
   const studentID = ctx.req.cookies["_id"]
 
+  if (token && studentID) {
+    const offeredCourses = await services.getOfferedCourses(token, studentID)
+
+    return {
+      props: {
+        token,
+        studentID,
+        offeredCourses: offeredCourses ? offeredCourses : [],
+      },
+    }
+  }
+
   return {
     props: {
-      token,
-      studentID,
+      token: null,
+      studentID: null,
+      offeredCourses: [],
     },
   }
 }
 
 ToolCoursesPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout title="Student Assistant - Proxy IRAS, Student Management System">
+    <Layout title="Offered Courses - Proxy IRAS, Student Management System">
       {page}
     </Layout>
   )

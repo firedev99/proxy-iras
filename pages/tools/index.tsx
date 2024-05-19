@@ -13,7 +13,7 @@ import {
   ToolsPageInformation,
   ToolsPageWrapper,
 } from "@/styles/ToolStyles"
-import { CourseProps } from "@types"
+import { CourseOffering, CourseProps } from "@types"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 
@@ -35,13 +35,19 @@ type Props = {
   token?: string
   studentID?: string
   courses: CourseProps[]
+  offeredCourses: CourseOffering[]
 }
 
 const Loader = dynamic(() => import("../../components/lottie/EducationScene"), {
   ssr: false,
 })
 
-export default function ToolsPage({ token, studentID, courses }: Props) {
+export default function ToolsPage({
+  token,
+  studentID,
+  courses,
+  offeredCourses,
+}: Props) {
   const [openRoutine, setOpenRoutine] = useState<boolean>(false)
   const [openCalculator, setOpenCalculator] = useState<boolean>(false)
 
@@ -56,7 +62,7 @@ export default function ToolsPage({ token, studentID, courses }: Props) {
   const { student } = useStudent()
 
   // fetch offering course data
-  const { loading, offeringCourses } = useCourses(token, studentID)
+  // const { loading, offeringCourses } = useCourses(token, studentID)
 
   // get the current courses from iub based on running semester
   const currentSemesterCourses = student
@@ -66,9 +72,10 @@ export default function ToolsPage({ token, studentID, courses }: Props) {
     : []
 
   const modifiedCalculatorCourses = currentSemesterCourses.map((course) => {
-    const credit = offeringCourses.find(
-      (item) => item.courseName === course.courseName
-    )?.creditHour
+    const credit =
+      offeredCourses &&
+      offeredCourses.find((item) => item.courseName === course.courseName)
+        ?.creditHour
 
     return {
       name: course.courseName,
@@ -78,19 +85,19 @@ export default function ToolsPage({ token, studentID, courses }: Props) {
     }
   })
 
-  if (!token || !studentID || loading) return <Loader />
+  if (!token || !studentID) return <Loader />
 
   return (
     <>
       <RoutineModal
         open={openRoutine}
         setOpen={setOpenRoutine}
-        offeringCourses={offeringCourses}
+        offeringCourses={offeredCourses}
       />
       <CalculatorModal
         open={openCalculator}
         setOpen={setOpenCalculator}
-        courses={offeringCourses}
+        courses={offeredCourses}
         currentSemester={modifiedCalculatorCourses}
       />
       <ToolsPageWrapper>
@@ -192,15 +199,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = ctx.req.cookies["user-token"]
   const studentID = ctx.req.cookies["_id"]
 
-  // fetch course details only if iub token is available
   if (token && studentID) {
     const courses = await services.getCourseData(token, studentID)
+    const offeredCourses = await services.getOfferedCourses(token, studentID)
 
     return {
       props: {
         token,
         studentID,
         courses: JSON.parse(JSON.stringify(courses)),
+        offeredCourses: offeredCourses ? offeredCourses : [],
       },
     }
   }
@@ -210,6 +218,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       token,
       studentID,
       courses: [],
+      offeredCourses: [],
     },
   }
 }
