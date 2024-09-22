@@ -5,6 +5,9 @@ import { GlobalStyles } from "@styles/GlobalStyles"
 import { AppPropsWithLayout } from "@types"
 import Head from "next/head"
 import NextNProgress from "nextjs-progressbar"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+
+const queryClient = new QueryClient()
 
 export default function App({
   Component,
@@ -12,6 +15,7 @@ export default function App({
   router,
 }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
+
   return getLayout(
     <>
       {/* injecting font in the head */}
@@ -29,11 +33,14 @@ export default function App({
       </Head>
       <GlobalStyles />
       <NextNProgress height={4} options={{ showSpinner: false }} />
-      <ToastProvider>
-        <StudentProvider>
-          <Component {...pageProps} key={router.asPath} />
-        </StudentProvider>
-      </ToastProvider>
+
+      <QueryClientProvider client={queryClient}>
+        <ToastProvider>
+          <StudentProvider>
+            <Component {...pageProps} key={router.asPath} />
+          </StudentProvider>
+        </ToastProvider>
+      </QueryClientProvider>
     </>
   )
 }

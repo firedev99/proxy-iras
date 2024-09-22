@@ -42,6 +42,12 @@ const ToolsModal = forwardRef<HTMLDivElement, Props>(
       )
     }
 
+    // apply this along w delete routine functionality
+    function handleNextPageSelection() {
+      handler()
+      setNextTab(false)
+    }
+
     if (!student) return <div />
 
     return (
@@ -74,14 +80,6 @@ const ToolsModal = forwardRef<HTMLDivElement, Props>(
                     {/* student information - start */}
                     <ToolsStudentInformation>
                       <ToolsModalHeader>
-                        {/* {type === "calculator" && (
-                          <button
-                            className="calculator_control"
-                            onClick={toggleNextTab}
-                          >
-                            <Icon name="web-page-scene" />
-                          </button>
-                        )} */}
                         {type === "routine" && (
                           <RoutinePreviewGrid onClick={toggleNextTab}>
                             {[
@@ -144,7 +142,11 @@ const ToolsModal = forwardRef<HTMLDivElement, Props>(
                     <button className="back_btn" onClick={toggleNextTab}>
                       <Icon name="left-arrow" />
                     </button>
-                    {type === "routine" && <RoutineNextPage />}
+                    {type === "routine" && (
+                      <RoutineNextPage
+                        handleNextPageSelection={handleNextPageSelection}
+                      />
+                    )}
                     {type === "calculator" && <CalculatorNextPage />}
                   </ToolsRightPortion>
                   {/* next tab - end */}

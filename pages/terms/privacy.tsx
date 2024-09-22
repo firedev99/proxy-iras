@@ -137,9 +137,5 @@ export default function TermsPage() {
 }
 
 TermsPage.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <SimpleLayout title="Privacy Policy - Proxy IRAS, Student Management System">
-      {page}
-    </SimpleLayout>
-  )
+  return <SimpleLayout title="Privacy Policy - @firedev99">{page}</SimpleLayout>
 }

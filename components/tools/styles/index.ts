@@ -123,7 +123,7 @@ export const ToolContentWrapper = styled.div`
 
 export const ToolContent = styled.div`
   background: rgba(var(--background-base), 0.25);
-  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 1px rgba(46, 46, 46, 0.8);
   display: flex;
   flex-direction: column;
   padding: 0.8rem 1rem;
@@ -168,6 +168,8 @@ export const ToolContent = styled.div`
 
   span {
     font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.85;
   }
 
   &:hover {
@@ -185,7 +187,7 @@ export const ToolContent = styled.div`
 
   @media only screen and (max-width: 768px) {
     border-radius: 0.3rem;
-    padding: 0.5rem 0.7rem;
+    padding: 0.8rem 0.7rem;
 
     &:before {
       width: 0.4rem;

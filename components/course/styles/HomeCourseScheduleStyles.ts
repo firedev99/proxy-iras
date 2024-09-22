@@ -11,7 +11,7 @@ export const ClassScheduleHeader = styled.div`
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
-    color: rgba(var(--text-base), 0.9);
+    color: rgba(var(--text-base), 0.8);
   }
 
   .share_control {
@@ -100,7 +100,7 @@ export const ClassScheduleWrapper = styled(motion.div)`
   margin-top: 1.5rem;
 
   h4 {
-    color: rgba(var(--text-base), 0.9);
+    color: rgba(var(--text-base), 0.8);
   }
 
   .course_meta_wrapper {
@@ -121,7 +121,9 @@ export const ClassScheduleWrapper = styled(motion.div)`
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      color: rgba(var(--text-base), 0.9);
+      color: rgba(var(--text-base), 0.8);
+      font-weight: 500;
+      font-size: 14px;
     }
   }
 

@@ -71,10 +71,12 @@ export const CourseElement = styled.div`
   justify-content: center;
   padding: 1.5rem;
   color: rgba(var(--text-base), 0.9);
-  box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(46, 46, 46, 0.3);
 
   @media (prefers-color-scheme: dark) {
-    box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.1);
+    /* box-shadow: inset 0 0 0 1px rgba(248, 248, 248, 0.25); */
+    box-shadow: inset 0 0 0 1px rgba(248, 248, 248, 0.35),
+      2px 2px 6px 2px rgba(0, 0, 0, 0.1);
   }
 
   @media only screen and (max-width: 768px) {
@@ -92,7 +94,7 @@ export const HomeCourseMeta = styled.div`
   height: 100%;
 
   .time {
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
   }
 
   h3 {
@@ -100,12 +102,14 @@ export const HomeCourseMeta = styled.div`
     font-family: var(--font-josefin), sans-serif;
     font-weight: 600;
     text-align: center;
+    opacity: 0.9;
   }
 
   h5 {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.9rem;
     text-shadow: 1px 2px 2px rgba(var(--background-base), 0.1);
+    opacity: 0.9;
   }
 
   @media only screen and (max-width: 1024px) {
@@ -119,7 +123,7 @@ export const HomeCourseMeta = styled.div`
     }
 
     h5 {
-      font-weight: 500;
+      /* font-weight: 500; */
     }
   }
 
@@ -164,11 +168,11 @@ export const HomeCourseAttendanceStatus = styled.div`
 
 export const GradeWrapper = styled.div`
   position: absolute;
-  right: -1.5rem;
-  top: -1.5rem;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1rem;
+  right: -1.2rem;
+  top: -1.2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
   display: flex;
   background: rgb(var(--btn-color));
   align-items: center;

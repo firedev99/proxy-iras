@@ -51,8 +51,8 @@ export function useForm<T>({
     const timerID = setTimeout(() => {
       if (isSubmitting && errorsCrossChecked) {
         onSubmit(values)
+        // setIsSubmitting(false)
       }
-      // setIsSubmitting(false)
     }, 2000)
 
     return () => {

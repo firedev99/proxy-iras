@@ -5,9 +5,7 @@ import { Layout } from "@components"
 import dynamic from "next/dynamic"
 import { EmptyRoutine } from "@/components/modals/styles"
 import Image from "next/image"
-import { CourseOffering } from "@/types"
-import { services } from "@/lib/services"
-// import { useCourses } from "@hooks/useCourses"
+import { useCourses } from "@/hooks/useCourses"
 
 const OfferedCourses = dynamic(
   () => import("../../components/tools/OfferedCourses"),
@@ -18,17 +16,14 @@ const Loader = dynamic(() => import("../../components/lottie/EducationScene"), {
 })
 
 type Props = {
-  token: string | null
-  studentID: string | null
-  offeredCourses: CourseOffering[]
+  token?: string
+  studentID?: string
 }
 
-export default function ToolCoursesPage({
-  token,
-  studentID,
-  offeredCourses,
-}: Props) {
-  if (!token || !studentID) return <Loader />
+export default function ToolCoursesPage({ token, studentID }: Props) {
+  const { loading, offeredCourses } = useCourses()
+
+  if (loading || !token || !studentID) return <Loader />
 
   return (
     <ToolCoursesPageWrapper>
@@ -55,23 +50,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = ctx.req.cookies["user-token"]
   const studentID = ctx.req.cookies["_id"]
 
-  if (token && studentID) {
-    const offeredCourses = await services.getOfferedCourses(token, studentID)
-
-    return {
-      props: {
-        token,
-        studentID,
-        offeredCourses: offeredCourses ? offeredCourses : [],
-      },
-    }
-  }
-
   return {
     props: {
-      token: null,
-      studentID: null,
-      offeredCourses: [],
+      token,
+      studentID,
     },
   }
 }

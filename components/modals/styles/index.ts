@@ -333,6 +333,10 @@ export const RoutineModalTabs = styled.div`
     &:hover {
       cursor: pointer;
     }
+
+    &:disabled {
+      opacity: 0.7;
+    }
   }
 
   @media only screen and (max-width: 800px) {
@@ -915,10 +919,18 @@ export const RoutineNextPageWrapper = styled(motion.div)`
     }
 
     .close_control {
-      background: rgba(var(--btn-color), 0.1);
+      background: rgba(48, 48, 48, 0.6);
+
+      svg {
+        fill: rgba(238, 238, 238, 0.6);
+      }
 
       &:hover {
-        background: rgba(var(--btn-color), 0.3);
+        background: rgba(238, 238, 238, 0.6);
+
+        svg {
+          fill: rgba(48, 48, 48, 0.6);
+        }
       }
     }
   }

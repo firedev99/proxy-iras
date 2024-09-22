@@ -13,7 +13,7 @@ import {
   ToolsPageInformation,
   ToolsPageWrapper,
 } from "@/styles/ToolStyles"
-import { CourseOffering, CourseProps } from "@types"
+import { CourseProps } from "@types"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 
@@ -35,19 +35,13 @@ type Props = {
   token?: string
   studentID?: string
   courses: CourseProps[]
-  offeredCourses: CourseOffering[]
 }
 
 const Loader = dynamic(() => import("../../components/lottie/EducationScene"), {
   ssr: false,
 })
 
-export default function ToolsPage({
-  token,
-  studentID,
-  courses,
-  offeredCourses,
-}: Props) {
+export default function ToolsPage({ token, studentID, courses }: Props) {
   const [openRoutine, setOpenRoutine] = useState<boolean>(false)
   const [openCalculator, setOpenCalculator] = useState<boolean>(false)
 
@@ -62,7 +56,7 @@ export default function ToolsPage({
   const { student } = useStudent()
 
   // fetch offering course data
-  // const { loading, offeringCourses } = useCourses(token, studentID)
+  const { loading, isError, offeredCourses } = useCourses()
 
   // get the current courses from iub based on running semester
   const currentSemesterCourses = student
@@ -85,7 +79,7 @@ export default function ToolsPage({
     }
   })
 
-  if (!token || !studentID) return <Loader />
+  if (loading || !token || !studentID) return <Loader />
 
   return (
     <>
@@ -151,9 +145,10 @@ export default function ToolsPage({
             whileTap="initial"
             onClick={() => router.push("/tools/courses")}
           >
-            <h4>{`Offered Courses ${
+            {/* <h4>{`Offered Courses ${
               student?.semesterName
-            } ${new Date().getFullYear()}`}</h4>
+            } ${new Date().getFullYear()}`}</h4> */}
+            <h4>{`Offered Courses Autumn ${new Date().getFullYear()}`}</h4>
             <div className="tools_feature_img">
               <Image
                 fill
@@ -201,14 +196,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   if (token && studentID) {
     const courses = await services.getCourseData(token, studentID)
-    const offeredCourses = await services.getOfferedCourses(token, studentID)
 
     return {
       props: {
         token,
         studentID,
         courses: JSON.parse(JSON.stringify(courses)),
-        offeredCourses: offeredCourses ? offeredCourses : [],
       },
     }
   }
@@ -218,7 +211,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       token,
       studentID,
       courses: [],
-      offeredCourses: [],
     },
   }
 }

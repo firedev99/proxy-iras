@@ -12,15 +12,20 @@ import {
   RoutineShareOption,
 } from "./styles"
 import Icon from "@/lib/icons"
+import { useToast } from "@/hooks/useToast"
 
-export default function RoutineNextPage() {
+export default function RoutineNextPage({
+  handleNextPageSelection,
+}: {
+  handleNextPageSelection: () => void
+}) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [routines, setRoutines] = useState<(RoutineCourseOffering[] | null)[]>(
     []
   )
 
-  // router context
-  const router = useRouter()
+  // toast context
+  const { addToast } = useToast()
 
   // student context
   const { student } = useStudent()
@@ -72,7 +77,8 @@ export default function RoutineNextPage() {
       )
 
       setSelectedId(null)
-      router.reload()
+      handleNextPageSelection()
+      addToast("Routine has been deleted ⚡")
     }
   }
 
