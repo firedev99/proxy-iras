@@ -9,8 +9,6 @@ export function useCourses() {
         .then((response) => response.json())
         .catch((err) => console.log(err)),
     select: (data) => data as { success: boolean; data: CourseOffering[] },
-
-    refetchInterval: 10000, // refetch every 10 secs
   })
 
   return {
