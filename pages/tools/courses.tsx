@@ -1,10 +1,8 @@
 import { ReactElement } from "react"
 import { GetServerSideProps } from "next"
 import { ToolCoursesPageWrapper } from "@/styles/ToolStyles"
-import { Layout } from "@components"
+import { EmptyCourseStat, Layout } from "@components"
 import dynamic from "next/dynamic"
-import { EmptyRoutine } from "@/components/modals/styles"
-import Image from "next/image"
 import { useCourses } from "@/hooks/useCourses"
 
 const OfferedCourses = dynamic(
@@ -25,23 +23,11 @@ export default function ToolCoursesPage({ token, studentID }: Props) {
 
   if (loading || !token || !studentID) return <Loader />
 
+  if (!loading && offeredCourses.length === 0) return <EmptyCourseStat />
+
   return (
     <ToolCoursesPageWrapper>
-      {offeredCourses.length === 0 ? (
-        <EmptyRoutine>
-          <div className="empty_illustration_all">
-            <Image
-              src="https://res.cloudinary.com/firey/image/upload/v1707759937/iub/empty.svg"
-              alt="undraw-empty"
-              fill
-              priority
-            />
-          </div>
-          <h3>No data!</h3>
-        </EmptyRoutine>
-      ) : (
-        <OfferedCourses courses={offeredCourses} />
-      )}
+      <OfferedCourses courses={offeredCourses} />
     </ToolCoursesPageWrapper>
   )
 }
