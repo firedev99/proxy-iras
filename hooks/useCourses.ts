@@ -5,17 +5,16 @@ import { useQuery } from "@tanstack/react-query"
 type IUBCOURSEFETCHRES = { success: boolean; data: CourseOffering[] }
 
 export function useCourses() {
-  const { data, isLoading, isError } = useQuery({
+  const { isLoading, data } = useQuery<IUBCOURSEFETCHRES>({
     queryKey: ["courses"],
-    queryFn: async (): Promise<IUBCOURSEFETCHRES> =>
+    queryFn: async () =>
       await fetch(`${process.env.NEXT_PUBLIC_URL}/api/iub/courses`)
         .then((response) => response.json())
         .catch((err) => console.log(err)),
   })
 
   return {
-    loading: isLoading,
-    isError,
+    isLoading,
     offeredCourses: data ? data.data : [],
   }
 }

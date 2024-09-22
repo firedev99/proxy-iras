@@ -56,7 +56,7 @@ export default function ToolsPage({ token, studentID, courses }: Props) {
   const { student } = useStudent()
 
   // fetch offering course data
-  const { loading, isError, offeredCourses } = useCourses()
+  const { isLoading, offeredCourses } = useCourses()
 
   // get the current courses from iub based on running semester
   const currentSemesterCourses = student
@@ -79,7 +79,7 @@ export default function ToolsPage({ token, studentID, courses }: Props) {
     }
   })
 
-  if (loading || !token || !studentID) return <Loader />
+  if (isLoading || !token || !studentID) return <Loader />
 
   return (
     <>

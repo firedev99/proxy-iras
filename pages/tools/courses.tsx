@@ -19,11 +19,11 @@ type Props = {
 }
 
 export default function ToolCoursesPage({ token, studentID }: Props) {
-  const { loading, offeredCourses } = useCourses()
+  const { isLoading, offeredCourses } = useCourses()
 
-  if (loading || !token || !studentID) return <Loader />
+  if (isLoading || !token || !studentID) return <Loader />
 
-  if (!loading && offeredCourses.length === 0) return <EmptyCourseStat />
+  if (offeredCourses.length === 0) return <EmptyCourseStat />
 
   return (
     <ToolCoursesPageWrapper>
