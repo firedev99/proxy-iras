@@ -6,6 +6,7 @@ import { AppPropsWithLayout } from "@types"
 import Head from "next/head"
 import NextNProgress from "nextjs-progressbar"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import LaunchingSoon from "@/components/template/LaunchingSoon"
 
 const queryClient = new QueryClient()
 
@@ -37,7 +38,8 @@ export default function App({
       <QueryClientProvider client={queryClient}>
         <ToastProvider>
           <StudentProvider>
-            <Component {...pageProps} key={router.asPath} />
+            <LaunchingSoon />
+            {/* <Component {...pageProps} key={router.asPath} /> */}
           </StudentProvider>
         </ToastProvider>
       </QueryClientProvider>

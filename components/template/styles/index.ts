@@ -10,6 +10,10 @@ export const TextWrapper = styled(motion.div)`
   display: grid;
   place-items: center;
 
+  max-width: 768px;
+  margin: 0 auto;
+  margin-top: 150px;
+
   /* a {
     text-decoration: underline;
     text-decoration-color: red;

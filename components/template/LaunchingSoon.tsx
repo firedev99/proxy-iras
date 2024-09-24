@@ -3,6 +3,10 @@ import { TextWrapper } from "./styles"
 export default function LaunchingSoon() {
   return (
     <TextWrapper initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <h3>
+        IUB has again changed iras&apos;s code, it will take some time to fix
+        the issue 🐍
+      </h3>
       {/* <h3>
         Coming back soon 🤞🏼 Thanks to everyone, this app was used by 1200+
         students in just 2 days 🤧 If you have anything to ask, reach me out
@@ -16,7 +20,7 @@ export default function LaunchingSoon() {
         </Link>
       </h3> */}
 
-      <h3>launching🚀soon🤞🏼</h3>
+      {/* <h3>launching🚀soon🤞🏼</h3> */}
     </TextWrapper>
   )
 }
