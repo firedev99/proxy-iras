@@ -1,4 +1,3 @@
-// import { CourseOffering } from "@/types"
 import { CourseOffering } from "@/types"
 import { useQuery } from "@tanstack/react-query"
 

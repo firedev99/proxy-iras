@@ -43,6 +43,8 @@ export default async function generateIubAuthFlow(
         studentName,
         firstMajor,
         minor,
+        cgpa,
+        erarnedCredit: creditEarned,
       },
     } = await services.getDataWithToken(
       `${process.env.IUB_API}//api/v2/profile/${credentials.email}/load-student-details`,
@@ -58,7 +60,8 @@ export default async function generateIubAuthFlow(
 
     // destructure student informations from the responses
     const { attendanceSemester, attendanceYear } = uniRules.data[0]
-    const { cgpa, creditEarned, advisorName } = studentCatalogue.data[0]
+    // const { cgpa, creditEarned, advisorName } = studentCatalogue.data[0]
+    // const { advisorName } = studentCatalogue.data[0]
 
     // extract foundation, core, minor, major etc credit status
     const studentCreditStatus = studentCatalogue.data.reduce(
@@ -99,7 +102,7 @@ export default async function generateIubAuthFlow(
       year: attendanceYear,
       cgpa,
       creditEarned,
-      advisorName,
+      advisorName: "",
       sex,
       creditStatus,
       semesterName: semesterList[parseInt(attendanceSemester) - 1],
