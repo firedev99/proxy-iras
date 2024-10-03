@@ -3,56 +3,46 @@ import styled from "styled-components"
 
 export const TextWrapper = styled(motion.div)`
   width: 100%;
-  min-height: 20rem;
-  height: calc(100vh - 5rem);
-  height: 400px;
-  margin-top: auto;
-  display: grid;
-  place-items: center;
   max-width: 768px;
   margin: 0 auto;
+  padding: 64px 0;
 
-  /* a {
+  .warning_bitches {
+    color: rgba(239, 68, 68, 1);
+  }
+
+  .notice {
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  a {
     text-decoration: underline;
-    text-decoration-color: red;
-  } */
+    text-decoration-color: rgba(239, 68, 68, 1);
+  }
 
   h3 {
     font-family: var(--font-mono);
-    font-size: 5rem;
+    font-size: 2.5rem;
     text-transform: uppercase;
     font-weight: 800;
     text-align: center;
-
-    /* font-size: 1.5rem;
-    max-width: 420px; */
   }
 
-  @media screen and (max-width: 1536px) {
-    h3 {
-      font-size: 3.25rem;
-    }
-
+  @media screen and (max-width: 1280px) {
     h3 {
       font-size: 2rem;
     }
   }
 
-  @media screen and (max-width: 768px),
-    (max-height: 768px) and (orientation: landscape) {
-    height: calc(100vh - 5rem);
-
+  @media screen and (max-width: 640px) {
     h3 {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 
   @media only screen and (max-width: 415px) {
-    height: calc(100vh - 4.3rem);
-
-    h3 {
-      font-size: 1.5rem;
-    }
+    /* height: calc(100vh - 4.3rem); */
   }
 
   @media screen and (max-width: 330px) {

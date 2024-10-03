@@ -21,6 +21,8 @@ async function auth(values: AuthCredentials, csrfToken: string) {
   return response
 }
 
+// RcFCkvTt0zpWUPsEIqn9yQ==
+
 async function getToken(values: AuthCredentials) {
   const res = await fetch(`${process.env.IUB_API}//v3/account/token`, {
     method: "POST",
