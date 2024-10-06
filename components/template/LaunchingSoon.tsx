@@ -20,10 +20,10 @@ export default function LaunchingSoon() {
         {/* If you need to know or ask about something, you can reach out to me over
         here,{" "} */}
         I&apos;ll soon be founding a tech startup 🥹 Looking for smart peoples to
-        join me. Also if you have any idea for a startup we can have a dicuss on
-        that as well. CS/Non-CS doesn&apos;t matters, you just have to be smart,
-        good with communication, a fast learner, interested to learn and explore
-        new stuffs. You can reach out to me over here,{" "}
+        join me. Also if you have any idea for a startup we can have a
+        discussion on that as well. CS/Non-CS doesn&apos;t matters, you just
+        have to be smart, good with communication, a fast learner, interested to
+        learn and explore new stuffs. You can reach out to me over here,{" "}
         <Link
           href="https://www.instagram.com/tripyy_land"
           target="blank"
