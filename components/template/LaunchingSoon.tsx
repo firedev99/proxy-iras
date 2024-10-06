@@ -5,14 +5,14 @@ export default function LaunchingSoon() {
   return (
     <TextWrapper initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <h3>
-        IUB is now using a new hashing algorithm for the passwords. Finally i
-        guess they hired someone to fill the blanks, good for em. It&apos;s been
+        IUB is now using a new hashing algorithm for the passwords which needs
+        to be decrypted. That is why i&apos;m closing Proxy IRAS. It&apos;s been
         a good journey from SUMMER 2023 to AUTUMN 2024, around 2000+ active
         students have used this platform and i think most of em were benefited
         from PROXY IRAS.{" "}
         <span className="warning_bitches">
-          If I ever feel bored I&apos;ll try to decode their hashing algorithm
-          to make PROXY IRAS alive again.
+          If I ever feel bored, I&apos;ll try to find a solution to make PROXY
+          IRAS alive again.
         </span>{" "}
         till then peace out 🤞🏼🏃🏼‍♂️
       </h3>
