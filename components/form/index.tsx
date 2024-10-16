@@ -13,6 +13,7 @@ import { LoginFormWrapper } from "./styles"
 import { AuthCredentials } from "@types"
 import Icon from "@icons"
 import Link from "next/link"
+import CryptoJS from "crypto-js"
 
 export default function LoginForm() {
   const { addToast } = useToast()
@@ -51,8 +52,31 @@ export default function LoginForm() {
       const csrfTokenResponse = await fetch(`/api/iub`)
       const csrfToken = await csrfTokenResponse.json()
 
+      // iv key
+      const ivUTF8 = CryptoJS.enc.Utf8.parse(
+        process.env.NEXT_PUBLIC_AES_IV_KEY as string
+      )
+
+      // secret key
+      const secretKeyUTF8 = CryptoJS.enc.Utf8.parse(
+        process.env.NEXT_PUBLIC_AES_SECRET_KEY as string
+      )
+
+      // ecrypt the plain text
+      const encrypted = CryptoJS.AES.encrypt(values.password, secretKeyUTF8, {
+        iv: ivUTF8,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7,
+      })
+
+      // set the encrypted text into base64 format
+      const encryptedPass = encrypted.toString()
+
       // request to fetch student data along with csrf token
-      const response = await services.auth(values, csrfToken)
+      const response = await services.auth(
+        { user: values.user, password: encryptedPass },
+        csrfToken
+      )
 
       if (response.ok) {
         const { student } = await response.json()
